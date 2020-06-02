@@ -1,0 +1,83 @@
+<resources>
+    <string name="app_name">StampCardMVVM</string>
+
+    <!-- for sample -->
+    <string name="loading_projects">Loading projects …</string>
+    <string name="project_name">タイトル</string>
+    <string name="github_projects">Your GitHub Projects!!</string>
+    <string name="project_list">Project List</string>
+    <string name="languages">プログラミング言語: %s</string>
+    <string name="watchers">Watchers: %s</string>
+    <string name="openIssues">Open Issues: %s</string>
+    <string name="created_at">作った時間: %s</string>
+    <string name="updated_at">最後にアップデートされた時間: %s</string>
+    <string name="clone_url">CloneするURL: %s</string>
+    <string name="project_language">Project Language</string>
+    <string name="project_watchers">Project Watchers</string>
+    <string name="project_description">Project Description</string>
+    <string name="open_issues">開かれているIssues</string>
+    <string name="loading_project">Loading Project …</string>
+    <string name="github_user_name">Tsutou</string>
+    <!-- end -->
+
+    <!-- for stamp card -->
+    <string name="mail_address">メールアドレス</string>
+    <string name="password">パスワード</string>
+    <string name="send">送信</string>
+    <string name="explanation_of_resetting">登録時に入力したメールアドレスを入力してください。パスワード再設定の手順を送信します。</string>
+    <string name="new_registration">新規登録</string>
+    <string name="login">ログイン</string>
+    <string name="logout">ログアウト</string>
+    <string name="forgot_password">＊パスワードを忘れた方はこちら</string>
+    <string name="number_of_visits">来店回数：</string>
+    <string name="number">0</string>
+    <string name="times">回</string>
+    <string name="rank_member">会員ランク：メンバー</string>
+    <string name="rank_silver">会員ランク：シルバーVIP</string>
+    <string name="rank_gold">会員ランク：ゴールドVIP</string>
+    <string name="benefits_text">特典内容：スタンプカードが40ポイント貯まると、シャンパン1本をサービス致します！</string>
+    <string name="button_stamp">スタンプを押してもらう</string>
+    <string name="text_show_qr_code">このQRコードを提示して下さい</string>
+    <string name="account_info">アカウント情報</string>
+    <string name="change_email">メールアドレス変更</string>
+    <string name="change_password">パスワード変更</string>
+    <string name="resetting_password">パスワードの再設定</string>
+    <string name="input_text">入力してください</string>
+    <string name="please_login">ログインしてください</string>
+    <string name="success_logout">ログアウトに成功しました</string>
+    <string name="input_correct_email">正しいメールアドレスを入力してください</string>
+
+    <string name="create_user_with_email_success">新規登録に成功しました</string>
+    <string name="create_user_with_email_success_log">createUserWithEmail:success</string>
+    <string name="create_user_with_email_failure">新規登録に失敗しました</string>
+    <string name="create_user_with_email_failure_log">createUserWithEmail:failure</string>
+    <string name="send_email_verification_success">変更確認メールが送信されました</string>
+    <string name="send_email_verification_success_log">sendEmailVerification:success</string>
+    <string name="send_email_verification_failure">変更確認メールの送信が失敗しました</string>
+    <string name="send_email_verification_failure_log">sendEmailVerification:failure</string>
+    <string name="email_sent_success">再設定メールが送信されました</string>
+    <string name="email_sent_success_log">Email sent:success</string>
+    <string name="email_sent_failure">再設定メールの送信に失敗しました</string>
+    <string name="email_sent_failure_log">Email sent:failure</string>
+    <string name="send_email_verification_of_registration_success">登録確認メールが送信されました</string>
+    <string name="send_email_verification_of_registration_success_log">sendEmailVerification:success</string>
+    <string name="send_email_verification_of_registration_failure">登録確認メールの送信が失敗しました</string>
+    <string name="send_email_verification_of_registration_failure_log">sendEmailVerification:failure</string>
+    <string name="sign_in_with_email_success">ログインに成功しました</string>
+    <string name="sign_in_with_email_success_log">signInWithEmail:success</string>
+    <string name="sign_in_with_email_failure">ログインに失敗しました</string>
+    <string name="sign_in_with_email_failure_log">signInWithEmail:failure</string>
+    <string name="user_email_address_updated_success">メールアドレス変更に成功しました</string>
+    <string name="user_email_address_updated_success_log">User email address updated:success</string>
+    <string name="user_email_address_updated_failure">メールアドレス変更に失敗しました</string>
+    <string name="user_email_address_updated_failure_log">User email address updated:failure</string>
+
+    <string name="user_re_authenticated_log">User re-authenticated.</string>
+    <string name="adding_document_failure_log">adding document:failure</string>
+    <string name="getting_documents_success_log">getting documents:success</string>
+    <string name="getting_documents_failure_log">getting documents:failure</string>
+    <string name="generate_qrcode_success_log">generate QRCode:success</string>
+    <string name="generate_qrcode_failure_log">generate QRCode:failure</string>
+    <!-- end -->
+
+</resources>
