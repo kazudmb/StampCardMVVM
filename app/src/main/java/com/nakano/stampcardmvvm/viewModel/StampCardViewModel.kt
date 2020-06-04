@@ -4,23 +4,16 @@ import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
 import androidx.lifecycle.*
 import com.nakano.stampcardmvvm.model.model.User
-import com.nakano.stampcardmvvm.model.repository.StampCardRepository
 
-class StampCardViewModel : BaseObservable(){
+class StampCardViewModel : BaseObservable() {
 
-//    val stampCardLiveData: MutableLiveData<User> = MutableLiveData()
+    val stampCard: MutableLiveData<User> = MutableLiveData()
 
     @Bindable
     var numberOfVisits: String = "0"
-        set(value) {
-            field = value
-        }
 
     @Bindable
     var rank: String = "会員ランク：メンバー"
-        set(value) {
-            field = value
-        }
 
     // TODO: 来店回数に応じて、スタンプを押下するような処理が必要
 //    @get:Bindable
@@ -30,4 +23,9 @@ class StampCardViewModel : BaseObservable(){
 //    fun fetchText() {
 //        stampCardLiveData.value = StampCardRepository().fetchText()
 //    }
+
+    // TODO: タップ時にfragmentに通知して画面遷移したい、現状はfragmentにonClickListenerを設置して対応
+    fun onButtonClicked(){
+        // do anything
+    }
 }

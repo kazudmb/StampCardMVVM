@@ -209,7 +209,8 @@
                         android:layout_below="@+id/benefits_text"
                         android:layout_centerHorizontal="true"
                         android:layout_marginBottom="20dp"
-                        android:text="@string/button_stamp" />
+                        android:text="@string/button_stamp"
+                        android:onClick="@{() -> stampCardViewModel.onButtonClicked()}"/>
                 </RelativeLayout>
             </ScrollView>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

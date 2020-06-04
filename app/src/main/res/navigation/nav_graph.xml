@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/stampCardFragment">
+
+    <fragment
+        android:id="@+id/stampCardFragment"
+        android:name="com.nakano.stampcardmvvm.view.StampCardFragment"
+        android:label="StampCardFragment">
+        <action
+            android:id="@+id/action_stampcardFragment_to_qrcodedisplayFragment"
+            app:destination="@id/qrCodeDisplayFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/qrCodeDisplayFragment"
+        android:name="com.nakano.stampcardmvvm.view.QRCodeDisplayFragment"
+        android:label="QRCodeDisplayFragment">
+    </fragment>
+
+</navigation>
