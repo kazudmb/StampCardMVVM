@@ -69,9 +69,6 @@ dependencies {
     // fragment
     implementation 'androidx.fragment:fragment-ktx:1.2.4'
 
-    //viewmodel-ktx viewModelScopeを使うため
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
-
     // OkHttp
     implementation "com.squareup.okhttp3:okhttp:3.12.1"
     implementation "com.squareup.okhttp3:logging-interceptor:3.12.1"
@@ -83,4 +80,9 @@ dependencies {
 
     // QRCode
     implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
+
+    // DI
+    implementation 'org.koin:koin-android:2.0.1'
+    implementation 'org.koin:koin-android-scope:2.0.1'
+    implementation 'org.koin:koin-android-viewmodel:2.0.1'
 }
