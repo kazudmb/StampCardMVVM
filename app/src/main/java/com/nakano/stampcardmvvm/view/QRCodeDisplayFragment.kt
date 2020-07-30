@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import com.nakano.stampcardmvvm.R
-import com.nakano.stampcardmvvm.databinding.FragmentQRCodeDisplayBinding
+import com.nakano.stampcardmvvm.util.Utility
 import com.nakano.stampcardmvvm.viewModel.QRCodeDisplayViewModel
 import org.koin.android.ext.android.inject
 
@@ -48,6 +48,8 @@ class QRCodeDisplayFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        val bitmap = Utility.createQRCode(resources)
 
     }
 
