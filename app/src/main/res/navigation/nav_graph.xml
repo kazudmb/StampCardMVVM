@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/stampCardFragment"
         android:name="com.nakano.stampcardmvvm.view.StampCardFragment"
-        android:label="StampCardFragment">
+        android:label="@string/app_name">
         <action
             android:id="@+id/action_stampcardFragment_to_qrcodedisplayFragment"
             app:destination="@id/qrCodeDisplayFragment"
@@ -19,7 +19,7 @@
     <fragment
         android:id="@+id/qrCodeDisplayFragment"
         android:name="com.nakano.stampcardmvvm.view.QRCodeDisplayFragment"
-        android:label="QRCodeDisplayFragment">
+        android:label="@string/qr_code">
     </fragment>
 
 </navigation>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">StampCardMVVM</string>
+    <string name="app_name">Stamp Card</string>
 
     <!-- for sample -->
     <string name="loading_projects">Loading projects …</string>
@@ -21,6 +21,7 @@
     <!-- end -->
 
     <!-- for stamp card -->
+    <string name="qr_code">QRコード</string>
     <string name="mail_address">メールアドレス</string>
     <string name="password">パスワード</string>
     <string name="send">送信</string>
