@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_stampCardFragment_to_accountInfoFragment"
             app:destination="@id/accountInfoFragment" />
+        <action
+            android:id="@+id/action_stampCardFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/qrCodeDisplayFragment"
@@ -26,15 +29,15 @@
         android:label="@string/qr_code">
     </fragment>
 
-<!--    <fragment-->
-<!--        android:id="@+id/loginFragment"-->
-<!--        android:name="com.nakano.stampcardmvvm.view."-->
-<!--        android:label="ログイン"-->
-<!--        tools:layout="@layout/login_fragment" />-->
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.nakano.stampcardmvvm.view.LoginFragment"
+        android:label="@string/login"
+        tools:layout="@layout/fragment_login" />
     <fragment
         android:id="@+id/accountInfoFragment"
         android:name="com.nakano.stampcardmvvm.view.AccountInfoFragment"
-        android:label="アカウント情報"
+        android:label="@string/account_info"
         tools:layout="@layout/fragment_account_info" />
 
 </navigation>

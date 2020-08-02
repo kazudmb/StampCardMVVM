@@ -31,8 +31,9 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.loginFragment -> {
-//                val intent = Intent(this, LoginActivity::class.java)
-//                startActivity(intent)
+                val action =
+                    StampCardFragmentDirections.actionStampCardFragmentToLoginFragment()
+                findNavController(R.id.nav_host_fragment).navigate(action)
                 return true
             }
             R.id.accountInfoFragment -> {
