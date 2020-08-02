@@ -1,11 +1,9 @@
 package com.nakano.stampcardmvvm.model.repository
 
-import com.nakano.stampcardmvvm.model.model.User
+import com.nakano.stampcardmvvm.model.model.AppDatabase
 
-class StampCardRepository {
-
-//    fun fetchText(): User? {
-//
-//    }
-
+class StampCardRepository(
+    private val db: AppDatabase
+) {
+    fun getStampCard() = db.getUserDao().getuser()
 }

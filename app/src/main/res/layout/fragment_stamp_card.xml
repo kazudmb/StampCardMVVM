@@ -57,7 +57,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:layout_marginBottom="10dp"
-                            android:text="@{stampCardViewModel.numberOfVisits}" />
+                            android:text="@{stampCardViewModel.stampCard.numberOfVisits}" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -74,7 +74,7 @@
                             android:layout_marginEnd="20dp"
                             android:layout_marginBottom="10dp"
                             android:gravity="end"
-                            android:text="@{stampCardViewModel.rank}" />
+                            android:text="@{stampCardViewModel.stampCard.rank}" />
 
                     </LinearLayout>
 
@@ -209,8 +209,7 @@
                         android:layout_below="@+id/benefits_text"
                         android:layout_centerHorizontal="true"
                         android:layout_marginBottom="20dp"
-                        android:text="@string/button_stamp"
-                        android:onClick="@{() -> stampCardViewModel.onButtonClicked()}"/>
+                        android:text="@string/button_stamp" />
                 </RelativeLayout>
             </ScrollView>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

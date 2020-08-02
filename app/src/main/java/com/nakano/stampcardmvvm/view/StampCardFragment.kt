@@ -5,35 +5,46 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.nakano.stampcardmvvm.R
 import com.nakano.stampcardmvvm.databinding.FragmentStampCardBinding
 import com.nakano.stampcardmvvm.viewModel.StampCardViewModel
+import com.nakano.stampcardmvvm.viewModel.StampCardViewModelFactory
 import kotlinx.android.synthetic.main.fragment_stamp_card.*
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.kodein
+import org.kodein.di.generic.instance
 
 const val TAG_OF_STAMP_CARD_FRAGMENT = "StampCardFragment"
 
-class StampCardFragment : Fragment() {
+class StampCardFragment : Fragment(), KodeinAware {
 
-//    private val viewModel: StampCardViewModel by viewModels()
-    private lateinit var binding: FragmentStampCardBinding
+    override val kodein by kodein()
+    private val factory: StampCardViewModelFactory by instance()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-//        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_stamp_card, container, false)
-//        binding.stampCardViewModel = StampCardViewModel()
-        val view = inflater.inflate(R.layout.fragment_stamp_card, container, false)
+    private lateinit var viewModel: StampCardViewModel
 
-        return view
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val binding: FragmentStampCardBinding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_stamp_card, container, false)
+        viewModel = ViewModelProviders.of(this, factory).get(StampCardViewModel::class.java)
+        binding.stampCardViewModel = viewModel
+        binding.lifecycleOwner = this
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        // TODO: setOnClickListenerはViewModel側で処理したい
         button_stamp.setOnClickListener {
-            val action = StampCardFragmentDirections.actionStampcardFragmentToQrcodedisplayFragment()
+            val action =
+                StampCardFragmentDirections.actionStampcardFragmentToQrcodedisplayFragment()
             findNavController().navigate(action)
         }
     }

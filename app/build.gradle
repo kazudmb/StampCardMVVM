@@ -81,8 +81,17 @@ dependencies {
     // QRCode
     implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
 
-    // DI
-    implementation 'org.koin:koin-android:2.0.1'
-    implementation 'org.koin:koin-android-scope:2.0.1'
-    implementation 'org.koin:koin-android-viewmodel:2.0.1'
+    // Koin
+//    implementation 'org.koin:koin-android:2.0.1'
+//    implementation 'org.koin:koin-android-scope:2.0.1'
+//    implementation 'org.koin:koin-android-viewmodel:2.0.1'
+
+    // Kodein Dependency Injection
+    implementation "org.kodein.di:kodein-di-generic-jvm:6.2.1"
+    implementation "org.kodein.di:kodein-di-framework-android-x:6.2.1"
+
+    // Room
+    implementation "androidx.room:room-runtime:2.2.5"
+    implementation "androidx.room:room-ktx:2.2.5"
+    kapt "androidx.room:room-compiler:2.2.5"
 }
