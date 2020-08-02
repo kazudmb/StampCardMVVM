@@ -1,6 +1,6 @@
 package com.nakano.stampcardmvvm.util
 
-import android.content.res.Resources
+import android.content.Context
 import android.graphics.Bitmap
 import com.google.zxing.BarcodeFormat
 import com.journeyapps.barcodescanner.BarcodeEncoder
@@ -9,15 +9,15 @@ object Utility {
 
     private val TAG = "Utility"
 
-    fun createQRCode(resources: Resources) : Bitmap? {
+    fun createQRCode(context: Context, uid: String?) : Bitmap? {
         val dp = 300
-        val scale = resources.displayMetrics.density
+        val scale = context.resources.displayMetrics.density
         val size = (dp * scale + 0.5f).toInt()
 
         val barcodeEncoder = BarcodeEncoder()
         return try {
             val bitmap = barcodeEncoder.encodeBitmap(
-                "uid", // TODO: ログインしているuidを入れること
+                uid,
                 BarcodeFormat.QR_CODE,
                 size,
                 size

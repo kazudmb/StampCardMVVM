@@ -1,36 +1,15 @@
 package com.nakano.stampcardmvvm.model.repository
 
+import android.content.Context
 import android.graphics.Bitmap
-import com.google.zxing.BarcodeFormat
-import com.journeyapps.barcodescanner.BarcodeEncoder
+import com.nakano.stampcardmvvm.model.model.AppDatabase
+import com.nakano.stampcardmvvm.util.Utility
 
-class QRCodeDisplayRepository {
+class QRCodeDisplayRepository(
+    private val db: AppDatabase,
+    private val context: Context
+) {
 
-    fun generateBitmap(): Bitmap {
+    fun getStampCard() = db.getUserDao().getuser()
 
-        lateinit var bitmap : Bitmap
-
-        val dp = 300
-        // TODO: getResorcesは、Activityのメソッドなので使用不可
-//        val scale = resources.displayMetrics.density
-        val scale = 3.0
-        val size = (dp * scale + 0.5f).toInt()
-
-        try {
-            val barcodeEncoder = BarcodeEncoder()
-            bitmap = barcodeEncoder.encodeBitmap("test", BarcodeFormat.QR_CODE, size, size)
-            // TODO: ImageViewをBindingでセットする方法を検討すること（xmlとkt）
-//            val imageQr = view?.findViewById<ImageView>(R.id.qr_code)
-//            imageQr?.setImageBitmap(bitmap)
-//            Log.d(QRCodeDisplayFragment.TAG, getString(R.string.generate_qrcode_success_log))
-        } catch (exception: Exception) {
-//            Log.w(QRCodeDisplayFragment.TAG, getString(R.string.generate_qrcode_failure_log), exception)
-        }
-
-        return bitmap
-    }
-
-    companion object {
-        private const val TAG = "QRCodeDisplayActivity"
-    }
 }

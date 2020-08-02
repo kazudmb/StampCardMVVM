@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.nakano.stampcardmvvm.R
@@ -17,8 +16,6 @@ import kotlinx.android.synthetic.main.fragment_stamp_card.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
-
-const val TAG_OF_STAMP_CARD_FRAGMENT = "StampCardFragment"
 
 class StampCardFragment : Fragment(), KodeinAware {
 
