@@ -49,6 +49,9 @@
         <action
             android:id="@+id/action_accountInfoFragment_to_changePasswordFragment"
             app:destination="@id/changePasswordFragment" />
+        <action
+            android:id="@+id/action_accountInfoFragment_to_changeEmailFragment"
+            app:destination="@id/changeEmailFragment" />
     </fragment>
     <fragment
         android:id="@+id/createAccountFragment"
@@ -58,5 +61,9 @@
         android:id="@+id/changePasswordFragment"
         android:name="com.nakano.stampcardmvvm.view.ChangePasswordFragment"
         android:label="@string/change_password" />
+    <fragment
+        android:id="@+id/changeEmailFragment"
+        android:name="com.nakano.stampcardmvvm.view.ChangeEmailFragment"
+        android:label="@string/change_email" />
 
 </navigation>

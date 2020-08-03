@@ -44,9 +44,9 @@ class AccountInfoFragment : Fragment(), KodeinAware {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.change_email -> {
-//                val action =
-//                    AccountInfoFragmentDirections.actionAccountInfoFragmentToChangePasswordFragment()
-//                findNavController().navigate(action)
+                val action =
+                    AccountInfoFragmentDirections.actionAccountInfoFragmentToChangeEmailFragment()
+                findNavController().navigate(action)
                 return true
             }
             R.id.change_password -> {
