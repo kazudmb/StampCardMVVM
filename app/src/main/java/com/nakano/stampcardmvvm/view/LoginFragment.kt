@@ -2,7 +2,6 @@ package com.nakano.stampcardmvvm.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -42,14 +41,14 @@ class LoginFragment : Fragment(), KodeinAware {
         super.onActivityCreated(savedInstanceState)
 
         login_button.setOnClickListener {
-            val action =
-                LoginFragmentDirections.actionLoginFragmentToCreateAccountFragment()
-            findNavController().navigate(action)
+//            val action =
+//                LoginFragmentDirections.actionLoginFragmentToCreateAccountFragment()
+//            findNavController().navigate(action)
         }
 
         forgot_password.setOnClickListener {
             val action =
-                LoginFragmentDirections.actionLoginFragmentToCreateAccountFragment()
+                LoginFragmentDirections.actionLoginFragmentToChangePasswordFragment()
             findNavController().navigate(action)
         }
 

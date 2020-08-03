@@ -37,15 +37,26 @@
         <action
             android:id="@+id/action_loginFragment_to_createAccountFragment"
             app:destination="@id/createAccountFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/accountInfoFragment"
         android:name="com.nakano.stampcardmvvm.view.AccountInfoFragment"
         android:label="@string/account_info"
-        tools:layout="@layout/fragment_account_info" />
+        tools:layout="@layout/fragment_account_info" >
+        <action
+            android:id="@+id/action_accountInfoFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
+    </fragment>
     <fragment
         android:id="@+id/createAccountFragment"
         android:name="com.nakano.stampcardmvvm.view.CreateAccountFragment"
         android:label="@string/new_registration" />
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.nakano.stampcardmvvm.view.ChangePasswordFragment"
+        android:label="@string/change_password" />
 
 </navigation>
