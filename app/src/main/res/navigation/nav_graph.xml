@@ -31,9 +31,9 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.nakano.stampcardmvvm.view.LoginFragment"
+        android:name="com.nakano.stampcardmvvm.view.EmailLoginFragment"
         android:label="@string/login"
-        tools:layout="@layout/fragment_login" >
+        tools:layout="@layout/fragment_email_login" >
         <action
             android:id="@+id/action_loginFragment_to_createAccountFragment"
             app:destination="@id/createAccountFragment" />
