@@ -1,12 +1,11 @@
 package com.nakano.stampcardmvvm.view
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.nakano.stampcardmvvm.R
 import com.nakano.stampcardmvvm.databinding.FragmentAccountInfoBinding
 import com.nakano.stampcardmvvm.viewModel.StampCardViewModel
@@ -31,6 +30,36 @@ class AccountInfoFragment : Fragment(), KodeinAware {
         viewModel = ViewModelProviders.of(this, factory).get(StampCardViewModel::class.java)
         binding.stampCardViewModel = viewModel
         binding.lifecycleOwner = this
+
+        setHasOptionsMenu(true)
+
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_account_info, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.change_email -> {
+//                val action =
+//                    AccountInfoFragmentDirections.actionAccountInfoFragmentToChangePasswordFragment()
+//                findNavController().navigate(action)
+                return true
+            }
+            R.id.change_password -> {
+                val action =
+                    AccountInfoFragmentDirections.actionAccountInfoFragmentToChangePasswordFragment()
+                findNavController().navigate(action)
+                return true
+            }
+            R.id.logout -> {
+
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }
