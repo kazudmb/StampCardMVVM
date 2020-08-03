@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs.kotlin"
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
@@ -94,4 +95,11 @@ dependencies {
     implementation "androidx.room:room-runtime:2.2.5"
     implementation "androidx.room:room-ktx:2.2.5"
     kapt "androidx.room:room-compiler:2.2.5"
+
+    // Firebase
+    implementation 'com.google.firebase:firebase-analytics:17.4.4'
+    implementation "com.google.firebase:firebase-core:17.4.4"
+    implementation "com.google.firebase:firebase-auth:19.3.2"
+    implementation "com.google.firebase:firebase-firestore:21.5.0"
+    implementation "com.google.android.gms:play-services-auth:18.1.0"
 }
