@@ -33,11 +33,19 @@
         android:id="@+id/loginFragment"
         android:name="com.nakano.stampcardmvvm.view.LoginFragment"
         android:label="@string/login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_createAccountFragment"
+            app:destination="@id/createAccountFragment" />
+    </fragment>
     <fragment
         android:id="@+id/accountInfoFragment"
         android:name="com.nakano.stampcardmvvm.view.AccountInfoFragment"
         android:label="@string/account_info"
         tools:layout="@layout/fragment_account_info" />
+    <fragment
+        android:id="@+id/createAccountFragment"
+        android:name="com.nakano.stampcardmvvm.view.CreateAccountFragment"
+        android:label="@string/new_registration" />
 
 </navigation>
