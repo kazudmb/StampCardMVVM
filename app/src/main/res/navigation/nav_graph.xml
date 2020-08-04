@@ -30,7 +30,7 @@
     </fragment>
 
     <fragment
-        android:id="@+id/loginFragment"
+        android:id="@+id/emailLoginFragment"
         android:name="com.nakano.stampcardmvvm.view.EmailLoginFragment"
         android:label="@string/login"
         tools:layout="@layout/fragment_email_login" >
@@ -65,5 +65,13 @@
         android:id="@+id/changeEmailFragment"
         android:name="com.nakano.stampcardmvvm.view.ChangeEmailFragment"
         android:label="@string/change_email" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.nakano.stampcardmvvm.view.LoginFragment"
+        android:label="@string/login" >
+        <action
+            android:id="@+id/action_loginFragment_to_loginFragment"
+            app:destination="@id/emailLoginFragment" />
+    </fragment>
 
 </navigation>
