@@ -40,6 +40,12 @@ class LoginFragment : Fragment(), KodeinAware {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        login_google.setOnClickListener {
+            val action =
+                LoginFragmentDirections.actionLoginFragmentToAuthActivity()
+            findNavController().navigate(action)
+        }
+
         login_email.setOnClickListener {
             val action =
                 LoginFragmentDirections.actionLoginFragmentToLoginFragment()

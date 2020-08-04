@@ -72,6 +72,13 @@
         <action
             android:id="@+id/action_loginFragment_to_loginFragment"
             app:destination="@id/emailLoginFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_authActivity"
+            app:destination="@id/authActivity" />
     </fragment>
+    <activity
+        android:id="@+id/authActivity"
+        android:name="com.nakano.stampcardmvvm.firebasepj.AuthActivity"
+        android:label="AuthActivity" />
 
 </navigation>
