@@ -79,14 +79,13 @@
     <string name="getting_documents_failure_log">getting documents:failure</string>
     <string name="generate_qrcode_success_log">generate QRCode:success</string>
     <string name="generate_qrcode_failure_log">generate QRCode:failure</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="login_google">Google アカウントでログイン</string>
     <string name="login_twitter">Twitter アカウントでログイン</string>
     <string name="login_facebook">Facebook アカウントでログイン</string>
-    <string name="login_email">メールアドレスでログイン</string>
-    <string name="login_phone_number">電話番号でログイン</string>
-    <string name="login_anonymous">テスト アカウントでログイン</string>
+    <string name="login_email">メールアドレス でログイン</string>
+    <string name="login_phone_number">電話番号 でログイン</string>
+    <string name="login_anonymous">テストアカウント でログイン</string>
     <!-- end -->
 
 </resources>
