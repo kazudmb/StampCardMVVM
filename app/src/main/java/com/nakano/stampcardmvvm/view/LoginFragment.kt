@@ -42,7 +42,7 @@ class LoginFragment : Fragment(), KodeinAware {
 
         login_google.setOnClickListener {
             val action =
-                LoginFragmentDirections.actionLoginFragmentToAuthActivity()
+                LoginFragmentDirections.actionLoginFragmentToGoogleAuthFragment()
             findNavController().navigate(action)
         }
 

@@ -73,12 +73,12 @@
             android:id="@+id/action_loginFragment_to_loginFragment"
             app:destination="@id/emailLoginFragment" />
         <action
-            android:id="@+id/action_loginFragment_to_authActivity"
-            app:destination="@id/authActivity" />
+            android:id="@+id/action_loginFragment_to_googleAuthFragment"
+            app:destination="@id/googleAuthFragment" />
     </fragment>
-    <activity
-        android:id="@+id/authActivity"
-        android:name="com.nakano.stampcardmvvm.view.AuthActivity"
-        android:label="AuthActivity" />
+    <fragment
+        android:id="@+id/googleAuthFragment"
+        android:name="com.nakano.stampcardmvvm.view.GoogleAuthFragment"
+        android:label="GoogleAuthFragment" />
 
 </navigation>
