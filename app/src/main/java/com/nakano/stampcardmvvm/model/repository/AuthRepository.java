@@ -29,7 +29,8 @@ public class AuthRepository {
                     String uid = firebaseUser.getUid();
                     String name = firebaseUser.getDisplayName();
                     String email = firebaseUser.getEmail();
-                    UserFirebase user = new UserFirebase(uid, name, email);
+                    String numberOfVisits = "0";
+                    UserFirebase user = new UserFirebase(uid, name, email, numberOfVisits);
                     user.isNew = isNewUser;
                     authenticatedUserMutableLiveData.setValue(user);
                 }

@@ -9,6 +9,7 @@ public class UserFirebase implements Serializable {
     public String name;
     @SuppressWarnings("WeakerAccess")
     public String email;
+    public String numberOfVisits;
     @Exclude
     public boolean isAuthenticated;
     @Exclude
@@ -19,10 +20,11 @@ public class UserFirebase implements Serializable {
     public UserFirebase() {
     }
 
-    public UserFirebase(String uid, String name, String email) {
+    public UserFirebase(String uid, String name, String email, String numberOfVisits) {
         this.uid = uid;
         this.name = name;
         this.email = email;
+        this.numberOfVisits = numberOfVisits;
     }
 
     @Override
@@ -31,6 +33,7 @@ public class UserFirebase implements Serializable {
                 "uid='" + uid + '\'' +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
+                ", numberOfVisits=" + numberOfVisits +
                 ", isAuthenticated=" + isAuthenticated +
                 ", isNew=" + isNew +
                 ", isCreated=" + isCreated +
