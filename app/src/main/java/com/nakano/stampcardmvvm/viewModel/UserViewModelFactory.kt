@@ -2,14 +2,14 @@ package com.nakano.stampcardmvvm.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.nakano.stampcardmvvm.model.repository.StampCardRepository
+import com.nakano.stampcardmvvm.model.repository.UserRepository
 
 @Suppress("UNCHECKED_CAST")
-class StampCardViewModelFactory(
-    private val repository: StampCardRepository
+class UserViewModelFactory(
+    private val repository: UserRepository
 ) : ViewModelProvider.NewInstanceFactory() {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return StampCardViewModel(repository) as T
+        return UserViewModel(repository) as T
     }
 }

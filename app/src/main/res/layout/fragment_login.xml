@@ -7,7 +7,7 @@
 
         <variable
             name="stampCardViewModel"
-            type="com.nakano.stampcardmvvm.viewModel.StampCardViewModel" />
+            type="com.nakano.stampcardmvvm.viewModel.UserViewModel" />
     </data>
 
     <LinearLayout

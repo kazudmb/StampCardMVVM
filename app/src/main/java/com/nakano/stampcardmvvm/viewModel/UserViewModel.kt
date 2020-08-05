@@ -1,10 +1,10 @@
 package com.nakano.stampcardmvvm.viewModel
 
 import androidx.lifecycle.ViewModel
-import com.nakano.stampcardmvvm.model.repository.StampCardRepository
+import com.nakano.stampcardmvvm.model.repository.UserRepository
 
-class StampCardViewModel(
-    repository: StampCardRepository
+class UserViewModel(
+    repository: UserRepository
 ) : ViewModel() {
 
     val stampCard = repository.getStampCard()

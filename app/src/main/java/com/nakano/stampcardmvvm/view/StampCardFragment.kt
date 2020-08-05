@@ -8,8 +8,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.nakano.stampcardmvvm.R
 import com.nakano.stampcardmvvm.databinding.FragmentStampCardBinding
-import com.nakano.stampcardmvvm.viewModel.StampCardViewModel
-import com.nakano.stampcardmvvm.viewModel.StampCardViewModelFactory
+import com.nakano.stampcardmvvm.viewModel.UserViewModel
+import com.nakano.stampcardmvvm.viewModel.UserViewModelFactory
 import kotlinx.android.synthetic.main.fragment_stamp_card.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
@@ -18,9 +18,9 @@ import org.kodein.di.generic.instance
 class StampCardFragment : Fragment(), KodeinAware {
 
     override val kodein by kodein()
-    private val factory: StampCardViewModelFactory by instance()
+    private val factory: UserViewModelFactory by instance()
 
-    private lateinit var viewModel: StampCardViewModel
+    private lateinit var viewModel: UserViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,7 +28,7 @@ class StampCardFragment : Fragment(), KodeinAware {
     ): View? {
         val binding: FragmentStampCardBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_stamp_card, container, false)
-        viewModel = ViewModelProviders.of(this, factory).get(StampCardViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, factory).get(UserViewModel::class.java)
         binding.stampCardViewModel = viewModel
         binding.lifecycleOwner = this
 
