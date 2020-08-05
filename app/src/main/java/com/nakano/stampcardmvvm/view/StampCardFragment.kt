@@ -29,7 +29,7 @@ class StampCardFragment : Fragment(), KodeinAware {
         val binding: FragmentStampCardBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_stamp_card, container, false)
         viewModel = ViewModelProviders.of(this, factory).get(UserViewModel::class.java)
-        binding.stampCardViewModel = viewModel
+        binding.userViewModel = viewModel
         binding.lifecycleOwner = this
 
         setHasOptionsMenu(true)

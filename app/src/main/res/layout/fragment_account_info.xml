@@ -5,7 +5,7 @@
     <data>
 
         <variable
-            name="stampCardViewModel"
+            name="userViewModel"
             type="com.nakano.stampcardmvvm.viewModel.UserViewModel" />
     </data>
 
@@ -27,8 +27,8 @@
         <TextView
             android:id="@+id/email"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-<!--            android:text="@{authViewModel.liveDataText}"/>-->
+            android:layout_height="wrap_content"
+            android:text="@{userViewModel.user.email}"/>
     </LinearLayout>
 
 </layout>

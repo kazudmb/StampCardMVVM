@@ -4,7 +4,7 @@
     <data>
 
         <variable
-            name="stampCardViewModel"
+            name="userViewModel"
             type="com.nakano.stampcardmvvm.viewModel.UserViewModel" />
     </data>
 
@@ -56,8 +56,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:text="@{stampCardViewModel.stampCard.numberOfVisits}" />
+                            android:layout_marginBottom="10dp" />
+<!--                            android:text="@{userViewModel.user.}" />-->
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -73,8 +73,8 @@
                             android:layout_marginTop="10dp"
                             android:layout_marginEnd="20dp"
                             android:layout_marginBottom="10dp"
-                            android:gravity="end"
-                            android:text="@{stampCardViewModel.stampCard.rank}" />
+                            android:gravity="end" />
+<!--                            android:text="@{stampCardViewModel.user.}" />-->
 
                     </LinearLayout>
 

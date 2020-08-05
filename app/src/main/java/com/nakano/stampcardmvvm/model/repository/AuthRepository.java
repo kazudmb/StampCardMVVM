@@ -64,9 +64,4 @@ public class AuthRepository {
         });
         return newUserMutableLiveData;
     }
-
-    String getUser(){
-        UserFirebase userFirebase = new UserFirebase();
-        return userFirebase.getEmail();
-    }
 }

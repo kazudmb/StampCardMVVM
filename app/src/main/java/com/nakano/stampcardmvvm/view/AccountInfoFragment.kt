@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.nakano.stampcardmvvm.R
 import com.nakano.stampcardmvvm.databinding.FragmentAccountInfoBinding
+import com.nakano.stampcardmvvm.model.model.UserFirebase
 import com.nakano.stampcardmvvm.viewModel.UserViewModel
 import com.nakano.stampcardmvvm.viewModel.UserViewModelFactory
 import org.kodein.di.KodeinAware
@@ -28,14 +30,10 @@ class AccountInfoFragment : Fragment(), KodeinAware {
         val binding: FragmentAccountInfoBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_account_info, container, false)
         viewModel = ViewModelProviders.of(this, factory).get(UserViewModel::class.java)
-        binding.stampCardViewModel = viewModel
+        binding.userViewModel = viewModel
         binding.lifecycleOwner = this
 
         setHasOptionsMenu(true)
-
-//        viewModel.liveDataText.observe(this, Observer {
-//            binding.email =
-//        })
 
         return binding.root
     }
