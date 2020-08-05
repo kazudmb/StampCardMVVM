@@ -30,8 +30,9 @@ public class AuthRepository {
                     String name = firebaseUser.getDisplayName();
                     String email = firebaseUser.getEmail();
                     String numberOfVisits = "0";
-                    UserFirebase user = new UserFirebase(uid, name, email, numberOfVisits);
-                    user.isNew = isNewUser;
+                    UserFirebase user = new UserFirebase(uid, name, email, numberOfVisits, "会員ランク：メンバー", false, false, false); // TODO: ハードコード修正すること
+//                    UserFirebaseKotlin user = new UserFirebase(uid, name, email, numberOfVisits, Utility.INSTANCE.getRank(numberOfVisits));
+                    user.setNew(isNewUser);
                     authenticatedUserMutableLiveData.setValue(user);
                 }
             } else {
@@ -43,14 +44,14 @@ public class AuthRepository {
 
     public MutableLiveData<UserFirebase> createUserInFirestoreIfNotExists(UserFirebase authenticatedUser) {
         MutableLiveData<UserFirebase> newUserMutableLiveData = new MutableLiveData<>();
-        DocumentReference uidRef = usersRef.document(authenticatedUser.uid);
+        DocumentReference uidRef = usersRef.document(authenticatedUser.getUid());
         uidRef.get().addOnCompleteListener(uidTask -> {
             if (uidTask.isSuccessful()) {
                 DocumentSnapshot document = uidTask.getResult();
                 if (!document.exists()) {
                     uidRef.set(authenticatedUser).addOnCompleteListener(userCreationTask -> {
                         if (userCreationTask.isSuccessful()) {
-                            authenticatedUser.isCreated = true;
+                            authenticatedUser.setCreated(true);
                             newUserMutableLiveData.setValue(authenticatedUser);
                         } else {
                             logErrorMessage(userCreationTask.getException().getMessage());

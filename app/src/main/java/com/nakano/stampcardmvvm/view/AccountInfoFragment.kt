@@ -4,12 +4,10 @@ import android.os.Bundle
 import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.nakano.stampcardmvvm.R
 import com.nakano.stampcardmvvm.databinding.FragmentAccountInfoBinding
-import com.nakano.stampcardmvvm.model.model.UserFirebase
 import com.nakano.stampcardmvvm.viewModel.UserViewModel
 import com.nakano.stampcardmvvm.viewModel.UserViewModelFactory
 import org.kodein.di.KodeinAware

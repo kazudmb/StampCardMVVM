@@ -26,7 +26,7 @@ class UserRepository(
             val name = firebaseUser.displayName
             val email = firebaseUser.email
             val numberOfVisits = "0" // TODO この値をローカルでもつ方法を検討
-            val user = UserFirebase(uid, name, email, numberOfVisits)
+            val user = UserFirebase(uid, name, email, numberOfVisits, "会員ランク：メンバー") // TODO ハードコードしないように修正
             userMutableLiveData.setValue(user)
         } else {
 

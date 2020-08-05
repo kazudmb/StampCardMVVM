@@ -73,8 +73,8 @@
                             android:layout_marginTop="10dp"
                             android:layout_marginEnd="20dp"
                             android:layout_marginBottom="10dp"
-                            android:gravity="end" />
-<!--                            android:text="@{stampCardViewModel.user.}" />-->
+                            android:gravity="end"
+                            android:text="@{userViewModel.user.rank}" />
 
                     </LinearLayout>
 

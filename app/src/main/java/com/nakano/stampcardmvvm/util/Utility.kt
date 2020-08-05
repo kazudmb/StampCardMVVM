@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import com.google.zxing.BarcodeFormat
 import com.journeyapps.barcodescanner.BarcodeEncoder
+import com.nakano.stampcardmvvm.R
 
 object Utility {
 
@@ -27,5 +28,18 @@ object Utility {
             e.printStackTrace()
             null
         }
+    }
+
+    fun getRank(context: Context, numberOfVisits: String) : String {
+
+        val num = numberOfVisits.toIntOrNull()
+        if (num != null) {
+            when {
+                num < 40 -> context.getString(R.string.rank_member)
+                num < 80 -> context.getString(R.string.rank_silver)
+                num >= 80 -> context.getString(R.string.rank_gold)
+            }
+        }
+        return context.getString(R.string.rank_member)
     }
 }

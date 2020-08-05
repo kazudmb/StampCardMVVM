@@ -17,8 +17,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.nakano.stampcardmvvm.R;
-import com.nakano.stampcardmvvm.viewModel.AuthViewModel;
 import com.nakano.stampcardmvvm.model.model.UserFirebase;
+import com.nakano.stampcardmvvm.viewModel.AuthViewModel;
 
 import static com.nakano.stampcardmvvm.util.HelperClass.logErrorMessage;
 
@@ -84,7 +84,7 @@ public class AuthActivity extends AppCompatActivity {
     private void signInWithGoogleAuthCredential(AuthCredential googleAuthCredential) {
         authViewModel.signInWithGoogle(googleAuthCredential);
         authViewModel.authenticatedUserLiveData.observe(this, authenticatedUser -> {
-            if (authenticatedUser.isNew) {
+            if (authenticatedUser.isNew()) {
                 createNewUser(authenticatedUser);
             } else {
                 goToMainActivity(authenticatedUser);
@@ -95,8 +95,8 @@ public class AuthActivity extends AppCompatActivity {
     private void createNewUser(UserFirebase authenticatedUser) {
         authViewModel.createUser(authenticatedUser);
         authViewModel.createdUserLiveData.observe(this, user -> {
-            if (user.isCreated) {
-                toastMessage(user.name);
+            if (user.isCreated()) {
+                toastMessage(user.getName());
             }
             goToMainActivity(user);
         });
@@ -107,9 +107,9 @@ public class AuthActivity extends AppCompatActivity {
     }
 
     private void goToMainActivity(UserFirebase user) {
-        Intent intent = new Intent(AuthActivity.this, MainActivity.class);
-        intent.putExtra("user", user);
-        startActivity(intent);
+//        Intent intent = new Intent(AuthActivity.this, MainActivity.class);
+//        intent.putExtra("user", user);
+//        startActivity(intent);
         finish();
     }
 }
