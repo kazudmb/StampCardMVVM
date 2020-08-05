@@ -1,4 +1,4 @@
-package com.nakano.stampcardmvvm.firebasepj;
+package com.nakano.stampcardmvvm.model.repository;
 
 import androidx.lifecycle.MutableLiveData;
 
@@ -9,16 +9,17 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.nakano.stampcardmvvm.model.model.UserFirebase;
 
-import static com.nakano.stampcardmvvm.firebasepj.HelperClass.logErrorMessage;
+import static com.nakano.stampcardmvvm.util.HelperClass.logErrorMessage;
 
-class AuthRepository {
+public class AuthRepository {
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
     private FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
     private CollectionReference usersRef = rootRef.collection("users");
 
-    MutableLiveData<UserFirebase> firebaseSignInWithGoogle(AuthCredential googleAuthCredential) {
+    public MutableLiveData<UserFirebase> firebaseSignInWithGoogle(AuthCredential googleAuthCredential) {
         MutableLiveData<UserFirebase> authenticatedUserMutableLiveData = new MutableLiveData<>();
         firebaseAuth.signInWithCredential(googleAuthCredential).addOnCompleteListener(authTask -> {
             if (authTask.isSuccessful()) {
@@ -39,7 +40,7 @@ class AuthRepository {
         return authenticatedUserMutableLiveData;
     }
 
-    MutableLiveData<UserFirebase> createUserInFirestoreIfNotExists(UserFirebase authenticatedUser) {
+    public MutableLiveData<UserFirebase> createUserInFirestoreIfNotExists(UserFirebase authenticatedUser) {
         MutableLiveData<UserFirebase> newUserMutableLiveData = new MutableLiveData<>();
         DocumentReference uidRef = usersRef.document(authenticatedUser.uid);
         uidRef.get().addOnCompleteListener(uidTask -> {
@@ -62,5 +63,10 @@ class AuthRepository {
             }
         });
         return newUserMutableLiveData;
+    }
+
+    String getUser(){
+        UserFirebase userFirebase = new UserFirebase();
+        return userFirebase.getEmail();
     }
 }

@@ -1,4 +1,4 @@
-package com.nakano.stampcardmvvm.firebasepj;
+package com.nakano.stampcardmvvm.util;
 
 import android.util.Log;
 

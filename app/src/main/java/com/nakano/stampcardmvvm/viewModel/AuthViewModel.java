@@ -1,4 +1,4 @@
-package com.nakano.stampcardmvvm.firebasepj;
+package com.nakano.stampcardmvvm.viewModel;
 
 import android.app.Application;
 
@@ -6,22 +6,30 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.google.firebase.auth.AuthCredential;
+import com.nakano.stampcardmvvm.model.model.UserFirebase;
+import com.nakano.stampcardmvvm.model.repository.AuthRepository;
 
 public class AuthViewModel extends AndroidViewModel {
     private AuthRepository authRepository;
-    LiveData<UserFirebase> authenticatedUserLiveData;
-    LiveData<UserFirebase> createdUserLiveData;
+    public LiveData<UserFirebase> authenticatedUserLiveData;
+    public LiveData<UserFirebase> createdUserLiveData;
 
     public AuthViewModel(Application application) {
         super(application);
         authRepository = new AuthRepository();
     }
 
-    void signInWithGoogle(AuthCredential googleAuthCredential) {
+    public void signInWithGoogle(AuthCredential googleAuthCredential) {
         authenticatedUserLiveData = authRepository.firebaseSignInWithGoogle(googleAuthCredential);
     }
 
-    void createUser(UserFirebase authenticatedUser) {
+    public void createUser(UserFirebase authenticatedUser) {
         createdUserLiveData = authRepository.createUserInFirestoreIfNotExists(authenticatedUser);
     }
+
+//    public MutableLiveData<String> liveDataText = new MutableLiveData<String>();
+//
+//    public void getUser() {
+//        liveDataText.setValue(authRepository.getUser());
+//    }
 }

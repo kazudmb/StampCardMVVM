@@ -1,4 +1,4 @@
-package com.nakano.stampcardmvvm.firebasepj;
+package com.nakano.stampcardmvvm.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,9 +17,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.nakano.stampcardmvvm.R;
-import com.nakano.stampcardmvvm.view.MainActivity;
+import com.nakano.stampcardmvvm.viewModel.AuthViewModel;
+import com.nakano.stampcardmvvm.model.model.UserFirebase;
 
-import static com.nakano.stampcardmvvm.firebasepj.HelperClass.logErrorMessage;
+import static com.nakano.stampcardmvvm.util.HelperClass.logErrorMessage;
 
 public class AuthActivity extends AppCompatActivity {
     private AuthViewModel authViewModel;
