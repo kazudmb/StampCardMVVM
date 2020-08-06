@@ -3,7 +3,6 @@ package com.nakano.stampcardmvvm
 import android.app.Application
 import com.nakano.stampcardmvvm.model.model.AppDatabase
 import com.nakano.stampcardmvvm.model.repository.AuthRepository
-import com.nakano.stampcardmvvm.model.repository.QRCodeDisplayRepository
 import com.nakano.stampcardmvvm.model.repository.UserRepository
 import com.nakano.stampcardmvvm.viewModel.AuthViewModelFactory
 import com.nakano.stampcardmvvm.viewModel.UserViewModelFactory
