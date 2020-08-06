@@ -1,14 +1,17 @@
 package com.nakano.stampcardmvvm.model.repository
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.nakano.stampcardmvvm.model.model.AppDatabase
 import com.nakano.stampcardmvvm.model.model.UserFirebase
+import com.nakano.stampcardmvvm.util.Utility
 
 class UserRepository(
-    private val db: AppDatabase
+    private val db: AppDatabase,
+    private val context: Context
 ) {
     private val firebaseAuth = FirebaseAuth.getInstance()
 
@@ -26,7 +29,7 @@ class UserRepository(
             val name = firebaseUser.displayName
             val email = firebaseUser.email
             val numberOfVisits = "0" // TODO この値をローカルでもつ方法を検討
-            val user = UserFirebase(uid, name, email, numberOfVisits, "会員ランク：メンバー") // TODO ハードコードしないように修正
+            val user = UserFirebase(uid, name, email, numberOfVisits, Utility.getRank(context, numberOfVisits))
             userMutableLiveData.setValue(user)
         } else {
 

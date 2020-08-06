@@ -11,6 +11,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.nakano.stampcardmvvm.model.model.AppDatabase
 import com.nakano.stampcardmvvm.model.model.UserFirebase
 import com.nakano.stampcardmvvm.util.HelperClass
+import com.nakano.stampcardmvvm.util.Utility
 
 class AuthRepository(
     private val db: AppDatabase,
@@ -39,12 +40,8 @@ class AuthRepository(
                             name,
                             email,
                             numberOfVisits,
-                            "会員ランク：メンバー",
-                            false,
-                            false,
-                            false
-                        ) // TODO: ハードコード修正すること
-                        //                    UserFirebaseKotlin user = new UserFirebase(uid, name, email, numberOfVisits, Utility.INSTANCE.getRank(numberOfVisits));
+                            Utility.getRank(context, numberOfVisits)
+                        )
                         user.isNew = isNewUser
                         authenticatedUserMutableLiveData.value = user
                     }

@@ -17,7 +17,6 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 
-// TODO: login画面を実装する（いろんなサービス連携できるように）
 class EmailLoginFragment : Fragment(), KodeinAware {
 
     override val kodein by kodein()

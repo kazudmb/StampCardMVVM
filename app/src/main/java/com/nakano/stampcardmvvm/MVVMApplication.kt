@@ -21,7 +21,7 @@ class MVVMApplication : Application(), KodeinAware {
         import(androidXModule(this@MVVMApplication))
 
         bind() from singleton { AppDatabase(instance()) }
-        bind() from singleton { UserRepository(instance()) }
+        bind() from singleton { UserRepository(instance(), instance()) }
         bind() from singleton { AuthRepository(instance(), instance()) }
         bind() from singleton { QRCodeDisplayRepository(instance(), instance()) }
         bind() from provider { UserViewModelFactory(instance()) }
