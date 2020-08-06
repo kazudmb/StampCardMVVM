@@ -35,9 +35,9 @@ object Utility {
         val num = numberOfVisits.toIntOrNull()
         if (num != null) {
             when {
-                num < 40 -> context.getString(R.string.rank_member)
-                num < 80 -> context.getString(R.string.rank_silver)
-                num >= 80 -> context.getString(R.string.rank_gold)
+                num < 40 -> return context.getString(R.string.rank_member)
+                num < 80 -> return context.getString(R.string.rank_silver)
+                num >= 80 -> return context.getString(R.string.rank_gold)
             }
         }
         return context.getString(R.string.rank_member)
