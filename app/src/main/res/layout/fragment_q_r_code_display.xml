@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="qrCodeDisplayViewModel"
-            type="com.nakano.stampcardmvvm.viewModel.QRCodeDisplayViewModel" />
+            name="userViewModel"
+            type="com.nakano.stampcardmvvm.viewModel.UserViewModel" />
     </data>
 
     <LinearLayout
