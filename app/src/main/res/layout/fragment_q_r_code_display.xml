@@ -19,8 +19,8 @@
             android:id="@+id/qr_code"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp" />
-<!--            app:imageResource="@{userViewModel.qrCode}"/>-->
+            android:layout_marginTop="100dp"
+            app:imageBitmap="@{userViewModel.qrCode}" />
 
         <TextView
             android:layout_width="wrap_content"

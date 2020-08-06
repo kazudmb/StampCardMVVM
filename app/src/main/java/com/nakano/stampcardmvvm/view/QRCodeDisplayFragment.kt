@@ -13,7 +13,6 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 
-// TODO: QRCode(Bitmap)をバインディングさせる方法を調査
 class QRCodeDisplayFragment : Fragment(), KodeinAware {
 
     override val kodein by kodein()
