@@ -21,7 +21,6 @@ class MVVMApplication : Application(), KodeinAware {
         bind() from singleton { AppDatabase(instance()) }
         bind() from singleton { UserRepository(instance(), instance()) }
         bind() from singleton { AuthRepository(instance(), instance()) }
-        bind() from singleton { QRCodeDisplayRepository(instance(), instance()) }
         bind() from provider { UserViewModelFactory(instance()) }
         bind() from provider { AuthViewModelFactory(instance()) }
     }
