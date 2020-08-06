@@ -10,8 +10,6 @@ class AuthViewModel(
     var repository: AuthRepository
 ) : ViewModel() {
 
-    // TODO AuthViewModelをUserViewModelに統合すべき？
-
     var authenticatedUserLiveData: LiveData<UserFirebase>? = null
     var createdUserLiveData: LiveData<UserFirebase>? = null
 
