@@ -1,10 +1,12 @@
 package com.nakano.stampcardmvvm.model.repository
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.util.Log
 import androidx.constraintlayout.widget.Constraints.TAG
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.nakano.stampcardmvvm.model.model.AppDatabase
 import com.nakano.stampcardmvvm.model.model.UserFirebase
@@ -42,5 +44,17 @@ class UserRepository(
             }
 
         return userMutableLiveData
+    }
+
+    fun getQRCode(): LiveData<Bitmap> {
+
+        val mutableLiveData = MutableLiveData<Bitmap>()
+
+        val firebaseAuth = FirebaseAuth.getInstance()
+        val firebaseUser = firebaseAuth.currentUser
+
+        mutableLiveData.value = Utility.createQRCode(context, firebaseUser?.uid)
+
+        return mutableLiveData
     }
 }

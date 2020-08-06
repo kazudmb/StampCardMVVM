@@ -7,4 +7,5 @@ class UserViewModel(
     repository: UserRepository
 ) : ViewModel() {
     val user = repository.getUser()
+    val qrCode = repository.getQRCode()
 }
