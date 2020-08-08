@@ -82,7 +82,6 @@ class StampCardFragment : Fragment(), KodeinAware {
         inflater.inflate(R.menu.menu_main, menu)
     }
 
-    // TODO High ログイン時に、ログインメニューを表示しないように修正すること
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.login -> {
