@@ -56,7 +56,7 @@ class AccountInfoFragment : Fragment(), KodeinAware {
                 return true
             }
             R.id.logout -> {
-
+                // TODO サインアウトの実装すること、AuthViewModelで処理したいがUserViewModelにいるため要検討
                 return true
             }
             else -> super.onOptionsItemSelected(item)
