@@ -28,10 +28,10 @@ class UserRepository(
             .addOnSuccessListener { result ->
                 for (document in result) {
                     // TODO: ハードコードしないように対応すること
-                    val uid = document.data["uid"] as String
-                    val name = document.data["name"] as String
-                    val email = document.data["email"] as String
-                    val numberOfVisits = document.data["numberOfVisits"] as String
+                    val uid = document.data["uid"] as String?
+                    val name = document.data["name"] as String?
+                    val email = document.data["email"] as String?
+                    val numberOfVisits = document.data["numberOfVisits"] as String? ?: "0"
                     val rank = Utility.getRank(context, numberOfVisits)
                     val user = UserFirebase(uid, name, email, numberOfVisits, rank)
                     user.isNew = true
