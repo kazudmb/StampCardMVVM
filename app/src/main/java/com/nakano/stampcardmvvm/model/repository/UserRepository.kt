@@ -92,16 +92,20 @@ class UserRepository(
         }
 
         val layerDrawable = mutableListOf<Drawable>()
-            for (i in 1..10) {
-                if (i <= loopCount) {
-                    val approved = ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_icon1, null)
-                    val layers = arrayOf(stamp[i - 1], approved)
-                    layerDrawable.add(LayerDrawable(layers))
-                } else {
-                    val layers = arrayOf(stamp[i - 1])
-                    layerDrawable.add(LayerDrawable(layers))
-                }
+        for (i in 1..10) {
+            if (i <= loopCount) {
+                val approved = ResourcesCompat.getDrawable(
+                    context.resources,
+                    R.drawable.logo_stamp_icon1,
+                    null
+                )
+                val layers = arrayOf(stamp[i - 1], approved)
+                layerDrawable.add(LayerDrawable(layers))
+            } else {
+                val layers = arrayOf(stamp[i - 1])
+                layerDrawable.add(LayerDrawable(layers))
             }
+        }
 
         val mutableLiveData = MutableLiveData<List<Drawable>>()
         mutableLiveData.value = layerDrawable
@@ -112,9 +116,9 @@ class UserRepository(
     fun isLogin(): LiveData<Boolean> {
 
         val mutableLiveData = MutableLiveData<Boolean>()
-        
+
         val firebaseAuth = FirebaseAuth.getInstance()
-        
+
         if (firebaseAuth.currentUser == null) {
             mutableLiveData.value = false
         } else {
