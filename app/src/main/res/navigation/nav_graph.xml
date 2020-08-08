@@ -18,10 +18,10 @@
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_stampCardFragment_to_accountInfoFragment"
-            app:destination="@id/accountInfoFragment" />
+            app:destination="@id/accountInfo" />
         <action
             android:id="@+id/action_stampCardFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/login" />
     </fragment>
     <fragment
         android:id="@+id/qrCodeDisplayFragment"
@@ -42,7 +42,7 @@
             app:destination="@id/changePasswordFragment" />
     </fragment>
     <fragment
-        android:id="@+id/accountInfoFragment"
+        android:id="@+id/accountInfo"
         android:name="com.nakano.stampcardmvvm.view.AccountInfoFragment"
         android:label="@string/account_info"
         tools:layout="@layout/fragment_account_info" >
@@ -66,7 +66,7 @@
         android:name="com.nakano.stampcardmvvm.view.ChangeEmailFragment"
         android:label="@string/change_email" />
     <fragment
-        android:id="@+id/loginFragment"
+        android:id="@+id/login"
         android:name="com.nakano.stampcardmvvm.view.LoginFragment"
         android:label="@string/login" >
         <action

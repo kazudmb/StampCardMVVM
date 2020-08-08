@@ -61,20 +61,37 @@ class StampCardFragment : Fragment(), KodeinAware {
         }
     }
 
+    override fun onPrepareOptionsMenu(menu: Menu) {
+
+        viewModel.isLogin()
+        viewModel.isLoginLiveData?.observe(viewLifecycleOwner,
+            Observer {
+                if (it) {
+                    menu.findItem(R.id.login).isVisible = false
+                    menu.findItem(R.id.accountInfo).isVisible = true
+                } else {
+                    menu.findItem(R.id.login).isVisible = true
+                    menu.findItem(R.id.accountInfo).isVisible = false
+                }
+            })
+        super.onPrepareOptionsMenu(menu)
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_main, menu)
     }
 
+    // TODO High ログイン時に、ログインメニューを表示しないように修正すること
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.loginFragment -> {
+            R.id.login -> {
                 val action =
                     StampCardFragmentDirections.actionStampCardFragmentToLoginFragment()
                 findNavController().navigate(action)
                 return true
             }
-            R.id.accountInfoFragment -> {
+            R.id.accountInfo -> {
                 val action =
                     StampCardFragmentDirections.actionStampCardFragmentToAccountInfoFragment()
                 findNavController().navigate(action)

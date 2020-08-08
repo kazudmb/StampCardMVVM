@@ -2,10 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:id="@+id/menu_main">
         <item
-            android:id="@+id/loginFragment"
+            android:id="@+id/login"
             android:title="@string/login" />
         <item
-            android:id="@+id/accountInfoFragment"
+            android:id="@+id/accountInfo"
             android:title="@string/account_info" />
     </group>
 </menu>
