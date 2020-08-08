@@ -108,7 +108,7 @@ class GoogleAuthFragment : Fragment(), KodeinAware {
 
     fun signInWithGoogleAuthCredential(googleAuthCredential: AuthCredential) {
         viewModel.signInWithGoogle(googleAuthCredential)
-        viewModel.authenticatedUserLiveData?.observe(this,
+        viewModel.authenticatedUserLiveData?.observe(viewLifecycleOwner,
             Observer { authenticatedUser: UserFirebase ->
                 if (authenticatedUser.isNew!!) {
                     createNewUser(authenticatedUser)
@@ -122,7 +122,7 @@ class GoogleAuthFragment : Fragment(), KodeinAware {
     fun createNewUser(authenticatedUser: UserFirebase) {
         viewModel.createUser(authenticatedUser)
         viewModel.createdUserLiveData?.observe(
-            this,
+            viewLifecycleOwner,
             Observer { user: UserFirebase ->
                 if (user.isCreated!!) {
                     toastMessage(user.name)
