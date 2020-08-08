@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -113,7 +114,7 @@ class GoogleAuthFragment : Fragment(), KodeinAware {
                 if (authenticatedUser.isNew!!) {
                     createNewUser(authenticatedUser)
                 } else {
-                    goToMainActivity(authenticatedUser)
+                    goToStampCardFragment()
                 }
             }
         )
@@ -127,7 +128,7 @@ class GoogleAuthFragment : Fragment(), KodeinAware {
                 if (user.isCreated!!) {
                     toastMessage(user.name)
                 }
-                goToMainActivity(user)
+                goToStampCardFragment()
             }
         )
     }
@@ -140,10 +141,9 @@ class GoogleAuthFragment : Fragment(), KodeinAware {
         ).show()
     }
 
-    fun goToMainActivity(user: UserFirebase) {
-//        Intent intent = new Intent(AuthActivity.this, MainActivity.class);
-//        intent.putExtra("user", user);
-//        startActivity(intent);
-//        finish()
+    fun goToStampCardFragment() {
+        val action =
+            GoogleAuthFragmentDirections.actionGoogleAuthFragmentPopUpToStampCardFragment()
+        findNavController().navigate(action)
     }
 }

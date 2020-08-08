@@ -26,14 +26,13 @@
     <fragment
         android:id="@+id/qrCodeDisplayFragment"
         android:name="com.nakano.stampcardmvvm.view.QRCodeDisplayFragment"
-        android:label="@string/qr_code">
-    </fragment>
+        android:label="@string/qr_code"></fragment>
 
     <fragment
         android:id="@+id/emailLoginFragment"
         android:name="com.nakano.stampcardmvvm.view.EmailLoginFragment"
         android:label="@string/login"
-        tools:layout="@layout/fragment_email_login" >
+        tools:layout="@layout/fragment_email_login">
         <action
             android:id="@+id/action_loginFragment_to_createAccountFragment"
             app:destination="@id/createAccountFragment" />
@@ -45,7 +44,7 @@
         android:id="@+id/accountInfo"
         android:name="com.nakano.stampcardmvvm.view.AccountInfoFragment"
         android:label="@string/account_info"
-        tools:layout="@layout/fragment_account_info" >
+        tools:layout="@layout/fragment_account_info">
         <action
             android:id="@+id/action_accountInfoFragment_to_changePasswordFragment"
             app:destination="@id/changePasswordFragment" />
@@ -68,7 +67,7 @@
     <fragment
         android:id="@+id/login"
         android:name="com.nakano.stampcardmvvm.view.LoginFragment"
-        android:label="@string/login" >
+        android:label="@string/login">
         <action
             android:id="@+id/action_loginFragment_to_loginFragment"
             app:destination="@id/emailLoginFragment" />
@@ -79,6 +78,11 @@
     <fragment
         android:id="@+id/googleAuthFragment"
         android:name="com.nakano.stampcardmvvm.view.GoogleAuthFragment"
-        android:label="GoogleAuthFragment" />
+        android:label="GoogleAuthFragment">
+        <action
+            android:id="@+id/action_googleAuthFragment_popUpTo_stampCardFragment"
+            app:popUpTo="@id/stampCardFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
 
 </navigation>

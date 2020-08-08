@@ -42,4 +42,6 @@ object Utility {
         }
         return context.getString(R.string.rank_member)
     }
+
+    // TODO: Middle グルグルを出すutilを作成すること、出来たらCoroutionを使って実装すること
 }
