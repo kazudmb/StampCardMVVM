@@ -2,8 +2,10 @@ package com.nakano.stampcardmvvm.view
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.nakano.stampcardmvvm.R
@@ -41,9 +43,21 @@ class StampCardFragment : Fragment(), KodeinAware {
         super.onActivityCreated(savedInstanceState)
 
         button_stamp.setOnClickListener {
-            val action =
-                StampCardFragmentDirections.actionStampcardFragmentToQrcodedisplayFragment()
-            findNavController().navigate(action)
+            viewModel.isLogin()
+            viewModel.isLoginLiveData?.observe(viewLifecycleOwner,
+                Observer {
+                    if (it) {
+                        val action =
+                            StampCardFragmentDirections.actionStampcardFragmentToQrcodedisplayFragment()
+                        findNavController().navigate(action)
+                    } else {
+                        Toast.makeText(
+                            context,
+                            getString(R.string.please_login),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                })
         }
     }
 

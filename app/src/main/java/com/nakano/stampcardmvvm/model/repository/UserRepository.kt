@@ -108,4 +108,19 @@ class UserRepository(
 
         return mutableLiveData
     }
+
+    fun isLogin(): LiveData<Boolean> {
+
+        val mutableLiveData = MutableLiveData<Boolean>()
+        
+        val firebaseAuth = FirebaseAuth.getInstance()
+        
+        if (firebaseAuth.currentUser == null) {
+            mutableLiveData.value = false
+        } else {
+            mutableLiveData.value = true
+        }
+
+        return mutableLiveData
+    }
 }

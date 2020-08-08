@@ -4,15 +4,21 @@ import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.nakano.stampcardmvvm.model.repository.UserRepository
 
 class UserViewModel(
-    repository: UserRepository
+    var repository: UserRepository
 ) : ViewModel() {
     val user = repository.getUser()
     val qrCode = repository.getQRCode()
     val stamp = repository.getStamp()
+
+    var isLoginLiveData: LiveData<Boolean>? = null
+    fun isLogin() {
+        isLoginLiveData = repository.isLogin()
+    }
 }
 
 @BindingAdapter("imageBitmap")
