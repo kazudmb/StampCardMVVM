@@ -20,6 +20,7 @@ class UserRepository(
     private val db: AppDatabase,
     private val context: Context
 ) {
+    private val firebaseAuth = FirebaseAuth.getInstance()
     private val rootRef = FirebaseFirestore.getInstance()
     private val usersRef = rootRef.collection("users")
 
@@ -27,25 +28,38 @@ class UserRepository(
 
         val userMutableLiveData = MutableLiveData<UserFirebase>()
 
-        usersRef
-            .get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    // TODO: ハードコードしないように対応すること
-                    val uid = document.data["uid"] as String?
-                    val name = document.data["name"] as String?
-                    val email = document.data["email"] as String?
-                    val numberOfVisits = document.data["numberOfVisits"] as String? ?: "0"
-                    val rank = Utility.getRank(context, numberOfVisits)
-                    val user = UserFirebase(uid, name, email, numberOfVisits, rank)
-                    user.isNew = true
-                    userMutableLiveData.value = user
-                    Log.d(TAG, "${document.id} => ${document.data}")
+        if (firebaseAuth.currentUser != null) {
+
+            val uid = firebaseAuth.currentUser!!.uid
+
+            usersRef
+                .document(uid)
+                .get()
+                .addOnSuccessListener {
+                    if (it.exists()) {
+                        // TODO: ハードコードしないように対応すること
+                        val uid = it["uid"] as String?
+                        val name = it["name"] as String?
+                        val email = it["email"] as String?
+                        val numberOfVisits = it["numberOfVisits"] as String? ?: "0"
+                        val rank = Utility.getRank(context, numberOfVisits)
+                        val user = UserFirebase(uid, name, email, numberOfVisits, rank)
+                        userMutableLiveData.value = user
+                        Log.d(TAG, "${it.id} => ${it.data}")
+                    }
                 }
-            }
-            .addOnFailureListener { exception ->
-                Log.w(TAG, "Error getting documents.", exception)
-            }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error getting documents.", exception)
+                }
+        } else {
+            val uid = null as String?
+            val name = null as String?
+            val email = null as String?
+            val numberOfVisits = "0"
+            val rank = Utility.getRank(context, numberOfVisits)
+            val user = UserFirebase(uid, name, email, numberOfVisits, rank)
+            userMutableLiveData.value = user
+        }
 
         return userMutableLiveData
     }
