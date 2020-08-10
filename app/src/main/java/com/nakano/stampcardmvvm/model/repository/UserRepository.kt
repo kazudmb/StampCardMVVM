@@ -127,6 +127,56 @@ class UserRepository(
         return mutableLiveData
     }
 
+    fun setStamp(numberOfVisits: String?): LiveData<List<Drawable>> {
+        val stamp = listOf(
+            ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon1, null),
+            ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon2, null),
+            ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon3, null),
+            ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon4, null),
+            ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon5, null),
+            ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon6, null),
+            ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon7, null),
+            ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon8, null),
+            ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon9, null),
+            ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon10, null)
+        )
+
+        val loopCount: Int
+        val numberOfVisits = numberOfVisits ?: "0" // TODO numberOfVisitsの取得方法を検討、現状SPやSQLiteに持っていない
+        val numberOfCutOut = numberOfVisits.substring(numberOfVisits.length - 1).toInt()
+
+        loopCount = if (numberOfCutOut == 0 && numberOfVisits.toInt() < 10) {
+            0
+        } else {
+            if (numberOfCutOut == 0) {
+                10
+            } else {
+                numberOfCutOut
+            }
+        }
+
+        val layerDrawable = mutableListOf<Drawable>()
+        for (i in 1..10) {
+            if (i <= loopCount) {
+                val approved = ResourcesCompat.getDrawable(
+                    context.resources,
+                    R.drawable.logo_stamp_icon1,
+                    null
+                )
+                val layers = arrayOf(stamp[i - 1], approved)
+                layerDrawable.add(LayerDrawable(layers))
+            } else {
+                val layers = arrayOf(stamp[i - 1])
+                layerDrawable.add(LayerDrawable(layers))
+            }
+        }
+
+        val mutableLiveData = MutableLiveData<List<Drawable>>()
+        mutableLiveData.value = layerDrawable
+
+        return mutableLiveData
+    }
+
     fun isLogin(): LiveData<Boolean> {
 
         val mutableLiveData = MutableLiveData<Boolean>()

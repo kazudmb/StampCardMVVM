@@ -100,7 +100,7 @@
                                 android:layout_weight="1"
                                 android:adjustViewBounds="true"
                                 android:background="@drawable/stroke_line"
-                                android:src="@{userViewModel.stamp[0]}" />
+                                android:src="@{userViewModel.stampLiveData[0]}" />
 
                             <ImageView
                                 android:id="@+id/stamp_area2"
@@ -109,7 +109,7 @@
                                 android:layout_weight="1"
                                 android:adjustViewBounds="true"
                                 android:background="@drawable/stroke_line"
-                                android:src="@{userViewModel.stamp[1]}" />
+                                android:src="@{userViewModel.stampLiveData[1]}" />
 
                             <ImageView
                                 android:id="@+id/stamp_area3"
@@ -118,7 +118,7 @@
                                 android:layout_weight="1"
                                 android:adjustViewBounds="true"
                                 android:background="@drawable/stroke_line"
-                                android:src="@{userViewModel.stamp[2]}" />
+                                android:src="@{userViewModel.stampLiveData[2]}" />
 
                             <ImageView
                                 android:id="@+id/stamp_area4"
@@ -127,7 +127,7 @@
                                 android:layout_weight="1"
                                 android:adjustViewBounds="true"
                                 android:background="@drawable/stroke_line"
-                                android:src="@{userViewModel.stamp[3]}" />
+                                android:src="@{userViewModel.stampLiveData[3]}" />
 
                             <ImageView
                                 android:id="@+id/stamp_area5"
@@ -136,7 +136,7 @@
                                 android:layout_weight="1"
                                 android:adjustViewBounds="true"
                                 android:background="@drawable/stroke_line"
-                                android:src="@{userViewModel.stamp[4]}" />
+                                android:src="@{userViewModel.stampLiveData[4]}" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -151,7 +151,7 @@
                                 android:layout_weight="1"
                                 android:adjustViewBounds="true"
                                 android:background="@drawable/stroke_line"
-                                android:src="@{userViewModel.stamp[5]}" />
+                                android:src="@{userViewModel.stampLiveData[5]}" />
 
                             <ImageView
                                 android:id="@+id/stamp_area7"
@@ -160,7 +160,7 @@
                                 android:layout_weight="1"
                                 android:adjustViewBounds="true"
                                 android:background="@drawable/stroke_line"
-                                android:src="@{userViewModel.stamp[6]}" />
+                                android:src="@{userViewModel.stampLiveData[6]}" />
 
                             <ImageView
                                 android:id="@+id/stamp_area8"
@@ -169,7 +169,7 @@
                                 android:layout_weight="1"
                                 android:adjustViewBounds="true"
                                 android:background="@drawable/stroke_line"
-                                android:src="@{userViewModel.stamp[7]}" />
+                                android:src="@{userViewModel.stampLiveData[7]}" />
 
                             <ImageView
                                 android:id="@+id/stamp_area9"
@@ -178,7 +178,7 @@
                                 android:layout_weight="1"
                                 android:adjustViewBounds="true"
                                 android:background="@drawable/stroke_line"
-                                android:src="@{userViewModel.stamp[8]}" />
+                                android:src="@{userViewModel.stampLiveData[8]}" />
 
                             <ImageView
                                 android:id="@+id/stamp_area10"
@@ -187,7 +187,7 @@
                                 android:layout_weight="1"
                                 android:adjustViewBounds="true"
                                 android:background="@drawable/stroke_line"
-                                android:src="@{userViewModel.stamp[9]}" />
+                                android:src="@{userViewModel.stampLiveData[9]}" />
                         </LinearLayout>
                     </LinearLayout>
 

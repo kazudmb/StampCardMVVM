@@ -17,6 +17,7 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 
+// TODO: High 来店回数とスタンプ押下する数を合わせる、viewModelからデータをgetする方法を理解すること
 class StampCardFragment : Fragment(), KodeinAware {
 
     override val kodein by kodein()
@@ -41,6 +42,13 @@ class StampCardFragment : Fragment(), KodeinAware {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        // TODO: おそらくnumberOfVisitsが取得できる前なので、スタンプが何も押されていない状態になっている
+        viewModel.setStamp(viewModel.user.value?.numberOfVisits)
+        viewModel.stampLiveData.observe(viewLifecycleOwner,
+            Observer {
+
+            })
 
         button_stamp.setOnClickListener {
             viewModel.isLogin()

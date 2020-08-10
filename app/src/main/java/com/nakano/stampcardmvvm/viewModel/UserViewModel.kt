@@ -15,6 +15,11 @@ class UserViewModel(
     val qrCode = repository.getQRCode()
     val stamp = repository.getStamp()
 
+    lateinit var stampLiveData: LiveData<List<Drawable>>
+    fun setStamp(numberOfVisits: String?) {
+        stampLiveData = repository.setStamp(numberOfVisits)
+    }
+
     var isLoginLiveData: LiveData<Boolean>? = null
     fun isLogin() {
         isLoginLiveData = repository.isLogin()
