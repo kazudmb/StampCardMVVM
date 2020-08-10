@@ -24,9 +24,12 @@ class UserRepository(
     private val rootRef = FirebaseFirestore.getInstance()
     private val usersRef = rootRef.collection("users")
 
-    fun getUser(): LiveData<UserFirebase> {
+    private val userMutableLiveData = MutableLiveData<UserFirebase>()
+    private val qrCodeMutableLiveData = MutableLiveData<Bitmap>()
+    private val drawableMutableLiveData = MutableLiveData<List<Drawable>>()
+    private val isLoginMutableLiveData = MutableLiveData<Boolean>()
 
-        val userMutableLiveData = MutableLiveData<UserFirebase>()
+    fun getUser(): LiveData<UserFirebase> {
 
         if (firebaseAuth.currentUser != null) {
 
@@ -66,18 +69,15 @@ class UserRepository(
 
     fun getQRCode(): LiveData<Bitmap> {
 
-        val mutableLiveData = MutableLiveData<Bitmap>()
-
         val firebaseAuth = FirebaseAuth.getInstance()
         val firebaseUser = firebaseAuth.currentUser
 
-        mutableLiveData.value = Utility.createQRCode(context, firebaseUser?.uid)
+        qrCodeMutableLiveData.value = Utility.createQRCode(context, firebaseUser?.uid)
 
-        return mutableLiveData
+        return qrCodeMutableLiveData
     }
 
     fun getStamp(): LiveData<List<Drawable>> {
-
         val stamp = listOf(
             ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon1, null),
             ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon2, null),
@@ -92,7 +92,8 @@ class UserRepository(
         )
 
         val loopCount: Int
-        val numberOfVisits = "9" // TODO numberOfVisitsの取得方法を検討、現状SPやSQLiteに持っていない
+        // TODO numberOfVisitsの取得方法を検討、現状SPやSQLiteに持っていない
+        val numberOfVisits = userMutableLiveData.value?.numberOfVisits ?: "0"
         val numberOfCutOut = numberOfVisits.substring(numberOfVisits.length - 1).toInt()
 
         loopCount = if (numberOfCutOut == 0 && numberOfVisits.toInt() < 10) {
@@ -121,74 +122,23 @@ class UserRepository(
             }
         }
 
-        val mutableLiveData = MutableLiveData<List<Drawable>>()
-        mutableLiveData.value = layerDrawable
+        // TODO: SwipeRefreshのTaskで実行しているため、Coroutineに変更した場合、postValueではなくsetValueにすべきか要確認
+        drawableMutableLiveData.value = layerDrawable
+//        drawableMutableLiveData.postValue(layerDrawable)
 
-        return mutableLiveData
-    }
-
-    fun setStamp(numberOfVisits: String?): LiveData<List<Drawable>> {
-        val stamp = listOf(
-            ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon1, null),
-            ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon2, null),
-            ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon3, null),
-            ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon4, null),
-            ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon5, null),
-            ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon6, null),
-            ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon7, null),
-            ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon8, null),
-            ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon9, null),
-            ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon10, null)
-        )
-
-        val loopCount: Int
-        val numberOfVisits = numberOfVisits ?: "0" // TODO numberOfVisitsの取得方法を検討、現状SPやSQLiteに持っていない
-        val numberOfCutOut = numberOfVisits.substring(numberOfVisits.length - 1).toInt()
-
-        loopCount = if (numberOfCutOut == 0 && numberOfVisits.toInt() < 10) {
-            0
-        } else {
-            if (numberOfCutOut == 0) {
-                10
-            } else {
-                numberOfCutOut
-            }
-        }
-
-        val layerDrawable = mutableListOf<Drawable>()
-        for (i in 1..10) {
-            if (i <= loopCount) {
-                val approved = ResourcesCompat.getDrawable(
-                    context.resources,
-                    R.drawable.logo_stamp_icon1,
-                    null
-                )
-                val layers = arrayOf(stamp[i - 1], approved)
-                layerDrawable.add(LayerDrawable(layers))
-            } else {
-                val layers = arrayOf(stamp[i - 1])
-                layerDrawable.add(LayerDrawable(layers))
-            }
-        }
-
-        val mutableLiveData = MutableLiveData<List<Drawable>>()
-        mutableLiveData.value = layerDrawable
-
-        return mutableLiveData
+        return drawableMutableLiveData
     }
 
     fun isLogin(): LiveData<Boolean> {
 
-        val mutableLiveData = MutableLiveData<Boolean>()
-
         val firebaseAuth = FirebaseAuth.getInstance()
 
         if (firebaseAuth.currentUser == null) {
-            mutableLiveData.value = false
+            isLoginMutableLiveData.value = false
         } else {
-            mutableLiveData.value = true
+            isLoginMutableLiveData.value = true
         }
 
-        return mutableLiveData
+        return isLoginMutableLiveData
     }
 }

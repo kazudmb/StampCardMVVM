@@ -6,6 +6,7 @@ import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import com.nakano.stampcardmvvm.model.model.UserFirebase
 import com.nakano.stampcardmvvm.model.repository.UserRepository
 
 class UserViewModel(
@@ -13,14 +14,19 @@ class UserViewModel(
 ) : ViewModel() {
     val user = repository.getUser()
     val qrCode = repository.getQRCode()
-    val stamp = repository.getStamp()
 
+    lateinit var userLiveData: LiveData<UserFirebase>
     lateinit var stampLiveData: LiveData<List<Drawable>>
-    fun setStamp(numberOfVisits: String?) {
-        stampLiveData = repository.setStamp(numberOfVisits)
+    lateinit var isLoginLiveData: LiveData<Boolean>
+
+    fun getUser() {
+        userLiveData = repository.getUser()
     }
 
-    var isLoginLiveData: LiveData<Boolean>? = null
+    fun setStamp() {
+        stampLiveData = repository.getStamp()
+    }
+
     fun isLogin() {
         isLoginLiveData = repository.isLogin()
     }

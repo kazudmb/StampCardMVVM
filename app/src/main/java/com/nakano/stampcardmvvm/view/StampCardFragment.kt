@@ -1,8 +1,11 @@
 package com.nakano.stampcardmvvm.view
 
+import android.os.AsyncTask
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
+import androidx.constraintlayout.widget.Constraints.TAG
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -13,6 +16,10 @@ import com.nakano.stampcardmvvm.databinding.FragmentStampCardBinding
 import com.nakano.stampcardmvvm.viewModel.UserViewModel
 import com.nakano.stampcardmvvm.viewModel.UserViewModelFactory
 import kotlinx.android.synthetic.main.fragment_stamp_card.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
@@ -33,7 +40,7 @@ class StampCardFragment : Fragment(), KodeinAware {
             DataBindingUtil.inflate(inflater, R.layout.fragment_stamp_card, container, false)
         viewModel = ViewModelProviders.of(this, factory).get(UserViewModel::class.java)
         binding.userViewModel = viewModel
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
 
         setHasOptionsMenu(true)
 
@@ -44,11 +51,7 @@ class StampCardFragment : Fragment(), KodeinAware {
         super.onActivityCreated(savedInstanceState)
 
         // TODO: おそらくnumberOfVisitsが取得できる前なので、スタンプが何も押されていない状態になっている
-        viewModel.setStamp(viewModel.user.value?.numberOfVisits)
-        viewModel.stampLiveData.observe(viewLifecycleOwner,
-            Observer {
-
-            })
+        viewModel.setStamp()
 
         button_stamp.setOnClickListener {
             viewModel.isLogin()
@@ -66,6 +69,12 @@ class StampCardFragment : Fragment(), KodeinAware {
                         ).show()
                     }
                 })
+        }
+
+        swipe_refresh_layout.setOnRefreshListener {
+            CoroutineScope(Dispatchers.Default).launch {
+                myTask()
+            }
         }
     }
 
@@ -105,6 +114,29 @@ class StampCardFragment : Fragment(), KodeinAware {
                 return true
             }
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private suspend fun myTask() {
+        try {
+
+            // onPreExecute
+            withContext(Dispatchers.Main) {
+                viewModel.getUser()
+                // TODO: ネットワーク通信待ちをする場合の実装方法を調査すること
+                viewModel.setStamp()
+            }
+
+            // doInBackground
+            Thread.sleep(500)
+
+            // onPostExecute
+            withContext(Dispatchers.Main) {
+                swipe_refresh_layout.isRefreshing = false
+            }
+        } catch (e: Exception) {
+            // onCancelled
+            Log.e(TAG, "error: ", e)
         }
     }
 }
