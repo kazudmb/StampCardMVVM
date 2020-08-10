@@ -71,6 +71,7 @@ class StampCardFragment : Fragment(), KodeinAware {
                 })
         }
 
+        swipe_refresh_layout.setColorSchemeResources(R.color.colorPrimary)
         swipe_refresh_layout.setOnRefreshListener {
             CoroutineScope(Dispatchers.Default).launch {
                 myTask()
