@@ -1,6 +1,5 @@
 package com.nakano.stampcardmvvm.view
 
-import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -55,7 +54,7 @@ class StampCardFragment : Fragment(), KodeinAware {
 
         button_stamp.setOnClickListener {
             viewModel.isLogin()
-            viewModel.isLoginLiveData?.observe(viewLifecycleOwner,
+            viewModel.isLoginLiveData.observe(viewLifecycleOwner,
                 Observer {
                     if (it) {
                         val action =
@@ -82,7 +81,7 @@ class StampCardFragment : Fragment(), KodeinAware {
     override fun onPrepareOptionsMenu(menu: Menu) {
 
         viewModel.isLogin()
-        viewModel.isLoginLiveData?.observe(viewLifecycleOwner,
+        viewModel.isLoginLiveData.observe(viewLifecycleOwner,
             Observer {
                 if (it) {
                     menu.findItem(R.id.login).isVisible = false
