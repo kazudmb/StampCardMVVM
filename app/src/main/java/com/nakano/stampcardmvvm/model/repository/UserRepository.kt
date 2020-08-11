@@ -92,7 +92,7 @@ class UserRepository(
         )
 
         val loopCount: Int
-        // TODO numberOfVisitsの取得方法を検討、現状SPやSQLiteに持っていない
+        // TODO: userMutableLiveDataにアクセスしているがそれはOKなのか？
         val numberOfVisits = userMutableLiveData.value?.numberOfVisits ?: "0"
         val numberOfCutOut = numberOfVisits.substring(numberOfVisits.length - 1).toInt()
 
@@ -122,9 +122,7 @@ class UserRepository(
             }
         }
 
-        // TODO: SwipeRefreshのTaskで実行しているため、Coroutineに変更した場合、postValueではなくsetValueにすべきか要確認
         drawableMutableLiveData.value = layerDrawable
-//        drawableMutableLiveData.postValue(layerDrawable)
 
         return drawableMutableLiveData
     }
