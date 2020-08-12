@@ -23,7 +23,7 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 
-// TODO: High 来店回数とスタンプ押下する数を合わせる、viewModelからデータをgetする方法を理解すること
+// TODO: 来店回数とスタンプ押下する数を合わせる、viewModelからデータをgetする方法を理解すること
 class StampCardFragment : Fragment(), KodeinAware {
 
     override val kodein by kodein()

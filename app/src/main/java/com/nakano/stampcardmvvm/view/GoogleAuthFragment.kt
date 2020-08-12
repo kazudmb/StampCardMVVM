@@ -109,15 +109,6 @@ class GoogleAuthFragment : Fragment(), KodeinAware {
 
     fun signInWithGoogleAuthCredential(googleAuthCredential: AuthCredential) {
         viewModel.signInWithGoogle(googleAuthCredential)
-        viewModel.authenticatedUserLiveData?.observe(viewLifecycleOwner,
-            Observer { authenticatedUser: UserFirebase ->
-                if (authenticatedUser.isNew!!) {
-                    createNewUser(authenticatedUser)
-                } else {
-                    goToStampCardFragment()
-                }
-            }
-        )
     }
 
     fun createNewUser(authenticatedUser: UserFirebase) {
