@@ -41,8 +41,7 @@ class AuthRepository(
                 )
                 return createUserInFirestoreIfNotExists2(user)
             } else {
-                // TODO: StampCardFragmentにnavigationさせる(repositoryでは実行しない)
-                return false
+                return true
             }
         } catch (e: Exception) {
             return false
