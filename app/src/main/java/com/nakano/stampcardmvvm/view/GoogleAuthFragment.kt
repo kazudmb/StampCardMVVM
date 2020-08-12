@@ -108,26 +108,16 @@ class GoogleAuthFragment : Fragment(), KodeinAware {
     }
 
     fun signInWithGoogleAuthCredential(googleAuthCredential: AuthCredential) {
-        viewModel.signInWithGoogle(googleAuthCredential)
+        if(viewModel.signInWithGoogle(googleAuthCredential)) {
+            goToStampCardFragment()
+            toastMessage()
+        }
     }
 
-    fun createNewUser(authenticatedUser: UserFirebase) {
-        viewModel.createUser(authenticatedUser)
-        viewModel.createdUserLiveData?.observe(
-            viewLifecycleOwner,
-            Observer { user: UserFirebase ->
-                if (user.isCreated!!) {
-                    toastMessage(user.name)
-                }
-                goToStampCardFragment()
-            }
-        )
-    }
-
-    fun toastMessage(name: String?) {
+    fun toastMessage() {
         Toast.makeText(
             context,
-            "Hi $name!\nYour account was successfully created.",
+            "Your account was successfully created.",
             Toast.LENGTH_LONG
         ).show()
     }
