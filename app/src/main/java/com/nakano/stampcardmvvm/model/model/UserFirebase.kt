@@ -13,8 +13,5 @@ data class UserFirebase(
     var isAuthenticated: Boolean? = false,
 
     @Exclude
-    var isNew: Boolean? = false,
-
-    @Exclude
     var isCreated: Boolean? = false
 )
