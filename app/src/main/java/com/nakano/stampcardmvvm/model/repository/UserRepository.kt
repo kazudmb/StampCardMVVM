@@ -68,6 +68,7 @@ class UserRepository(
                 val user = UserFirebase(uid, name, email, numberOfVisits, rank)
                 userMutableLiveData.value = user
             }
+        // TODO: user情報を取得後に、getStampするように修正
         return userMutableLiveData
     }
 
@@ -80,7 +81,8 @@ class UserRepository(
 
         return qrCodeMutableLiveData
     }
-    
+
+    // TODO: High 下記処理のcoroutine化
     fun getStamp(): LiveData<List<Drawable>> {
         val stamp = listOf(
             ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon1, null),
