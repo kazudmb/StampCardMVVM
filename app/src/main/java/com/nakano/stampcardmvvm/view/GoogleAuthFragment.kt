@@ -59,17 +59,17 @@ class GoogleAuthFragment : Fragment(), KodeinAware {
         initGoogleSignInClient()
     }
 
-    fun initSignInButton() {
+    private fun initSignInButton() {
         val googleSignInButton: SignInButton =
             requireView().findViewById(R.id.google_sign_in_button)
         googleSignInButton.setOnClickListener { v: View? -> signIn() }
     }
 
-    fun initAuthViewModel() {
+    private fun initAuthViewModel() {
         viewModel = ViewModelProvider(this).get(AuthViewModel::class.java)
     }
 
-    fun initGoogleSignInClient() {
+    private fun initGoogleSignInClient() {
         val googleSignInOptions =
             GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -79,7 +79,7 @@ class GoogleAuthFragment : Fragment(), KodeinAware {
             GoogleSignIn.getClient(context?.applicationContext!!, googleSignInOptions)
     }
 
-    fun signIn() {
+    private fun signIn() {
         val signInIntent = googleSignInClient.signInIntent
         startActivityForResult(signInIntent, 123)
     }
@@ -100,7 +100,7 @@ class GoogleAuthFragment : Fragment(), KodeinAware {
         }
     }
 
-    fun getGoogleAuthCredential(googleSignInAccount: GoogleSignInAccount) {
+    private fun getGoogleAuthCredential(googleSignInAccount: GoogleSignInAccount) {
         val googleTokenId = googleSignInAccount.idToken
         val googleAuthCredential =
             GoogleAuthProvider.getCredential(googleTokenId, null)
