@@ -39,7 +39,8 @@ class AuthRepository(
                     numberOfVisits,
                     Utility.getRank(context, numberOfVisits)
                 )
-                return createUserInFirestoreIfNotExists2(user)
+                isSuccess.value = createUserInFirestoreIfNotExists(user)
+                return isSuccess
             } else {
                 return true
             }
@@ -48,7 +49,7 @@ class AuthRepository(
         }
     }
 
-    private suspend fun createUserInFirestoreIfNotExists2(authenticatedUser: UserFirebase): Boolean {
+    private suspend fun createUserInFirestoreIfNotExists(authenticatedUser: UserFirebase): Boolean {
         try {
             val data =
                 usersRef
