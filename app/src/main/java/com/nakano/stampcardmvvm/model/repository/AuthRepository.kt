@@ -1,6 +1,8 @@
 package com.nakano.stampcardmvvm.model.repository
 
 import android.content.Context
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -17,8 +19,10 @@ class AuthRepository(
     private val rootRef = FirebaseFirestore.getInstance()
     private val usersRef = rootRef.collection("users")
 
-    // TODO: ReturnをResponse?result?にして、suceessの場合はview側でnavigationする、failedの場合はtoastの表示
-    suspend fun signInWithGoogle(googleAuthCredential: AuthCredential?): Boolean {
+    suspend fun signInWithGoogle(googleAuthCredential: AuthCredential?): LiveData<Boolean> {
+
+        val isSuccess = MutableLiveData<Boolean>()
+
         try {
             val data = firebaseAuth
                 .signInWithCredential(googleAuthCredential!!)
@@ -42,10 +46,12 @@ class AuthRepository(
                 isSuccess.value = createUserInFirestoreIfNotExists(user)
                 return isSuccess
             } else {
-                return true
+                isSuccess.value = true
+                return isSuccess
             }
         } catch (e: Exception) {
-            return false
+            isSuccess.value = false
+            return isSuccess
         }
     }
 

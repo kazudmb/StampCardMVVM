@@ -22,7 +22,6 @@ import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.GoogleAuthProvider
 import com.nakano.stampcardmvvm.R
 import com.nakano.stampcardmvvm.databinding.FragmentGoogleAuthBinding
-import com.nakano.stampcardmvvm.model.model.UserFirebase
 import com.nakano.stampcardmvvm.util.HelperClass
 import com.nakano.stampcardmvvm.viewModel.AuthViewModelFactory
 import com.nakano.stampcardmvvm.viewModel.AuthViewModel
@@ -76,7 +75,8 @@ class GoogleAuthFragment : Fragment(), KodeinAware {
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build()
-        googleSignInClient = GoogleSignIn.getClient(context?.applicationContext!!, googleSignInOptions)
+        googleSignInClient =
+            GoogleSignIn.getClient(context?.applicationContext!!, googleSignInOptions)
     }
 
     fun signIn() {
@@ -107,22 +107,26 @@ class GoogleAuthFragment : Fragment(), KodeinAware {
         signInWithGoogleAuthCredential(googleAuthCredential)
     }
 
-    fun signInWithGoogleAuthCredential(googleAuthCredential: AuthCredential) {
-        if(viewModel.signInWithGoogle(googleAuthCredential)) {
-            goToStampCardFragment()
-            toastMessage()
-        }
+    private fun signInWithGoogleAuthCredential(googleAuthCredential: AuthCredential) {
+        viewModel.signInWithGoogle(googleAuthCredential)
+        viewModel.isSuccess.observe(
+            viewLifecycleOwner,
+            Observer {
+                if (it) {
+                    goToStampCardFragment()
+                    toastMessage(R.string.sign_in_with_email_success)
+                } else {
+                    toastMessage(R.string.sign_in_with_email_failure)
+                }
+            })
     }
 
-    fun toastMessage() {
-        Toast.makeText(
-            context,
-            "Your account was successfully created.",
-            Toast.LENGTH_LONG
-        ).show()
+    private fun toastMessage(resourceId: Int) {
+        Toast.makeText(context, resourceId, Toast.LENGTH_LONG)
+            .show()
     }
 
-    fun goToStampCardFragment() {
+    private fun goToStampCardFragment() {
         val action =
             GoogleAuthFragmentDirections.actionGoogleAuthFragmentPopUpToStampCardFragment()
         findNavController().navigate(action)
