@@ -49,7 +49,7 @@ class StampCardFragment : Fragment(), KodeinAware {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        // TODO: おそらくnumberOfVisitsが取得できる前なので、スタンプが何も押されていない状態になっている
+        viewModel.getUser()
         viewModel.setStamp()
 
         button_stamp.setOnClickListener {

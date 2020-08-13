@@ -15,6 +15,7 @@ import com.nakano.stampcardmvvm.R
 import com.nakano.stampcardmvvm.model.model.AppDatabase
 import com.nakano.stampcardmvvm.model.model.UserFirebase
 import com.nakano.stampcardmvvm.util.Utility
+import kotlinx.coroutines.tasks.await
 
 class UserRepository(
     private val db: AppDatabase,
@@ -29,41 +30,44 @@ class UserRepository(
     private val drawableMutableLiveData = MutableLiveData<List<Drawable>>()
     private val isLoginMutableLiveData = MutableLiveData<Boolean>()
 
-    fun getUser(): LiveData<UserFirebase> {
+    suspend fun getUser(): LiveData<UserFirebase> {
 
-        if (firebaseAuth.currentUser != null) {
+        val userMutableLiveData = MutableLiveData<UserFirebase>()
 
-            val uid = firebaseAuth.currentUser!!.uid
+            val uid = firebaseAuth.currentUser?.uid
 
-            usersRef
-                .document(uid)
-                .get()
-                .addOnSuccessListener {
-                    if (it.exists()) {
+            if (uid != null) {
+
+                val data = usersRef
+                    .document(uid)
+                    .get()
+                    .await()
+
+                try {
+                    if(data.exists()) {
                         // TODO: ハードコードしないように対応すること
-                        val uid = it["uid"] as String?
-                        val name = it["name"] as String?
-                        val email = it["email"] as String?
-                        val numberOfVisits = it["numberOfVisits"] as String? ?: "0"
+                        val uid = data["uid"] as String?
+                        val name = data["name"] as String?
+                        val email = data["email"] as String?
+                        val numberOfVisits = data["numberOfVisits"] as String? ?: "0"
                         val rank = Utility.getRank(context, numberOfVisits)
                         val user = UserFirebase(uid, name, email, numberOfVisits, rank)
                         userMutableLiveData.value = user
-                        Log.d(TAG, "${it.id} => ${it.data}")
+                        Log.d(TAG, "${data.id} => ${data.data}")
                     }
+                } catch (e: Exception) {
+                    Log.w(TAG, "Error getting documents.", e)
                 }
-                .addOnFailureListener { exception ->
-                    Log.w(TAG, "Error getting documents.", exception)
-                }
-        } else {
-            val uid = null as String?
-            val name = null as String?
-            val email = null as String?
-            val numberOfVisits = "0"
-            val rank = Utility.getRank(context, numberOfVisits)
-            val user = UserFirebase(uid, name, email, numberOfVisits, rank)
-            userMutableLiveData.value = user
-        }
 
+            } else {
+                val uid = null as String?
+                val name = null as String?
+                val email = null as String?
+                val numberOfVisits = "0"
+                val rank = Utility.getRank(context, numberOfVisits)
+                val user = UserFirebase(uid, name, email, numberOfVisits, rank)
+                userMutableLiveData.value = user
+            }
         return userMutableLiveData
     }
 
@@ -76,7 +80,7 @@ class UserRepository(
 
         return qrCodeMutableLiveData
     }
-
+    
     fun getStamp(): LiveData<List<Drawable>> {
         val stamp = listOf(
             ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon1, null),
