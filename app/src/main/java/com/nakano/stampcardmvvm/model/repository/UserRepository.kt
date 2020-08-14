@@ -31,9 +31,7 @@ class UserRepository(
     private val isLoginMutableLiveData = MutableLiveData<Boolean>()
 
     suspend fun getUser(): LiveData<UserFirebase> {
-
-        val userMutableLiveData = MutableLiveData<UserFirebase>()
-
+        
             val uid = firebaseAuth.currentUser?.uid
 
             if (uid != null) {

@@ -50,7 +50,14 @@ class StampCardFragment : Fragment(), KodeinAware {
         super.onActivityCreated(savedInstanceState)
 
         viewModel.getUser()
+        // TODO: High setBlankStampArea()に置き換える
         viewModel.setStamp()
+        viewModel.user.observe(viewLifecycleOwner,
+            Observer {
+                if (it != null) {
+                    viewModel.setStamp()
+                }
+            })
 
         button_stamp.setOnClickListener {
             viewModel.isLogin()

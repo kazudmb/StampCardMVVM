@@ -31,6 +31,9 @@ class UserViewModel(
         }
     }
 
+    // TODO: スタンプの押されていないスタンプエリアをセットすること(layoutと紐づいているため、何も押されていないスタンプエリアの画像をセットする必要あり)
+    // setBlankStampArea()
+
     fun setStamp() {
         stampLiveData = repository.getStamp()
     }
