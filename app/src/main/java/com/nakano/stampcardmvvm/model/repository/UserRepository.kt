@@ -23,7 +23,7 @@ class UserRepository(
 ) {
     private val firebaseAuth = FirebaseAuth.getInstance()
     private val rootRef = FirebaseFirestore.getInstance()
-    private val usersRef = rootRef.collection("users")
+    private val usersRef = rootRef.collection(COLLECTION_PATH)
 
     private val userMutableLiveData = MutableLiveData<UserFirebase>()
     private val drawableMutableLiveData = MutableLiveData<List<Drawable>>()
@@ -56,11 +56,10 @@ class UserRepository(
 
                 try {
                     if(data.exists()) {
-                        // TODO: ハードコードしないように対応すること
-                        val uid = data["uid"] as String?
-                        val name = data["name"] as String?
-                        val email = data["email"] as String?
-                        val numberOfVisits = data["numberOfVisits"] as String? ?: "0"
+                        val uid = data[FIELD_NAME_UID] as String?
+                        val name = data[FIELD_NAME_NAME] as String?
+                        val email = data[FIELD_NAME_EMAIL] as String?
+                        val numberOfVisits = data[FIELD_NAME_NUMBER_OF_VISITS] as String? ?: DEFAULT_NUMBER_OF_VISITS
                         val rank = Utility.getRank(context, numberOfVisits)
                         val user = UserFirebase(uid, name, email, numberOfVisits, rank)
                         userMutableLiveData.value = user
@@ -102,7 +101,7 @@ class UserRepository(
 
     fun getStamp(): LiveData<List<Drawable>> {
         val loopCount: Int
-        val numberOfVisits = userMutableLiveData.value?.numberOfVisits ?: "0"
+        val numberOfVisits = userMutableLiveData.value?.numberOfVisits ?: DEFAULT_NUMBER_OF_VISITS
         val numberOfCutOut = numberOfVisits.substring(numberOfVisits.length - 1).toInt()
 
         loopCount = if (numberOfCutOut == 0 && numberOfVisits.toInt() < 10) {
@@ -148,5 +147,16 @@ class UserRepository(
         }
 
         return isLoginMutableLiveData
+    }
+
+    companion object{
+        const val COLLECTION_PATH = "users"
+
+        const val FIELD_NAME_UID = "uid"
+        const val FIELD_NAME_NAME = "name"
+        const val FIELD_NAME_EMAIL = "email"
+        const val FIELD_NAME_NUMBER_OF_VISITS = "numberOfVisits"
+
+        const val DEFAULT_NUMBER_OF_VISITS = "0"
     }
 }
