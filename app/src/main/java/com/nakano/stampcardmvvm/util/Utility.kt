@@ -10,7 +10,7 @@ object Utility {
 
     private val TAG = "Utility"
 
-    fun createQRCode(context: Context, uid: String?) : Bitmap? {
+    fun createQRCode(context: Context, uid: String) : Bitmap? {
         val dp = 300
         val scale = context.resources.displayMetrics.density
         val size = (dp * scale + 0.5f).toInt()

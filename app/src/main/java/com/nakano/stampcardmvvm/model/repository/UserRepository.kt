@@ -86,9 +86,11 @@ class UserRepository(
         val qrCodeMutableLiveData = MutableLiveData<Bitmap>()
 
         val firebaseAuth = FirebaseAuth.getInstance()
-        val firebaseUser = firebaseAuth.currentUser
+        val uid = firebaseAuth.currentUser?.uid
 
-        qrCodeMutableLiveData.value = Utility.createQRCode(context, firebaseUser?.uid)
+        if (uid != null) {
+            qrCodeMutableLiveData.value = Utility.createQRCode(context, uid)
+        }
 
         return qrCodeMutableLiveData
     }
