@@ -30,12 +30,23 @@ class UserRepository(
     private val drawableMutableLiveData = MutableLiveData<List<Drawable>>()
     private val isLoginMutableLiveData = MutableLiveData<Boolean>()
 
+    private val stampArea = mutableListOf(
+        ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon1, null)!!,
+        ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon2, null)!!,
+        ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon3, null)!!,
+        ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon4, null)!!,
+        ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon5, null)!!,
+        ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon6, null)!!,
+        ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon7, null)!!,
+        ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon8, null)!!,
+        ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon9, null)!!,
+        ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon10, null)!!
+    )
+
     suspend fun getUser(): LiveData<UserFirebase> {
-        
             val uid = firebaseAuth.currentUser?.uid
 
             if (uid != null) {
-
                 val data = usersRef
                     .document(uid)
                     .get()
@@ -66,7 +77,6 @@ class UserRepository(
                 val user = UserFirebase(uid, name, email, numberOfVisits, rank)
                 userMutableLiveData.value = user
             }
-        // TODO: user情報を取得後に、getStampするように修正
         return userMutableLiveData
     }
 
@@ -80,23 +90,13 @@ class UserRepository(
         return qrCodeMutableLiveData
     }
 
-    // TODO: High 下記処理のcoroutine化
-    fun getStamp(): LiveData<List<Drawable>> {
-        val stamp = listOf(
-            ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon1, null),
-            ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon2, null),
-            ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon3, null),
-            ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon4, null),
-            ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon5, null),
-            ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon6, null),
-            ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon7, null),
-            ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon8, null),
-            ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon9, null),
-            ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon10, null)
-        )
+    fun setBlankStampArea(): LiveData<List<Drawable>> {
+        drawableMutableLiveData.value = stampArea
+        return drawableMutableLiveData
+    }
 
+    fun getStamp(): LiveData<List<Drawable>> {
         val loopCount: Int
-        // TODO: userMutableLiveDataにアクセスしているがそれはOKなのか？
         val numberOfVisits = userMutableLiveData.value?.numberOfVisits ?: "0"
         val numberOfCutOut = numberOfVisits.substring(numberOfVisits.length - 1).toInt()
 
@@ -118,10 +118,10 @@ class UserRepository(
                     R.drawable.logo_stamp_icon1,
                     null
                 )
-                val layers = arrayOf(stamp[i - 1], approved)
+                val layers = arrayOf(stampArea[i - 1], approved)
                 layerDrawable.add(LayerDrawable(layers))
             } else {
-                val layers = arrayOf(stamp[i - 1])
+                val layers = arrayOf(stampArea[i - 1])
                 layerDrawable.add(LayerDrawable(layers))
             }
         }

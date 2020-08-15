@@ -23,7 +23,6 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 
-// TODO: 来店回数とスタンプ押下する数を合わせる、viewModelからデータをgetする方法を理解すること
 class StampCardFragment : Fragment(), KodeinAware {
 
     override val kodein by kodein()
@@ -40,18 +39,16 @@ class StampCardFragment : Fragment(), KodeinAware {
         viewModel = ViewModelProviders.of(this, factory).get(UserViewModel::class.java)
         binding.userViewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
-
-        setHasOptionsMenu(true)
-
         return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        setHasOptionsMenu(true)
+
+        viewModel.setBlankStampArea()
         viewModel.getUser()
-        // TODO: High setBlankStampArea()に置き換える
-        viewModel.setStamp()
         viewModel.user.observe(viewLifecycleOwner,
             Observer {
                 if (it != null) {
@@ -130,7 +127,6 @@ class StampCardFragment : Fragment(), KodeinAware {
             // onPreExecute
             withContext(Dispatchers.Main) {
                 viewModel.getUser()
-                // TODO: ネットワーク通信待ちをする場合の実装方法を調査すること
                 viewModel.setStamp()
             }
 

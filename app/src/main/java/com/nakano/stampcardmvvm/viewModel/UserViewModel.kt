@@ -16,26 +16,28 @@ import kotlinx.coroutines.launch
 class UserViewModel(
     var repository: UserRepository
 ) : ViewModel() {
-//    val user = repository.getUser()
     val qrCode = repository.getQRCode()
 
     private val _user = MutableLiveData<UserFirebase>()
     var user: LiveData<UserFirebase> = _user
-    lateinit var stampLiveData: LiveData<List<Drawable>>
+    private val _stamp = MutableLiveData<List<Drawable>>()
+    var stamp: LiveData<List<Drawable>> = _stamp
     lateinit var isLoginLiveData: LiveData<Boolean>
 
     fun getUser() {
         viewModelScope.launch(Dispatchers.Main) {
             user = repository.getUser()
-            _user.postValue(user.value)
+            _user.value  = user.value
         }
     }
 
-    // TODO: スタンプの押されていないスタンプエリアをセットすること(layoutと紐づいているため、何も押されていないスタンプエリアの画像をセットする必要あり)
-    // setBlankStampArea()
+    fun setBlankStampArea() {
+        stamp = repository.setBlankStampArea()
+        _stamp.value = stamp.value
+    }
 
     fun setStamp() {
-        stampLiveData = repository.getStamp()
+        stamp = repository.getStamp()
     }
 
     fun isLogin() {
