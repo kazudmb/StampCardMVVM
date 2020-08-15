@@ -32,7 +32,7 @@ class UserViewModel(
     }
 
     fun setBlankStampArea() {
-        stamp = repository.setBlankStampArea()
+        stamp = repository.getBlankStampArea()
         _stamp.value = stamp.value
     }
 

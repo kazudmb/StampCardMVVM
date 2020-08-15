@@ -90,7 +90,7 @@ class UserRepository(
         return qrCodeMutableLiveData
     }
 
-    fun setBlankStampArea(): LiveData<List<Drawable>> {
+    fun getBlankStampArea(): LiveData<List<Drawable>> {
         drawableMutableLiveData.value = stampArea
         return drawableMutableLiveData
     }
