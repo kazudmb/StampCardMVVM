@@ -31,11 +31,16 @@ class AccountInfoFragment : Fragment(), KodeinAware {
         viewModel = ViewModelProviders.of(this, factory).get(UserViewModel::class.java)
         binding.userViewModel = viewModel
         binding.lifecycleOwner = this
-
-        setHasOptionsMenu(true)
-
         return binding.root
     }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        setHasOptionsMenu(true)
+        viewModel.getUser()
+    }
+
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)

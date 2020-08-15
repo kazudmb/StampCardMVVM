@@ -24,6 +24,11 @@ class UserViewModel(
     var stamp: LiveData<List<Drawable>> = _stamp
     lateinit var isLoginLiveData: LiveData<Boolean>
 
+    fun getUser() {
+        user = repository.getUser()
+        _user.value = user.value
+    }
+
     fun getUserFromGoogle() {
         viewModelScope.launch(Dispatchers.Main) {
             user = repository.getUserFromGoogle()

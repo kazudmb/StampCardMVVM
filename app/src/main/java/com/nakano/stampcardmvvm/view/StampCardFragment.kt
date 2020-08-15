@@ -47,6 +47,8 @@ class StampCardFragment : Fragment(), KodeinAware {
 
         setHasOptionsMenu(true)
 
+        // TODO: データ取得するまでの間、viewに値が入っていないので、代わりの値を入れるかsplashを入れるかどちらか対応すること
+
         viewModel.setBlankStampArea()
         viewModel.getUserFromGoogle()
         viewModel.user.observe(viewLifecycleOwner,
