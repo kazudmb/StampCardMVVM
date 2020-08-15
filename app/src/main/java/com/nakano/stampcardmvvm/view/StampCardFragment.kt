@@ -48,7 +48,7 @@ class StampCardFragment : Fragment(), KodeinAware {
         setHasOptionsMenu(true)
 
         viewModel.setBlankStampArea()
-        viewModel.getUser()
+        viewModel.getUserFromGoogle()
         viewModel.user.observe(viewLifecycleOwner,
             Observer {
                 if (it != null) {
@@ -126,7 +126,7 @@ class StampCardFragment : Fragment(), KodeinAware {
 
             // onPreExecute
             withContext(Dispatchers.Main) {
-                viewModel.getUser()
+                viewModel.getUserFromGoogle()
                 viewModel.setStamp()
             }
 

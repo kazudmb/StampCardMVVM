@@ -41,7 +41,7 @@ class UserRepository(
         ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon10, null)!!
     )
 
-    suspend fun getUser(): LiveData<UserFirebase> {
+    suspend fun getUserFromGoogle(): LiveData<UserFirebase> {
             val uid = firebaseAuth.currentUser?.uid
 
             if (uid != null) {
