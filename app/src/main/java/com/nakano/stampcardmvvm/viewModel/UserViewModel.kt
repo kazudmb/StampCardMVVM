@@ -8,7 +8,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nakano.stampcardmvvm.model.model.UserFirebase
+import com.nakano.stampcardmvvm.model.model.User
 import com.nakano.stampcardmvvm.model.repository.UserRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,8 +18,8 @@ class UserViewModel(
 ) : ViewModel() {
     val qrCode = repository.getQRCode()
 
-    private val _user = MutableLiveData<UserFirebase>()
-    var user: LiveData<UserFirebase> = _user
+    private val _user = MutableLiveData<User>()
+    var user: LiveData<User> = _user
     private val _stamp = MutableLiveData<List<Drawable>>()
     var stamp: LiveData<List<Drawable>> = _stamp
     lateinit var isLoginLiveData: LiveData<Boolean>

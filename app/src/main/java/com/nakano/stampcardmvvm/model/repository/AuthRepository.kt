@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.nakano.stampcardmvvm.model.model.UserFirebase
+import com.nakano.stampcardmvvm.model.model.User
 import com.nakano.stampcardmvvm.util.Utility
 import kotlinx.coroutines.tasks.await
 
@@ -34,7 +34,7 @@ class AuthRepository(
                 val name = firebaseUser.displayName
                 val email = firebaseUser.email
                 val numberOfVisits = "0"
-                val user = UserFirebase(
+                val user = User(
                     uid,
                     name,
                     email,
@@ -53,7 +53,7 @@ class AuthRepository(
         }
     }
 
-    private suspend fun createUserInFirestoreIfNotExists(authenticatedUser: UserFirebase): Boolean {
+    private suspend fun createUserInFirestoreIfNotExists(authenticatedUser: User): Boolean {
         try {
             val data =
                 usersRef

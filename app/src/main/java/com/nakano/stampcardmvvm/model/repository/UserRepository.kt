@@ -12,7 +12,7 @@ import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.nakano.stampcardmvvm.R
-import com.nakano.stampcardmvvm.model.model.UserFirebase
+import com.nakano.stampcardmvvm.model.model.User
 import com.nakano.stampcardmvvm.util.Utility
 import kotlinx.coroutines.tasks.await
 
@@ -23,7 +23,7 @@ class UserRepository(
     private val rootRef = FirebaseFirestore.getInstance()
     private val usersRef = rootRef.collection(COLLECTION_PATH)
 
-    private val userMutableLiveData = MutableLiveData<UserFirebase>()
+    private val userMutableLiveData = MutableLiveData<User>()
     private val drawableMutableLiveData = MutableLiveData<List<Drawable>>()
 
     private val stampArea = mutableListOf(
@@ -39,11 +39,11 @@ class UserRepository(
         ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon10, null)!!
     )
 
-    fun getUser(): LiveData<UserFirebase> {
+    fun getUser(): LiveData<User> {
         return userMutableLiveData
     }
 
-    suspend fun getUserFromGoogle(): LiveData<UserFirebase> {
+    suspend fun getUserFromGoogle(): LiveData<User> {
             val uid = firebaseAuth.currentUser?.uid
 
             if (uid != null) {
@@ -59,7 +59,7 @@ class UserRepository(
                         val email = data[FIELD_NAME_EMAIL] as String?
                         val numberOfVisits = data[FIELD_NAME_NUMBER_OF_VISITS] as String? ?: DEFAULT_NUMBER_OF_VISITS
                         val rank = Utility.getRank(context, numberOfVisits)
-                        val user = UserFirebase(uid, name, email, numberOfVisits, rank)
+                        val user = User(uid, name, email, numberOfVisits, rank)
                         userMutableLiveData.value = user
                         Log.d(TAG, "${data.id} => ${data.data}")
                     }
@@ -73,7 +73,7 @@ class UserRepository(
                 val email = null as String?
                 val numberOfVisits = "0"
                 val rank = Utility.getRank(context, numberOfVisits)
-                val user = UserFirebase(uid, name, email, numberOfVisits, rank)
+                val user = User(uid, name, email, numberOfVisits, rank)
                 userMutableLiveData.value = user
             }
         return userMutableLiveData
