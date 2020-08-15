@@ -26,9 +26,7 @@ class UserRepository(
     private val usersRef = rootRef.collection("users")
 
     private val userMutableLiveData = MutableLiveData<UserFirebase>()
-    private val qrCodeMutableLiveData = MutableLiveData<Bitmap>()
     private val drawableMutableLiveData = MutableLiveData<List<Drawable>>()
-    private val isLoginMutableLiveData = MutableLiveData<Boolean>()
 
     private val stampArea = mutableListOf(
         ResourcesCompat.getDrawable(context.resources, R.drawable.logo_stamp_area_icon1, null)!!,
@@ -81,6 +79,7 @@ class UserRepository(
     }
 
     fun getQRCode(): LiveData<Bitmap> {
+        val qrCodeMutableLiveData = MutableLiveData<Bitmap>()
 
         val firebaseAuth = FirebaseAuth.getInstance()
         val firebaseUser = firebaseAuth.currentUser
@@ -132,6 +131,7 @@ class UserRepository(
     }
 
     fun isLogin(): LiveData<Boolean> {
+        val isLoginMutableLiveData = MutableLiveData<Boolean>()
 
         val firebaseAuth = FirebaseAuth.getInstance()
 
