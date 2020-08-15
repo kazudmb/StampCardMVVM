@@ -6,13 +6,11 @@ import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.nakano.stampcardmvvm.model.model.AppDatabase
 import com.nakano.stampcardmvvm.model.model.UserFirebase
 import com.nakano.stampcardmvvm.util.Utility
 import kotlinx.coroutines.tasks.await
 
 class AuthRepository(
-    private val db: AppDatabase,
     private val context: Context
 ) {
     private val firebaseAuth = FirebaseAuth.getInstance()

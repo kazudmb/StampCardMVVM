@@ -1,7 +1,6 @@
 package com.nakano.stampcardmvvm
 
 import android.app.Application
-import com.nakano.stampcardmvvm.model.model.AppDatabase
 import com.nakano.stampcardmvvm.model.repository.AuthRepository
 import com.nakano.stampcardmvvm.model.repository.UserRepository
 import com.nakano.stampcardmvvm.viewModel.AuthViewModelFactory
@@ -18,9 +17,8 @@ class MVVMApplication : Application(), KodeinAware {
     override val kodein = Kodein.lazy {
         import(androidXModule(this@MVVMApplication))
 
-        bind() from singleton { AppDatabase(instance()) }
-        bind() from singleton { UserRepository(instance(), instance()) }
-        bind() from singleton { AuthRepository(instance(), instance()) }
+        bind() from singleton { UserRepository(instance()) }
+        bind() from singleton { AuthRepository(instance()) }
         bind() from provider { UserViewModelFactory(instance()) }
         bind() from provider { AuthViewModelFactory(instance()) }
     }
