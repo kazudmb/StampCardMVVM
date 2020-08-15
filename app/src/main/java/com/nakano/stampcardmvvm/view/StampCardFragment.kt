@@ -5,10 +5,10 @@ import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.constraintlayout.widget.Constraints.TAG
-import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.nakano.stampcardmvvm.R
 import com.nakano.stampcardmvvm.databinding.FragmentStampCardBinding
@@ -27,8 +27,7 @@ class StampCardFragment : Fragment(), KodeinAware {
 
     override val kodein by kodein()
     private val factory: UserViewModelFactory by instance()
-
-    private lateinit var viewModel: UserViewModel
+    private val viewModel: UserViewModel by viewModels { factory }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +35,6 @@ class StampCardFragment : Fragment(), KodeinAware {
     ): View? {
         val binding: FragmentStampCardBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_stamp_card, container, false)
-        viewModel = ViewModelProviders.of(this, factory).get(UserViewModel::class.java)
         binding.userViewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root

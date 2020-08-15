@@ -8,9 +8,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -23,8 +22,8 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.nakano.stampcardmvvm.R
 import com.nakano.stampcardmvvm.databinding.FragmentGoogleAuthBinding
 import com.nakano.stampcardmvvm.util.HelperClass
-import com.nakano.stampcardmvvm.viewModel.AuthViewModelFactory
 import com.nakano.stampcardmvvm.viewModel.AuthViewModel
+import com.nakano.stampcardmvvm.viewModel.AuthViewModelFactory
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
@@ -33,8 +32,7 @@ class GoogleAuthFragment : Fragment(), KodeinAware {
 
     override val kodein by kodein()
     private val factory: AuthViewModelFactory by instance()
-
-    private lateinit var viewModel: AuthViewModel
+    private val viewModel: AuthViewModel by viewModels { factory }
     private lateinit var googleSignInClient: GoogleSignInClient
 
     override fun onCreateView(
@@ -43,7 +41,6 @@ class GoogleAuthFragment : Fragment(), KodeinAware {
     ): View? {
         val binding: FragmentGoogleAuthBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_google_auth, container, false)
-        viewModel = ViewModelProviders.of(this, factory).get(AuthViewModel::class.java)
         binding.authViewModelKotlin = viewModel
         binding.lifecycleOwner = this
 
@@ -55,7 +52,6 @@ class GoogleAuthFragment : Fragment(), KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initSignInButton()
-        initAuthViewModel()
         initGoogleSignInClient()
     }
 
@@ -63,10 +59,6 @@ class GoogleAuthFragment : Fragment(), KodeinAware {
         val googleSignInButton: SignInButton =
             requireView().findViewById(R.id.google_sign_in_button)
         googleSignInButton.setOnClickListener { v: View? -> signIn() }
-    }
-
-    private fun initAuthViewModel() {
-        viewModel = ViewModelProvider(this).get(AuthViewModel::class.java)
     }
 
     private fun initGoogleSignInClient() {

@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.nakano.stampcardmvvm.R
@@ -19,8 +19,7 @@ class AccountInfoFragment : Fragment(), KodeinAware {
 
     override val kodein by kodein()
     private val factory: UserViewModelFactory by instance()
-
-    private lateinit var viewModel: UserViewModel
+    private val viewModel: UserViewModel by viewModels { factory }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,7 +27,6 @@ class AccountInfoFragment : Fragment(), KodeinAware {
     ): View? {
         val binding: FragmentAccountInfoBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_account_info, container, false)
-        viewModel = ViewModelProviders.of(this, factory).get(UserViewModel::class.java)
         binding.userViewModel = viewModel
         binding.lifecycleOwner = this
         return binding.root

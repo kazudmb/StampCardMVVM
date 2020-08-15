@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.fragment.app.viewModels
 import com.nakano.stampcardmvvm.R
 import com.nakano.stampcardmvvm.databinding.FragmentCreateAccountBinding
 import com.nakano.stampcardmvvm.viewModel.UserViewModel
@@ -19,8 +19,7 @@ class CreateAccountFragment : Fragment(), KodeinAware {
 
     override val kodein by kodein()
     private val factory: UserViewModelFactory by instance()
-
-    private lateinit var viewModel: UserViewModel
+    private val viewModel: UserViewModel by viewModels { factory }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,7 +27,6 @@ class CreateAccountFragment : Fragment(), KodeinAware {
     ): View? {
         val binding: FragmentCreateAccountBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_create_account, container, false)
-        viewModel = ViewModelProviders.of(this, factory).get(UserViewModel::class.java)
         binding.stampCardViewModel = viewModel
         binding.lifecycleOwner = this
         return binding.root

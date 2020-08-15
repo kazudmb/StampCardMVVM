@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.nakano.stampcardmvvm.R
 import com.nakano.stampcardmvvm.databinding.FragmentLoginBinding
@@ -22,8 +22,7 @@ class LoginFragment : Fragment(), KodeinAware {
 
     override val kodein by kodein()
     private val factory: UserViewModelFactory by instance()
-
-    private lateinit var viewModel: UserViewModel
+    private val viewModel: UserViewModel by viewModels { factory }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,7 +30,6 @@ class LoginFragment : Fragment(), KodeinAware {
     ): View? {
         val binding: FragmentLoginBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
-        viewModel = ViewModelProviders.of(this, factory).get(UserViewModel::class.java)
         binding.stampCardViewModel = viewModel
         binding.lifecycleOwner = this
         return binding.root
