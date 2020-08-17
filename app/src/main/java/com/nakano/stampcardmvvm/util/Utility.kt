@@ -8,9 +8,7 @@ import com.nakano.stampcardmvvm.R
 
 object Utility {
 
-    private val TAG = "Utility"
-
-    fun createQRCode(context: Context, uid: String) : Bitmap? {
+    fun createQRCode(context: Context, uid: String): Bitmap? {
         val dp = 300
         val scale = context.resources.displayMetrics.density
         val size = (dp * scale + 0.5f).toInt()
@@ -30,15 +28,11 @@ object Utility {
         }
     }
 
-    fun getRank(context: Context, numberOfVisits: String) : String {
-
-        val num = numberOfVisits.toIntOrNull()
-        if (num != null) {
-            when {
-                num < 40 -> return context.getString(R.string.rank_member)
-                num < 80 -> return context.getString(R.string.rank_silver)
-                num >= 80 -> return context.getString(R.string.rank_gold)
-            }
+    fun getRank(context: Context, numberOfVisits: Long): String {
+        when {
+            numberOfVisits < 40 -> return context.getString(R.string.rank_member)
+            numberOfVisits < 80 -> return context.getString(R.string.rank_silver)
+            numberOfVisits >= 80 -> return context.getString(R.string.rank_gold)
         }
         return context.getString(R.string.rank_member)
     }

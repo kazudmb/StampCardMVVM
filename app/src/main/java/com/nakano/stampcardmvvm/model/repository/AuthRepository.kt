@@ -33,7 +33,7 @@ class AuthRepository(
                 val uid = firebaseUser.uid
                 val name = firebaseUser.displayName
                 val email = firebaseUser.email
-                val numberOfVisits = "0"
+                val numberOfVisits = 0.toLong()
                 val user = User(
                     uid,
                     name,
@@ -57,13 +57,13 @@ class AuthRepository(
         try {
             val data =
                 usersRef
-                    .document(authenticatedUser.uid!!)
+                    .document(authenticatedUser.uid)
                     .get()
                     .await()
             if (!data.exists()) {
                 return try {
                     usersRef
-                        .document(authenticatedUser.uid!!)
+                        .document(authenticatedUser.uid)
                         .set(authenticatedUser)
                         .await()
                     true

@@ -54,10 +54,10 @@ class UserRepository(
 
                 try {
                     if(data.exists()) {
-                        val uid = data[FIELD_NAME_UID] as String?
+                        val uid = data[FIELD_NAME_UID] as String
                         val name = data[FIELD_NAME_NAME] as String?
                         val email = data[FIELD_NAME_EMAIL] as String?
-                        val numberOfVisits = data[FIELD_NAME_NUMBER_OF_VISITS] as String? ?: DEFAULT_NUMBER_OF_VISITS
+                        val numberOfVisits = data[FIELD_NAME_NUMBER_OF_VISITS] as Long
                         val rank = Utility.getRank(context, numberOfVisits)
                         val user = User(uid, name, email, numberOfVisits, rank)
                         userMutableLiveData.value = user
@@ -68,10 +68,10 @@ class UserRepository(
                 }
 
             } else {
-                val uid = null as String?
+                val uid = ""
                 val name = null as String?
                 val email = null as String?
-                val numberOfVisits = "0"
+                val numberOfVisits = 0.toLong()
                 val rank = Utility.getRank(context, numberOfVisits)
                 val user = User(uid, name, email, numberOfVisits, rank)
                 userMutableLiveData.value = user
@@ -100,9 +100,9 @@ class UserRepository(
     fun getStamp(): LiveData<List<Drawable>> {
         val loopCount: Int
         val numberOfVisits = userMutableLiveData.value?.numberOfVisits ?: DEFAULT_NUMBER_OF_VISITS
-        val numberOfCutOut = numberOfVisits.substring(numberOfVisits.length - 1).toInt()
+        val numberOfCutOut = numberOfVisits.toString().substring(numberOfVisits.toString().length - 1).toInt()
 
-        loopCount = if (numberOfCutOut == 0 && numberOfVisits.toInt() < 10) {
+        loopCount = if (numberOfCutOut == 0 && numberOfVisits < 10) {
             0
         } else {
             if (numberOfCutOut == 0) {
@@ -155,6 +155,6 @@ class UserRepository(
         const val FIELD_NAME_EMAIL = "email"
         const val FIELD_NAME_NUMBER_OF_VISITS = "numberOfVisits"
 
-        const val DEFAULT_NUMBER_OF_VISITS = "0"
+        const val DEFAULT_NUMBER_OF_VISITS = 0.toLong()
     }
 }
