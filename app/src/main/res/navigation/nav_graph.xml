@@ -26,7 +26,7 @@
     <fragment
         android:id="@+id/qrCodeDisplayFragment"
         android:name="com.nakano.stampcardmvvm.view.QRCodeDisplayFragment"
-        android:label="@string/qr_code"></fragment>
+        android:label="@string/qr_code" />
 
     <fragment
         android:id="@+id/emailLoginFragment"
@@ -51,6 +51,10 @@
         <action
             android:id="@+id/action_accountInfoFragment_to_changeEmailFragment"
             app:destination="@id/changeEmailFragment" />
+        <action
+            android:id="@+id/action_accountInfo_popUpTo_stampCardFragment"
+            app:popUpTo="@id/stampCardFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/createAccountFragment"

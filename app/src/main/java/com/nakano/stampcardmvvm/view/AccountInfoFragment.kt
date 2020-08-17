@@ -2,6 +2,7 @@ package com.nakano.stampcardmvvm.view
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -63,6 +64,11 @@ class AccountInfoFragment : Fragment(), KodeinAware {
                 // TODO サインアウトの実装すること、AuthViewModelで処理したいがUserViewModelにいるため要検討
                 val firebaseAuth = FirebaseAuth.getInstance()
                 firebaseAuth.signOut()
+                // TODO: High ダイアログを表示すること
+                val action =
+                    AccountInfoFragmentDirections.actionAccountInfoPopUpToStampCardFragment()
+                findNavController().navigate(action)
+                Toast.makeText(context, R.string.success_logout, Toast.LENGTH_LONG).show()
                 return true
             }
             else -> super.onOptionsItemSelected(item)

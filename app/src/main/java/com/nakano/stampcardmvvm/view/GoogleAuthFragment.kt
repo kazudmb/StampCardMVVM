@@ -24,6 +24,7 @@ import com.nakano.stampcardmvvm.databinding.FragmentGoogleAuthBinding
 import com.nakano.stampcardmvvm.util.HelperClass
 import com.nakano.stampcardmvvm.viewModel.AuthViewModel
 import com.nakano.stampcardmvvm.viewModel.AuthViewModelFactory
+import kotlinx.android.synthetic.main.fragment_google_auth.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
@@ -72,6 +73,7 @@ class GoogleAuthFragment : Fragment(), KodeinAware {
     }
 
     private fun signIn() {
+        progress_bar.visibility = View.VISIBLE
         val signInIntent = googleSignInClient.signInIntent
         startActivityForResult(signInIntent, 123)
     }
@@ -104,6 +106,7 @@ class GoogleAuthFragment : Fragment(), KodeinAware {
         viewModel.isSuccess.observe(
             viewLifecycleOwner,
             Observer {
+                progress_bar.visibility = View.INVISIBLE
                 if (it) {
                     goToStampCardFragment()
                     toastMessage(R.string.sign_in_with_email_success)
