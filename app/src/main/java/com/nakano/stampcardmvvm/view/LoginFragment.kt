@@ -2,10 +2,12 @@ package com.nakano.stampcardmvvm.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.constraintlayout.widget.Constraints.TAG
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -17,6 +19,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.AuthCredential
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.nakano.stampcardmvvm.R
 import com.nakano.stampcardmvvm.databinding.FragmentLoginBinding
@@ -28,7 +31,7 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 
-// TODO: login画面を実装する（いろんなサービス連携できるように）
+// TODO: 各login処理ごとに分割すること
 class LoginFragment : Fragment(), KodeinAware {
 
     override val kodein by kodein()
@@ -75,7 +78,31 @@ class LoginFragment : Fragment(), KodeinAware {
         }
 
         login_anonymous.setOnClickListener {
-            toastMessage(R.string.toast_message_coming_soon)
+
+            progress_bar.visibility = View.VISIBLE
+
+            val auth = FirebaseAuth.getInstance()
+            auth.signInAnonymously()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d(TAG, "signInAnonymously:success")
+                        Toast.makeText(context, "Authentication success.",
+                            Toast.LENGTH_SHORT).show()
+                        val user = auth.currentUser
+
+                        // TODO: firestoreへの追加も必要
+
+                        progress_bar.visibility = View.INVISIBLE
+                        goToStampCardFragment()
+
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w(TAG, "signInAnonymously:failure", task.exception)
+                        Toast.makeText(context, "Authentication failed.",
+                            Toast.LENGTH_SHORT).show()
+                    }
+                }
         }
     }
 
