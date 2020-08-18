@@ -86,6 +86,8 @@
     <string name="login_email">メールアドレス でログイン</string>
     <string name="login_phone_number">電話番号 でログイン</string>
     <string name="login_anonymous">テストアカウント でログイン</string>
+    <string name="toast_message_coming_soon">coming soon</string>
+
     <!-- end -->
 
 </resources>

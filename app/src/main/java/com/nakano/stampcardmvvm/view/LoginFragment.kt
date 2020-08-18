@@ -56,10 +56,26 @@ class LoginFragment : Fragment(), KodeinAware {
             signIn()
         }
 
+        login_twitter.setOnClickListener {
+            toastMessage(R.string.toast_message_coming_soon)
+        }
+
+        login_facebook.setOnClickListener {
+            toastMessage(R.string.toast_message_coming_soon)
+        }
+
         login_email.setOnClickListener {
             val action =
                 LoginFragmentDirections.actionLoginFragmentToLoginFragment()
             findNavController().navigate(action)
+        }
+
+        login_phone.setOnClickListener {
+            toastMessage(R.string.toast_message_coming_soon)
+        }
+
+        login_anonymous.setOnClickListener {
+            toastMessage(R.string.toast_message_coming_soon)
         }
     }
 
