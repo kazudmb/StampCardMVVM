@@ -13,9 +13,17 @@ class AuthViewModel(
 ) : ViewModel() {
     private val _isSuccess = MutableLiveData<Boolean>()
     val isSuccess: LiveData<Boolean> = _isSuccess
+
     fun signInWithGoogle(googleAuthCredential: AuthCredential?) {
         viewModelScope.launch {
             val result = repository.signInWithGoogle(googleAuthCredential)
+            _isSuccess.postValue(result.value)
+        }
+    }
+
+    fun signInAnonymous() {
+        viewModelScope.launch {
+            val result = repository.signInAnonymous()
             _isSuccess.postValue(result.value)
         }
     }

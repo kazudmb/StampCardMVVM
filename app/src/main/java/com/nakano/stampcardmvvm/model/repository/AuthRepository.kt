@@ -1,6 +1,8 @@
 package com.nakano.stampcardmvvm.model.repository
 
 import android.content.Context
+import android.util.Log
+import androidx.constraintlayout.widget.Constraints
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.AuthCredential
@@ -48,6 +50,46 @@ class AuthRepository(
                 return isSuccess
             }
         } catch (e: Exception) {
+            isSuccess.value = false
+            return isSuccess
+        }
+    }
+
+    suspend fun signInAnonymous(): LiveData<Boolean> {
+
+        val isSuccess = MutableLiveData<Boolean>()
+
+        try {
+            val data = firebaseAuth
+                .signInAnonymously()
+                .await()
+
+            Log.d(Constraints.TAG, "signInAnonymously:success")
+
+            val isNewUser = data.additionalUserInfo?.isNewUser
+            val firebaseUser = firebaseAuth.currentUser
+
+            if (isNewUser == true && firebaseUser != null) {
+                val uid = firebaseUser.uid
+                val name = "anonymous"
+                val email = "not set"
+                val numberOfVisits = 88.toLong() // sample number
+                val user = User(
+                    uid,
+                    name,
+                    email,
+                    numberOfVisits,
+                    Utility.getRank(context, numberOfVisits)
+                )
+                isSuccess.value = createUserInFirestoreIfNotExists(user)
+                return isSuccess
+            } else {
+                isSuccess.value = true
+                return isSuccess
+            }
+
+        } catch (e: Exception) {
+            Log.w(Constraints.TAG, "signInAnonymously:failure", e)
             isSuccess.value = false
             return isSuccess
         }
