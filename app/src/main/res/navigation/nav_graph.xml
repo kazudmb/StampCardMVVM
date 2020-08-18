@@ -78,15 +78,14 @@
         <action
             android:id="@+id/action_loginFragment_to_googleAuthFragment"
             app:destination="@id/googleAuthFragment" />
+        <action
+            android:id="@+id/action_login_popUpTo_stampCardFragment"
+            app:destination="@id/stampCardFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/googleAuthFragment"
         android:name="com.nakano.stampcardmvvm.view.GoogleAuthFragment"
-        android:label="GoogleAuthFragment">
-        <action
-            android:id="@+id/action_googleAuthFragment_popUpTo_stampCardFragment"
-            app:popUpTo="@id/stampCardFragment"
-            app:popUpToInclusive="false" />
-    </fragment>
+        android:label="GoogleAuthFragment" />
 
 </navigation>
