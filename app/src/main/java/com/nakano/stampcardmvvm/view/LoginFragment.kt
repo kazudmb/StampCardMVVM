@@ -58,6 +58,19 @@ class LoginFragment : Fragment(), KodeinAware {
 
         login_twitter.setOnClickListener {
             toastMessage(R.string.toast_message_coming_soon)
+//            progress_bar.visibility = View.VISIBLE
+//            viewModel.signInWithTwitter()
+//            viewModel.isSuccess.observe(
+//                viewLifecycleOwner,
+//                Observer {
+//                    progress_bar.visibility = View.INVISIBLE
+//                    if (it) {
+//                        goToStampCardFragment()
+//                        toastMessage(R.string.sign_in_with_email_success)
+//                    } else {
+//                        toastMessage(R.string.sign_in_with_email_failure)
+//                    }
+//                })
         }
 
         login_facebook.setOnClickListener {

@@ -21,6 +21,13 @@ class AuthViewModel(
         }
     }
 
+    fun signInWithTwitter(){
+        viewModelScope.launch {
+            val result = repository.signInWithTwitter()
+            _isSuccess.postValue(result.value)
+        }
+    }
+
     fun signInAnonymous() {
         viewModelScope.launch {
             val result = repository.signInAnonymous()

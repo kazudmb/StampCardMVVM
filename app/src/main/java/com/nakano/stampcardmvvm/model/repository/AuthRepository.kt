@@ -2,14 +2,16 @@ package com.nakano.stampcardmvvm.model.repository
 
 import android.content.Context
 import android.util.Log
-import androidx.constraintlayout.widget.Constraints
+import androidx.constraintlayout.widget.Constraints.TAG
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.OAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
 import com.nakano.stampcardmvvm.model.model.User
 import com.nakano.stampcardmvvm.util.Utility
+import com.nakano.stampcardmvvm.view.MainActivity
 import kotlinx.coroutines.tasks.await
 
 class AuthRepository(
@@ -55,6 +57,58 @@ class AuthRepository(
         }
     }
 
+    suspend fun signInWithTwitter(): LiveData<Boolean> {
+
+        val isSuccess = MutableLiveData<Boolean>()
+
+        isSuccess.value = checkPendingTask()
+
+        return isSuccess
+    }
+
+    private suspend fun checkPendingTask(): Boolean {
+        val pendingResultTask = firebaseAuth.pendingAuthResult
+
+        return if (pendingResultTask != null) {
+            false
+        } else {
+            signInWithProviderTwitter()
+        }
+    }
+
+    private suspend fun signInWithProviderTwitter(): Boolean {
+        val oauthProvider = OAuthProvider.newBuilder("twitter.com")
+        oauthProvider.addCustomParameter("lang", "jp")
+
+        // TODO: activityの取得方法を検討すること、何も表示しない空のActivityを作る？
+        try {
+            firebaseAuth
+                .startActivityForSignInWithProvider(MainActivity(), oauthProvider.build())
+                .await()
+            Log.d(TAG, "signInWithProviderTwitter: success")
+
+            val firebaseUser = firebaseAuth.currentUser
+            return if (firebaseUser != null) {
+                try {
+                    firebaseUser
+                        .startActivityForLinkWithProvider(MainActivity(), oauthProvider.build())
+                        .await()
+                    Log.d(TAG, "linkWithProviderTwitter: success")
+                    true
+                } catch (e: Exception) {
+                    Log.w(TAG, "linkWithProviderTwitter: failure", e)
+                    false
+                }
+            } else {
+                false
+            }
+
+        } catch (e: Exception) {
+            Log.w(TAG, "signInWithProviderTwitter: failure", e)
+            return false
+        }
+    }
+
     suspend fun signInAnonymous(): LiveData<Boolean> {
 
         val isSuccess = MutableLiveData<Boolean>()
@@ -64,7 +118,7 @@ class AuthRepository(
                 .signInAnonymously()
                 .await()
 
-            Log.d(Constraints.TAG, "signInAnonymously:success")
+            Log.d(TAG, "signInAnonymously:success")
 
             val isNewUser = data.additionalUserInfo?.isNewUser
             val firebaseUser = firebaseAuth.currentUser
@@ -89,7 +143,7 @@ class AuthRepository(
             }
 
         } catch (e: Exception) {
-            Log.w(Constraints.TAG, "signInAnonymously:failure", e)
+            Log.w(TAG, "signInAnonymously:failure", e)
             isSuccess.value = false
             return isSuccess
         }
