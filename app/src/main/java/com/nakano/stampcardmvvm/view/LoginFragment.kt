@@ -81,6 +81,7 @@ class LoginFragment : Fragment(), KodeinAware {
 
             progress_bar.visibility = View.VISIBLE
 
+            // TODO: High viewModelに移すこと
             val auth = FirebaseAuth.getInstance()
             auth.signInAnonymously()
                 .addOnCompleteListener { task ->
@@ -91,7 +92,7 @@ class LoginFragment : Fragment(), KodeinAware {
                             Toast.LENGTH_SHORT).show()
                         val user = auth.currentUser
 
-                        // TODO: firestoreへの追加も必要
+                        // TODO: Middle firestoreへの追加も必要
 
                         progress_bar.visibility = View.INVISIBLE
                         goToStampCardFragment()
