@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.auth.FirebaseAuth
 import com.nakano.stampcardmvvm.model.model.User
 import com.nakano.stampcardmvvm.model.repository.UserRepository
 import kotlinx.coroutines.Dispatchers
@@ -47,6 +48,10 @@ class UserViewModel(
 
     fun isLogin() {
         isLoginLiveData = repository.isLogin()
+    }
+
+    fun logoutFromGoogle() {
+        FirebaseAuth.getInstance().signOut()
     }
 }
 

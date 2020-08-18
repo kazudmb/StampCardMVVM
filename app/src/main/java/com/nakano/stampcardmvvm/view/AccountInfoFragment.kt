@@ -7,7 +7,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.google.firebase.auth.FirebaseAuth
 import com.nakano.stampcardmvvm.R
 import com.nakano.stampcardmvvm.databinding.FragmentAccountInfoBinding
 import com.nakano.stampcardmvvm.viewModel.UserViewModel
@@ -61,10 +60,7 @@ class AccountInfoFragment : Fragment(), KodeinAware {
                 return true
             }
             R.id.logout -> {
-                // TODO サインアウトの実装すること、AuthViewModelで処理したいがUserViewModelにいるため要検討
-                val firebaseAuth = FirebaseAuth.getInstance()
-                firebaseAuth.signOut()
-                // TODO: High ダイアログを表示すること
+                viewModel.logoutFromGoogle()
                 val action =
                     AccountInfoFragmentDirections.actionAccountInfoPopUpToStampCardFragment()
                 findNavController().navigate(action)
