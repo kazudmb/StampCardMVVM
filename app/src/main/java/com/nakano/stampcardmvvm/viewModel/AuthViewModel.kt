@@ -28,6 +28,13 @@ class AuthViewModel(
         }
     }
 
+    fun signInWithEmailAndPassword(email: String, password: String) {
+        viewModelScope.launch {
+            val result = repository.signInWithEmailAndPassword(email, password)
+            _isSuccess.postValue(result.value)
+        }
+    }
+
     fun signInAnonymous() {
         viewModelScope.launch {
             val result = repository.signInAnonymous()

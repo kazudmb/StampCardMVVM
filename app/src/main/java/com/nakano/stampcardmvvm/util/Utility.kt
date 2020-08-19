@@ -2,6 +2,8 @@ package com.nakano.stampcardmvvm.util
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.text.TextUtils
+import android.widget.EditText
 import com.google.zxing.BarcodeFormat
 import com.journeyapps.barcodescanner.BarcodeEncoder
 import com.nakano.stampcardmvvm.R
@@ -35,5 +37,27 @@ object Utility {
             numberOfVisits >= 80 -> return context.getString(R.string.rank_gold)
         }
         return context.getString(R.string.rank_member)
+    }
+
+    fun validateForm(context: Context, fieldEmail: EditText, fieldPassword: EditText): Boolean {
+        var valid = true
+
+        val email = fieldEmail.text.toString()
+        if (TextUtils.isEmpty(email)) {
+            fieldEmail.error = context.resources.getString(R.string.input_text)
+            valid = false
+        } else {
+            fieldEmail.error = null
+        }
+
+        val password = fieldPassword.text.toString()
+        if (TextUtils.isEmpty(password)) {
+            fieldPassword.error = context.resources.getString(R.string.input_text)
+            valid = false
+        } else {
+            fieldPassword.error = null
+        }
+
+        return valid
     }
 }

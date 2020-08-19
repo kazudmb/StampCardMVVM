@@ -109,8 +109,26 @@ class AuthRepository(
         }
     }
 
-    suspend fun signInAnonymous(): LiveData<Boolean> {
+    // TODO: High メールログイン時の新規登録処理の実装をすること
 
+    suspend fun signInWithEmailAndPassword(email: String, password: String): LiveData<Boolean> {
+        val isSuccess = MutableLiveData<Boolean>()
+
+        return try {
+            firebaseAuth
+                .signInWithEmailAndPassword(email, password)
+                .await()
+            Log.d(TAG, "signInWithEmailAndPassword:success")
+            isSuccess.value = true
+            isSuccess
+        } catch (e: Exception) {
+            Log.w(TAG, "signInWithEmailAndPassword:failure", e)
+            isSuccess.value = false
+            isSuccess
+        }
+    }
+
+    suspend fun signInAnonymous(): LiveData<Boolean> {
         val isSuccess = MutableLiveData<Boolean>()
 
         try {
