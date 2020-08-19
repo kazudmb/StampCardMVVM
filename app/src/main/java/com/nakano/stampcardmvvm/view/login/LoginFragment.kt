@@ -1,4 +1,4 @@
-package com.nakano.stampcardmvvm.view
+package com.nakano.stampcardmvvm.view.login
 
 import android.content.Intent
 import android.os.Bundle

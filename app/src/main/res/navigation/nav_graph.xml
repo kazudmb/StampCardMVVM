@@ -30,7 +30,7 @@
 
     <fragment
         android:id="@+id/emailLoginFragment"
-        android:name="com.nakano.stampcardmvvm.view.EmailLoginFragment"
+        android:name="com.nakano.stampcardmvvm.view.login.EmailLoginFragment"
         android:label="@string/login"
         tools:layout="@layout/fragment_email_login">
         <action
@@ -41,7 +41,7 @@
             app:destination="@id/changePasswordFragment" />
         <action
             android:id="@+id/action_emailLoginFragment_popUpTo_stampCardFragment"
-            app:destination="@id/stampCardFragment"
+            app:popUpTo="@id/stampCardFragment"
             app:popUpToInclusive="false"/>
     </fragment>
     <fragment
@@ -62,8 +62,13 @@
     </fragment>
     <fragment
         android:id="@+id/createAccountFragment"
-        android:name="com.nakano.stampcardmvvm.view.CreateAccountFragment"
-        android:label="@string/new_registration" />
+        android:name="com.nakano.stampcardmvvm.view.login.CreateAccountFragment"
+        android:label="@string/new_registration" >
+        <action
+            android:id="@+id/action_createAccountFragment_popUpTo_stampCardFragment"
+            app:popUpTo="@id/stampCardFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
     <fragment
         android:id="@+id/changePasswordFragment"
         android:name="com.nakano.stampcardmvvm.view.ChangePasswordFragment"
@@ -74,14 +79,14 @@
         android:label="@string/change_email" />
     <fragment
         android:id="@+id/login"
-        android:name="com.nakano.stampcardmvvm.view.LoginFragment"
+        android:name="com.nakano.stampcardmvvm.view.login.LoginFragment"
         android:label="@string/login">
         <action
             android:id="@+id/action_loginFragment_to_loginFragment"
             app:destination="@id/emailLoginFragment" />
         <action
             android:id="@+id/action_login_popUpTo_stampCardFragment"
-            app:destination="@id/stampCardFragment"
+            app:popUpTo="@id/stampCardFragment"
             app:popUpToInclusive="false" />
     </fragment>
 

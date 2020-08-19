@@ -1,4 +1,4 @@
-package com.nakano.stampcardmvvm.view
+package com.nakano.stampcardmvvm.view.login
 
 import android.os.Bundle
 import android.view.LayoutInflater

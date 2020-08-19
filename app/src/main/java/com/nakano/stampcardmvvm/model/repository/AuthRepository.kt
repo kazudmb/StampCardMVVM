@@ -9,6 +9,7 @@ import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.OAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
+import com.nakano.stampcardmvvm.R
 import com.nakano.stampcardmvvm.model.model.User
 import com.nakano.stampcardmvvm.util.Utility
 import com.nakano.stampcardmvvm.view.MainActivity
@@ -110,6 +111,92 @@ class AuthRepository(
     }
 
     // TODO: High メールログイン時の新規登録処理の実装をすること
+
+    suspend fun createUserWithEmailAndPassword(email: String, password: String): LiveData<Boolean> {
+        val isSuccess = MutableLiveData<Boolean>()
+
+        return try {
+            firebaseAuth
+                .createUserWithEmailAndPassword(email, password)
+                .await()
+            Log.d(
+                TAG,
+                context.applicationContext.getString(R.string.create_user_with_email_success_log)
+            )
+
+            val firebaseUser = firebaseAuth.currentUser
+            return if (firebaseUser != null) {
+                val uid = firebaseUser.uid
+                val name = null
+                val email = firebaseUser.email
+                val numberOfVisits = 0.toLong()
+                val user = User(
+                    uid, name, email, numberOfVisits, Utility.getRank(context, numberOfVisits)
+                )
+                isSuccess.value = createCollection(user)
+                isSuccess
+            } else {
+                isSuccess.value = false
+                isSuccess
+            }
+        } catch (e: Exception) {
+            Log.w(
+                TAG,
+                context.applicationContext.getString(R.string.create_user_with_email_failure_log),
+                e
+            )
+            isSuccess.value = false
+            isSuccess
+        }
+    }
+
+    private suspend fun createCollection(user: User): Boolean {
+        try {
+            usersRef
+                .document(firebaseAuth.currentUser?.uid.toString())
+                .set(user)
+                .await()
+            Log.d(
+                TAG,
+                "DocumentSnapshot added with ID: ${firebaseAuth.currentUser?.uid.toString()}"
+            )
+            return sendEmailVerification()
+        } catch (e: Exception) {
+            Log.w(
+                TAG,
+                context.applicationContext.getString(R.string.adding_document_failure_log),
+                e
+            )
+            return false
+        }
+    }
+
+    private suspend fun sendEmailVerification(): Boolean {
+        val user = firebaseAuth.currentUser
+
+        if (user != null) {
+            try {
+                user
+                    .sendEmailVerification()
+                    .await()
+
+                Log.d(
+                    TAG,
+                    context.applicationContext.getString(R.string.send_email_verification_of_registration_success_log)
+                )
+                return true
+            } catch (e: Exception) {
+                Log.e(
+                    TAG,
+                    context.applicationContext.getString(R.string.send_email_verification_of_registration_failure_log),
+                    e
+                )
+                return false
+            }
+        } else {
+            return false
+        }
+    }
 
     suspend fun signInWithEmailAndPassword(email: String, password: String): LiveData<Boolean> {
         val isSuccess = MutableLiveData<Boolean>()
