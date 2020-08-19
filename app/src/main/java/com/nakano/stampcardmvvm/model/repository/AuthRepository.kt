@@ -109,9 +109,7 @@ class AuthRepository(
             return false
         }
     }
-
-    // TODO: High メールログイン時の新規登録処理の実装をすること
-
+    
     suspend fun createUserWithEmailAndPassword(email: String, password: String): LiveData<Boolean> {
         val isSuccess = MutableLiveData<Boolean>()
 
