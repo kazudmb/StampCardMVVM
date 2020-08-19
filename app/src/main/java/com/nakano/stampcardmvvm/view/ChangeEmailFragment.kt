@@ -15,6 +15,7 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 
+// TODO: High 処理を実装すること
 class ChangeEmailFragment : Fragment(), KodeinAware {
 
     override val kodein by kodein()
