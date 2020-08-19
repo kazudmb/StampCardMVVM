@@ -30,6 +30,7 @@ class UserViewModel(
         _user.value = user.value
     }
 
+    // TODO: getUserFromFireStoreに変更すること
     fun getUserFromGoogle() {
         viewModelScope.launch(Dispatchers.Main) {
             user = repository.getUserFromGoogle()
