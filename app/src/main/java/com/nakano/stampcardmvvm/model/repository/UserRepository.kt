@@ -13,6 +13,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.nakano.stampcardmvvm.R
 import com.nakano.stampcardmvvm.model.model.User
+import com.nakano.stampcardmvvm.util.Constant
 import com.nakano.stampcardmvvm.util.Utility
 import kotlinx.coroutines.tasks.await
 
@@ -21,7 +22,7 @@ class UserRepository(
 ) {
     private val firebaseAuth = FirebaseAuth.getInstance()
     private val rootRef = FirebaseFirestore.getInstance()
-    private val usersRef = rootRef.collection(COLLECTION_PATH)
+    private val usersRef = rootRef.collection(Constant.COLLECTION_PATH)
 
     private val userMutableLiveData = MutableLiveData<User>()
     private val drawableMutableLiveData = MutableLiveData<List<Drawable>>()
@@ -54,10 +55,10 @@ class UserRepository(
 
                 try {
                     if(data.exists()) {
-                        val uid = data[FIELD_NAME_UID] as String
-                        val name = data[FIELD_NAME_NAME] as String?
-                        val email = data[FIELD_NAME_EMAIL] as String?
-                        val numberOfVisits = data[FIELD_NAME_NUMBER_OF_VISITS] as Long
+                        val uid = data[Constant.FIELD_NAME_UID] as String
+                        val name = data[Constant.FIELD_NAME_NAME] as String?
+                        val email = data[Constant.FIELD_NAME_EMAIL] as String?
+                        val numberOfVisits = data[Constant.FIELD_NAME_NUMBER_OF_VISITS] as Long
                         val rank = Utility.getRank(context, numberOfVisits)
                         val user = User(uid, name, email, numberOfVisits, rank)
                         userMutableLiveData.value = user
@@ -99,7 +100,7 @@ class UserRepository(
 
     fun getStamp(): LiveData<List<Drawable>> {
         val loopCount: Int
-        val numberOfVisits = userMutableLiveData.value?.numberOfVisits ?: DEFAULT_NUMBER_OF_VISITS
+        val numberOfVisits = userMutableLiveData.value?.numberOfVisits ?: Constant.DEFAULT_NUMBER_OF_VISITS
         val numberOfCutOut = numberOfVisits.toString().substring(numberOfVisits.toString().length - 1).toInt()
 
         loopCount = if (numberOfCutOut == 0 && numberOfVisits < 10) {
@@ -145,16 +146,5 @@ class UserRepository(
         }
 
         return isLoginMutableLiveData
-    }
-
-    companion object{
-        const val COLLECTION_PATH = "users"
-
-        const val FIELD_NAME_UID = "uid"
-        const val FIELD_NAME_NAME = "name"
-        const val FIELD_NAME_EMAIL = "email"
-        const val FIELD_NAME_NUMBER_OF_VISITS = "numberOfVisits"
-
-        const val DEFAULT_NUMBER_OF_VISITS = 0.toLong()
     }
 }
