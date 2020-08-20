@@ -44,7 +44,7 @@ class UserRepository(
         return userMutableLiveData
     }
 
-    suspend fun getUserFromGoogle(): LiveData<User> {
+    suspend fun getUserFromFirestore(): LiveData<User> {
             val uid = firebaseAuth.currentUser?.uid
 
             if (uid != null) {

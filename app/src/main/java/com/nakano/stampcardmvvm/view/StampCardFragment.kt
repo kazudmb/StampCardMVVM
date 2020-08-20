@@ -48,7 +48,7 @@ class StampCardFragment : Fragment(), KodeinAware {
         // TODO: データ取得するまでの間、viewに値が入っていないので、代わりの値を入れるかsplashを入れるかどちらか対応すること
 
         viewModel.setBlankStampArea()
-        viewModel.getUserFromGoogle()
+        viewModel.getUserFromFirestore()
         viewModel.user.observe(viewLifecycleOwner,
             Observer {
                 if (it != null) {
@@ -126,7 +126,7 @@ class StampCardFragment : Fragment(), KodeinAware {
 
             // onPreExecute
             withContext(Dispatchers.Main) {
-                viewModel.getUserFromGoogle()
+                viewModel.getUserFromFirestore()
                 viewModel.setStamp()
             }
 
