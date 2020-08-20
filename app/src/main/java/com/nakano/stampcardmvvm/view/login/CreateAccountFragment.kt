@@ -40,7 +40,7 @@ class CreateAccountFragment : Fragment(), KodeinAware {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        login_button.text = R.string.new_registration.toString()
+        login_button.text = getString(R.string.new_registration)
         login_button.setOnClickListener {
             viewModel.createInWithEmailAndPassword(
                 field_email.text.toString(),
