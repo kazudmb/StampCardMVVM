@@ -32,7 +32,7 @@
         android:id="@+id/emailLoginFragment"
         android:name="com.nakano.stampcardmvvm.view.login.EmailLoginFragment"
         android:label="@string/login"
-        tools:layout="@layout/fragment_email_login">
+        tools:layout="@layout/fragment_email_base">
         <action
             android:id="@+id/action_loginFragment_to_createAccountFragment"
             app:destination="@id/createAccountFragment" />

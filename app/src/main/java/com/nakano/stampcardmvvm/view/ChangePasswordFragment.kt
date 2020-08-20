@@ -16,7 +16,7 @@ import com.nakano.stampcardmvvm.R
 import com.nakano.stampcardmvvm.databinding.FragmentEmailLoginBinding
 import com.nakano.stampcardmvvm.viewModel.AuthViewModel
 import com.nakano.stampcardmvvm.viewModel.AuthViewModelFactory
-import kotlinx.android.synthetic.main.fragment_email_login.*
+import kotlinx.android.synthetic.main.fragment_email_base.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
@@ -32,7 +32,7 @@ class ChangePasswordFragment : Fragment(), KodeinAware {
         savedInstanceState: Bundle?
     ): View? {
         val binding: FragmentEmailLoginBinding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_email_login, container, false)
+            DataBindingUtil.inflate(inflater, R.layout.fragment_email_base, container, false)
         binding.authViewModel = viewModel
         binding.lifecycleOwner = this
         return binding.root
