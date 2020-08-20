@@ -27,7 +27,7 @@
     <string name="mail_address_after_change">メールアドレス(変更後)</string>
     <string name="password">パスワード</string>
     <string name="send">送信</string>
-    <string name="explanation_of_resetting">登録時に入力したメールアドレスを入力してください。パスワード再設定の手順を送信します。</string>
+    <string name="explanation_of_resetting">登録しているメールアドレスを入力してください。パスワード再設定の手順をメールで送信します。</string>
     <string name="new_registration">新規登録</string>
     <string name="login">ログイン</string>
     <string name="logout">ログアウト</string>
