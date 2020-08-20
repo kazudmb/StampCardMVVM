@@ -342,4 +342,19 @@ class AuthRepository(
             false
         }
     }
+
+    suspend fun sendPasswordResetEmail(email: String): LiveData<Boolean> {
+        val isSuccess = MutableLiveData<Boolean>()
+        try {
+            firebaseAuth
+                .sendPasswordResetEmail(email)
+                .await()
+            Log.d(TAG, context.applicationContext.getString(R.string.email_sent_success_log))
+            isSuccess.value = true
+        } catch (e: Exception) {
+            Log.w(TAG, context.applicationContext.getString(R.string.email_sent_failure_log), e)
+            isSuccess.value = false
+        }
+        return isSuccess
+    }
 }

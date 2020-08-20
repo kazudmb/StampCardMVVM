@@ -55,4 +55,11 @@ class AuthViewModel(
             _isSuccess.postValue(result.value)
         }
     }
+
+    fun sendPasswordResetEmail(email: String) {
+        viewModelScope.launch {
+            val result = repository.sendPasswordResetEmail(email)
+            _isSuccess.postValue(result.value)
+        }
+    }
 }

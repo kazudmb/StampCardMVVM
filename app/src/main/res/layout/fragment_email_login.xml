@@ -40,6 +40,15 @@
                 android:visibility="gone" />
 
             <TextView
+                android:id="@+id/explanation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/explanation_of_resetting"
+                android:visibility="gone" />
+
+            <TextView
                 android:id="@+id/mail_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -54,6 +63,7 @@
                 android:inputType="textEmailAddress" />
 
             <TextView
+                android:id="@+id/password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"

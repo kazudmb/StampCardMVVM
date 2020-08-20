@@ -72,7 +72,12 @@
     <fragment
         android:id="@+id/changePasswordFragment"
         android:name="com.nakano.stampcardmvvm.view.ChangePasswordFragment"
-        android:label="@string/change_password" />
+        android:label="@string/change_password" >
+        <action
+            android:id="@+id/action_changePasswordFragment_popUpTo_accountInfo"
+            app:popUpTo="@id/accountInfo"
+            app:popUpToInclusive="false" />
+    </fragment>
     <fragment
         android:id="@+id/changeEmailFragment"
         android:name="com.nakano.stampcardmvvm.view.ChangeEmailFragment"
