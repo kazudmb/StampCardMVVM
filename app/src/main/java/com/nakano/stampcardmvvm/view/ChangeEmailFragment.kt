@@ -12,7 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.nakano.stampcardmvvm.R
-import com.nakano.stampcardmvvm.databinding.FragmentEmailLoginBinding
+import com.nakano.stampcardmvvm.databinding.FragmentEmailBaseBinding
 import com.nakano.stampcardmvvm.util.Utility
 import com.nakano.stampcardmvvm.viewModel.AuthViewModel
 import com.nakano.stampcardmvvm.viewModel.AuthViewModelFactory
@@ -31,7 +31,7 @@ class ChangeEmailFragment : Fragment(), KodeinAware {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding: FragmentEmailLoginBinding =
+        val binding: FragmentEmailBaseBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_email_base, container, false)
         binding.authViewModel = viewModel
         binding.lifecycleOwner = this
