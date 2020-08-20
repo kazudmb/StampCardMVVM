@@ -41,7 +41,6 @@ class ChangeEmailFragment : Fragment(), KodeinAware {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        // TODO: destinationEmailは入力させる、currentUserEmailは表示して編集不可にすること
         val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
         val currentUserEmail = firebaseAuth.currentUser?.email
 
@@ -75,6 +74,10 @@ class ChangeEmailFragment : Fragment(), KodeinAware {
             }
         }
 
+        mail_address.text = getString(R.string.mail_address_after_change)
+        current_mail_address1.visibility = View.VISIBLE
+        current_mail_address2.visibility = View.VISIBLE
+        current_mail_address2.text = firebaseAuth.currentUser?.email.toString()
         forgot_password.visibility = View.GONE
         new_registration.visibility = View.GONE
     }

@@ -280,7 +280,7 @@ class AuthRepository(
 
     suspend fun updateEmail(
         currentUserEmail: String,
-        destinationEmail: String,
+        afterChangeEmail: String,
         password: String
     ): LiveData<Boolean> {
         val isSuccess = MutableLiveData<Boolean>()
@@ -299,14 +299,14 @@ class AuthRepository(
                 )
                 try {
                     user
-                        .updateEmail(destinationEmail)
+                        .updateEmail(afterChangeEmail)
                         .await()
                     Log.d(
                         TAG,
                         context.applicationContext.getString(R.string.user_email_address_updated_success_log)
                     )
                     isSuccess.value =
-                        updateEmailInFirestore(uid = user.uid, email = destinationEmail)
+                        updateEmailInFirestore(uid = user.uid, email = afterChangeEmail)
                 } catch (e: Exception) {
                     Log.w(
                         TAG,

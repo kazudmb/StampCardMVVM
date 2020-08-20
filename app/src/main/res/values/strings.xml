@@ -23,6 +23,8 @@
     <!-- for stamp card -->
     <string name="qr_code">QRコード</string>
     <string name="mail_address">メールアドレス</string>
+    <string name="mail_address_current">メールアドレス(現在)</string>
+    <string name="mail_address_after_change">メールアドレス(変更後)</string>
     <string name="password">パスワード</string>
     <string name="send">送信</string>
     <string name="explanation_of_resetting">登録時に入力したメールアドレスを入力してください。パスワード再設定の手順を送信します。</string>

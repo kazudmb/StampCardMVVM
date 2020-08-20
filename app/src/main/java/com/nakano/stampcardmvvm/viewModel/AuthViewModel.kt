@@ -49,9 +49,9 @@ class AuthViewModel(
         }
     }
 
-    fun updateEmail(currentUserEmail: String, destinationEmail: String, password: String) {
+    fun updateEmail(currentUserEmail: String, afterChangeEmail: String, password: String) {
         viewModelScope.launch {
-            val result = repository.updateEmail(currentUserEmail, destinationEmail, password)
+            val result = repository.updateEmail(currentUserEmail, afterChangeEmail, password)
             _isSuccess.postValue(result.value)
         }
     }
