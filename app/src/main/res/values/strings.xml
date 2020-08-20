@@ -73,7 +73,8 @@
     <string name="user_email_address_updated_failure">メールアドレス変更に失敗しました</string>
     <string name="user_email_address_updated_failure_log">User email address updated:failure</string>
 
-    <string name="user_re_authenticated_log">User re-authenticated.</string>
+    <string name="user_re_authenticated_success_log">User re-authenticated:success</string>
+    <string name="user_re_authenticated_failure_log">User re-authenticated:failure</string>
     <string name="adding_document_failure_log">adding document:failure</string>
     <string name="getting_documents_success_log">getting documents:success</string>
     <string name="getting_documents_failure_log">getting documents:failure</string>

@@ -21,7 +21,7 @@ class AuthViewModel(
         }
     }
 
-    fun signInWithTwitter(){
+    fun signInWithTwitter() {
         viewModelScope.launch {
             val result = repository.signInWithTwitter()
             _isSuccess.postValue(result.value)
@@ -45,6 +45,13 @@ class AuthViewModel(
     fun signInAnonymous() {
         viewModelScope.launch {
             val result = repository.signInAnonymous()
+            _isSuccess.postValue(result.value)
+        }
+    }
+
+    fun updateEmail(currentUserEmail: String, destinationEmail: String, password: String) {
+        viewModelScope.launch {
+            val result = repository.updateEmail(currentUserEmail, destinationEmail, password)
             _isSuccess.postValue(result.value)
         }
     }

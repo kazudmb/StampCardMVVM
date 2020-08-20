@@ -42,7 +42,7 @@
         <action
             android:id="@+id/action_emailLoginFragment_popUpTo_stampCardFragment"
             app:popUpTo="@id/stampCardFragment"
-            app:popUpToInclusive="false"/>
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/accountInfo"
@@ -63,7 +63,7 @@
     <fragment
         android:id="@+id/createAccountFragment"
         android:name="com.nakano.stampcardmvvm.view.login.CreateAccountFragment"
-        android:label="@string/new_registration" >
+        android:label="@string/new_registration">
         <action
             android:id="@+id/action_createAccountFragment_popUpTo_stampCardFragment"
             app:popUpTo="@id/stampCardFragment"
@@ -76,7 +76,12 @@
     <fragment
         android:id="@+id/changeEmailFragment"
         android:name="com.nakano.stampcardmvvm.view.ChangeEmailFragment"
-        android:label="@string/change_email" />
+        android:label="@string/change_email">
+        <action
+            android:id="@+id/action_changeEmailFragment_popUpTo_accountInfo"
+            app:popUpTo="@id/accountInfo"
+            app:popUpToInclusive="false" />
+    </fragment>
     <fragment
         android:id="@+id/login"
         android:name="com.nakano.stampcardmvvm.view.login.LoginFragment"

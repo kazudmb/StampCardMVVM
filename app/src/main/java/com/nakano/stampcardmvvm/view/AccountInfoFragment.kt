@@ -15,6 +15,7 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 
+// TODO: メールアドレスの認証状況(credential)を取得して、表示するレイアウトに変更すること
 class AccountInfoFragment : Fragment(), KodeinAware {
 
     override val kodein by kodein()
@@ -36,9 +37,26 @@ class AccountInfoFragment : Fragment(), KodeinAware {
         super.onActivityCreated(savedInstanceState)
 
         setHasOptionsMenu(true)
+        // TODO: changeEmailのnavigationで戻ってきている場合は、getUserFromGoogleで変更後のアドレスを取得させる
         viewModel.getUser()
     }
 
+//    override fun onPrepareOptionsMenu(menu: Menu) {
+//
+//        // TODO: Loginしているサービスによって、表示する内容を変更すること
+//        viewModel.isLogin()
+//        viewModel.isLoginLiveData.observe(viewLifecycleOwner,
+//            Observer {
+//                if (it) {
+//                    menu.findItem(R.id.login).isVisible = false
+//                    menu.findItem(R.id.accountInfo).isVisible = true
+//                } else {
+//                    menu.findItem(R.id.login).isVisible = true
+//                    menu.findItem(R.id.accountInfo).isVisible = false
+//                }
+//            })
+//        super.onPrepareOptionsMenu(menu)
+//    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)

@@ -6,11 +6,13 @@ import androidx.constraintlayout.widget.Constraints.TAG
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.AuthCredential
+import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.OAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
 import com.nakano.stampcardmvvm.R
 import com.nakano.stampcardmvvm.model.model.User
+import com.nakano.stampcardmvvm.util.Constant
 import com.nakano.stampcardmvvm.util.Utility
 import com.nakano.stampcardmvvm.view.MainActivity
 import kotlinx.coroutines.tasks.await
@@ -109,7 +111,7 @@ class AuthRepository(
             return false
         }
     }
-    
+
     suspend fun createUserWithEmailAndPassword(email: String, password: String): LiveData<Boolean> {
         val isSuccess = MutableLiveData<Boolean>()
 
@@ -273,6 +275,71 @@ class AuthRepository(
             return false
         } catch (e: Exception) {
             return false
+        }
+    }
+
+    suspend fun updateEmail(
+        currentUserEmail: String,
+        destinationEmail: String,
+        password: String
+    ): LiveData<Boolean> {
+        val isSuccess = MutableLiveData<Boolean>()
+        val user = firebaseAuth.currentUser
+        val credential = EmailAuthProvider.getCredential(currentUserEmail, password)
+
+        // Prompt the user to re-provide their sign-in credentials
+        if (user != null) {
+            try {
+                user
+                    .reauthenticate(credential)
+                    .await()
+                Log.d(
+                    TAG,
+                    context.applicationContext.getString(R.string.user_re_authenticated_success_log)
+                )
+                try {
+                    user
+                        .updateEmail(destinationEmail)
+                        .await()
+                    Log.d(
+                        TAG,
+                        context.applicationContext.getString(R.string.user_email_address_updated_success_log)
+                    )
+                    isSuccess.value =
+                        updateEmailInFirestore(uid = user.uid, email = destinationEmail)
+                } catch (e: Exception) {
+                    Log.w(
+                        TAG,
+                        context.applicationContext.getString(R.string.user_email_address_updated_failure_log)
+                    )
+                    isSuccess.value = false
+                }
+            } catch (e: Exception) {
+                Log.w(
+                    TAG,
+                    context.applicationContext.getString(R.string.user_re_authenticated_failure_log)
+                )
+                isSuccess.value = false
+            }
+        } else {
+            isSuccess.value = false
+        }
+
+        return isSuccess
+    }
+
+    private suspend fun updateEmailInFirestore(uid: String, email: String): Boolean {
+        return try {
+            usersRef
+                .document(uid)
+                .update(Constant.FIELD_NAME_EMAIL, email)
+                .await()
+            Log.d(TAG, "updateEmailInFirestore: success")
+            sendEmailVerification()
+            true
+        } catch (e: Exception) {
+            Log.w(TAG, "updateEmailInFirestore: failure", e)
+            false
         }
     }
 }
