@@ -18,6 +18,7 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 
+// TODO: High layoutファイルを、マテリアルデザインに準拠させること
 // TODO: メールアドレスの認証状況(credential)を取得して、表示するレイアウトに変更すること
 class AccountInfoFragment : Fragment(), KodeinAware {
 
