@@ -6,9 +6,12 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.*
 import com.nakano.stampcardmvvm.R
 import com.nakano.stampcardmvvm.databinding.FragmentAccountInfoBinding
+import com.nakano.stampcardmvvm.util.Constant
 import com.nakano.stampcardmvvm.viewModel.UserViewModel
 import com.nakano.stampcardmvvm.viewModel.UserViewModelFactory
 import org.kodein.di.KodeinAware
@@ -41,22 +44,43 @@ class AccountInfoFragment : Fragment(), KodeinAware {
         viewModel.getUser()
     }
 
-//    override fun onPrepareOptionsMenu(menu: Menu) {
-//
-//        // TODO: Loginしているサービスによって、表示する内容を変更すること
-//        viewModel.isLogin()
-//        viewModel.isLoginLiveData.observe(viewLifecycleOwner,
-//            Observer {
-//                if (it) {
-//                    menu.findItem(R.id.login).isVisible = false
-//                    menu.findItem(R.id.accountInfo).isVisible = true
-//                } else {
-//                    menu.findItem(R.id.login).isVisible = true
-//                    menu.findItem(R.id.accountInfo).isVisible = false
-//                }
-//            })
-//        super.onPrepareOptionsMenu(menu)
-//    }
+    override fun onPrepareOptionsMenu(menu: Menu) {
+
+        viewModel.getCurrentProviderId()
+        viewModel.currentProviderId.observe(viewLifecycleOwner,
+            Observer {
+                val status: String = when(it) {
+                    EmailAuthProvider.PROVIDER_ID -> Constant.ALL
+                    FacebookAuthProvider.PROVIDER_ID -> Constant.EMAIL_CHANGE_AND_LOGOUT
+                    FirebaseAuthProvider.PROVIDER_ID -> Constant.ONLY_LOGOUT
+//                    GithubAuthProvider.PROVIDER_ID -> Constant.ALL
+                    GoogleAuthProvider.PROVIDER_ID -> Constant.EMAIL_CHANGE_AND_LOGOUT
+                    PhoneAuthProvider.PROVIDER_ID -> Constant.ONLY_LOGOUT
+//                    PlayGamesAuthProvider.PROVIDER_ID -> Constant.ALL
+                    TwitterAuthProvider.PROVIDER_ID -> Constant.EMAIL_CHANGE_AND_LOGOUT
+                    else -> Constant.ONLY_LOGOUT
+                }
+
+                when(status) {
+                    Constant.ALL -> {
+                        menu.findItem(R.id.change_email).isVisible = true
+                        menu.findItem(R.id.change_password).isVisible = true
+                        menu.findItem(R.id.logout).isVisible = true
+                    }
+                    Constant.EMAIL_CHANGE_AND_LOGOUT -> {
+                        menu.findItem(R.id.change_email).isVisible = true
+                        menu.findItem(R.id.change_password).isVisible = false
+                        menu.findItem(R.id.logout).isVisible = true
+                    }
+                    Constant.ONLY_LOGOUT -> {
+                        menu.findItem(R.id.change_email).isVisible = false
+                        menu.findItem(R.id.change_password).isVisible = false
+                        menu.findItem(R.id.logout).isVisible = true
+                    }
+                }
+            })
+        super.onPrepareOptionsMenu(menu)
+    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)

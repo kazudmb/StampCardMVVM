@@ -24,6 +24,8 @@ class UserViewModel(
     private val _stamp = MutableLiveData<List<Drawable>>()
     var stamp: LiveData<List<Drawable>> = _stamp
     lateinit var isLoginLiveData: LiveData<Boolean>
+    private val _currentProviderId = MutableLiveData<String?>()
+    var currentProviderId: LiveData<String?> = _currentProviderId
 
     fun getUser() {
         user = repository.getUser()
@@ -48,6 +50,10 @@ class UserViewModel(
 
     fun isLogin() {
         isLoginLiveData = repository.isLogin()
+    }
+
+    fun getCurrentProviderId() {
+        currentProviderId = repository.getCurrentProviderId()
     }
 
     fun logoutFromGoogle() {

@@ -9,7 +9,7 @@ import androidx.constraintlayout.widget.Constraints.TAG
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.*
 import com.google.firebase.firestore.FirebaseFirestore
 import com.nakano.stampcardmvvm.R
 import com.nakano.stampcardmvvm.model.model.User
@@ -45,38 +45,38 @@ class UserRepository(
     }
 
     suspend fun getUserFromFirestore(): LiveData<User> {
-            val uid = firebaseAuth.currentUser?.uid
+        val uid = firebaseAuth.currentUser?.uid
 
-            if (uid != null) {
-                val data = usersRef
-                    .document(uid)
-                    .get()
-                    .await()
+        if (uid != null) {
+            val data = usersRef
+                .document(uid)
+                .get()
+                .await()
 
-                try {
-                    if(data.exists()) {
-                        val uid = data[Constant.FIELD_NAME_UID] as String
-                        val name = data[Constant.FIELD_NAME_NAME] as String?
-                        val email = data[Constant.FIELD_NAME_EMAIL] as String?
-                        val numberOfVisits = data[Constant.FIELD_NAME_NUMBER_OF_VISITS] as Long
-                        val rank = Utility.getRank(context, numberOfVisits)
-                        val user = User(uid, name, email, numberOfVisits, rank)
-                        userMutableLiveData.value = user
-                        Log.d(TAG, "${data.id} => ${data.data}")
-                    }
-                } catch (e: Exception) {
-                    Log.w(TAG, "Error getting documents.", e)
+            try {
+                if (data.exists()) {
+                    val uid = data[Constant.FIELD_NAME_UID] as String
+                    val name = data[Constant.FIELD_NAME_NAME] as String?
+                    val email = data[Constant.FIELD_NAME_EMAIL] as String?
+                    val numberOfVisits = data[Constant.FIELD_NAME_NUMBER_OF_VISITS] as Long
+                    val rank = Utility.getRank(context, numberOfVisits)
+                    val user = User(uid, name, email, numberOfVisits, rank)
+                    userMutableLiveData.value = user
+                    Log.d(TAG, "${data.id} => ${data.data}")
                 }
-
-            } else {
-                val uid = ""
-                val name = null as String?
-                val email = null as String?
-                val numberOfVisits = 0.toLong()
-                val rank = Utility.getRank(context, numberOfVisits)
-                val user = User(uid, name, email, numberOfVisits, rank)
-                userMutableLiveData.value = user
+            } catch (e: Exception) {
+                Log.w(TAG, "Error getting documents.", e)
             }
+
+        } else {
+            val uid = ""
+            val name = null as String?
+            val email = null as String?
+            val numberOfVisits = 0.toLong()
+            val rank = Utility.getRank(context, numberOfVisits)
+            val user = User(uid, name, email, numberOfVisits, rank)
+            userMutableLiveData.value = user
+        }
         return userMutableLiveData
     }
 
@@ -100,8 +100,10 @@ class UserRepository(
 
     fun getStamp(): LiveData<List<Drawable>> {
         val loopCount: Int
-        val numberOfVisits = userMutableLiveData.value?.numberOfVisits ?: Constant.DEFAULT_NUMBER_OF_VISITS
-        val numberOfCutOut = numberOfVisits.toString().substring(numberOfVisits.toString().length - 1).toInt()
+        val numberOfVisits =
+            userMutableLiveData.value?.numberOfVisits ?: Constant.DEFAULT_NUMBER_OF_VISITS
+        val numberOfCutOut =
+            numberOfVisits.toString().substring(numberOfVisits.toString().length - 1).toInt()
 
         loopCount = if (numberOfCutOut == 0 && numberOfVisits < 10) {
             0
@@ -146,5 +148,30 @@ class UserRepository(
         }
 
         return isLoginMutableLiveData
+    }
+
+    fun getCurrentProviderId(): LiveData<String?> {
+        val currentProviderIdMutableLiveData = MutableLiveData<String?>()
+
+        when (firebaseAuth.currentUser?.providerId) {
+            EmailAuthProvider.PROVIDER_ID -> currentProviderIdMutableLiveData.value =
+                EmailAuthProvider.PROVIDER_ID
+            FacebookAuthProvider.PROVIDER_ID -> currentProviderIdMutableLiveData.value =
+                FacebookAuthProvider.PROVIDER_ID
+            FirebaseAuthProvider.PROVIDER_ID -> currentProviderIdMutableLiveData.value =
+                FirebaseAuthProvider.PROVIDER_ID
+            GithubAuthProvider.PROVIDER_ID -> currentProviderIdMutableLiveData.value =
+                GithubAuthProvider.PROVIDER_ID
+            GoogleAuthProvider.PROVIDER_ID -> currentProviderIdMutableLiveData.value =
+                GoogleAuthProvider.PROVIDER_ID
+            PhoneAuthProvider.PROVIDER_ID -> currentProviderIdMutableLiveData.value =
+                PhoneAuthProvider.PROVIDER_ID
+            PlayGamesAuthProvider.PROVIDER_ID -> currentProviderIdMutableLiveData.value =
+                PlayGamesAuthProvider.PROVIDER_ID
+            TwitterAuthProvider.PROVIDER_ID -> currentProviderIdMutableLiveData.value =
+                TwitterAuthProvider.PROVIDER_ID
+            else -> currentProviderIdMutableLiveData.value = null
+        }
+        return currentProviderIdMutableLiveData
     }
 }
