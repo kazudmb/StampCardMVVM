@@ -24,6 +24,7 @@
 
             <TextView
                 android:id="@+id/current_mail_address1"
+                style="@style/TextAppearance.MdcTypographyStyles.Body1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -33,6 +34,7 @@
 
             <TextView
                 android:id="@+id/current_mail_address2"
+                style="@style/TextAppearance.MdcTypographyStyles.Body2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -41,6 +43,7 @@
 
             <TextView
                 android:id="@+id/explanation"
+                style="@style/TextAppearance.MdcTypographyStyles.Body2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -50,35 +53,44 @@
 
             <TextView
                 android:id="@+id/mail_address"
+                style="@style/TextAppearance.MdcTypographyStyles.Body1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
+                android:labelFor="@id/field_email"
                 android:text="@string/mail_address" />
 
             <EditText
                 android:id="@+id/field_email"
+                style="@style/TextAppearance.MdcTypographyStyles.Body2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:importantForAutofill="no"
                 android:inputType="textEmailAddress" />
 
             <TextView
                 android:id="@+id/password"
+                style="@style/TextAppearance.MdcTypographyStyles.Body1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
+                android:labelFor="@id/field_password"
                 android:text="@string/password" />
 
             <EditText
                 android:id="@+id/field_password"
+                style="@style/TextAppearance.MdcTypographyStyles.Body2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:importantForAutofill="no"
                 android:inputType="textPassword" />
 
             <Button
                 android:id="@+id/login_button"
-                android:layout_width="match_parent"
+                style="@style/TextAppearance.MdcTypographyStyles.Button"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/login" />
@@ -91,6 +103,7 @@
 
                 <TextView
                     android:id="@+id/forgot_password"
+                    style="@style/TextAppearance.MdcTypographyStyles.Body1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:clickable="true"
@@ -99,6 +112,7 @@
 
                 <TextView
                     android:id="@+id/new_registration"
+                    style="@style/TextAppearance.MdcTypographyStyles.Body1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clickable="true"
