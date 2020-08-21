@@ -51,13 +51,13 @@ class AccountInfoFragment : Fragment(), KodeinAware {
             Observer {
                 val status: String = when(it) {
                     EmailAuthProvider.PROVIDER_ID -> Constant.ALL
-                    FacebookAuthProvider.PROVIDER_ID -> Constant.EMAIL_CHANGE_AND_LOGOUT
+//                    FacebookAuthProvider.PROVIDER_ID -> Constant.ALL
                     FirebaseAuthProvider.PROVIDER_ID -> Constant.ONLY_LOGOUT
 //                    GithubAuthProvider.PROVIDER_ID -> Constant.ALL
-                    GoogleAuthProvider.PROVIDER_ID -> Constant.EMAIL_CHANGE_AND_LOGOUT
-                    PhoneAuthProvider.PROVIDER_ID -> Constant.ONLY_LOGOUT
+                    GoogleAuthProvider.PROVIDER_ID -> Constant.ALL
+//                    PhoneAuthProvider.PROVIDER_ID -> Constant.ONLY_LOGOUT
 //                    PlayGamesAuthProvider.PROVIDER_ID -> Constant.ALL
-                    TwitterAuthProvider.PROVIDER_ID -> Constant.EMAIL_CHANGE_AND_LOGOUT
+//                    TwitterAuthProvider.PROVIDER_ID -> Constant.ALL
                     else -> Constant.ONLY_LOGOUT
                 }
 

@@ -153,24 +153,33 @@ class UserRepository(
     fun getCurrentProviderId(): LiveData<String?> {
         val currentProviderIdMutableLiveData = MutableLiveData<String?>()
 
-        when (firebaseAuth.currentUser?.providerId) {
-            EmailAuthProvider.PROVIDER_ID -> currentProviderIdMutableLiveData.value =
-                EmailAuthProvider.PROVIDER_ID
-            FacebookAuthProvider.PROVIDER_ID -> currentProviderIdMutableLiveData.value =
-                FacebookAuthProvider.PROVIDER_ID
-            FirebaseAuthProvider.PROVIDER_ID -> currentProviderIdMutableLiveData.value =
-                FirebaseAuthProvider.PROVIDER_ID
-            GithubAuthProvider.PROVIDER_ID -> currentProviderIdMutableLiveData.value =
-                GithubAuthProvider.PROVIDER_ID
-            GoogleAuthProvider.PROVIDER_ID -> currentProviderIdMutableLiveData.value =
-                GoogleAuthProvider.PROVIDER_ID
-            PhoneAuthProvider.PROVIDER_ID -> currentProviderIdMutableLiveData.value =
-                PhoneAuthProvider.PROVIDER_ID
-            PlayGamesAuthProvider.PROVIDER_ID -> currentProviderIdMutableLiveData.value =
-                PlayGamesAuthProvider.PROVIDER_ID
-            TwitterAuthProvider.PROVIDER_ID -> currentProviderIdMutableLiveData.value =
-                TwitterAuthProvider.PROVIDER_ID
-            else -> currentProviderIdMutableLiveData.value = null
+        val providerData = firebaseAuth.currentUser?.providerData
+        if (providerData != null) {
+            for (i in 0 until providerData.size) {
+                Log.d(TAG, "getCurrentProviderId: providerId is " + providerData[i].providerId)
+                if (providerData.size == 1) {
+                    currentProviderIdMutableLiveData.value = FirebaseAuthProvider.PROVIDER_ID
+                    break
+                } else {
+                    // TODO: 複数プロバイダでログインしている場合の考慮がされていない
+                    when (providerData[i].providerId) {
+                        EmailAuthProvider.PROVIDER_ID -> currentProviderIdMutableLiveData.value =
+                            EmailAuthProvider.PROVIDER_ID
+                        FacebookAuthProvider.PROVIDER_ID -> currentProviderIdMutableLiveData.value =
+                            FacebookAuthProvider.PROVIDER_ID
+                        GithubAuthProvider.PROVIDER_ID -> currentProviderIdMutableLiveData.value =
+                            GithubAuthProvider.PROVIDER_ID
+                        GoogleAuthProvider.PROVIDER_ID -> currentProviderIdMutableLiveData.value =
+                            GoogleAuthProvider.PROVIDER_ID
+                        PhoneAuthProvider.PROVIDER_ID -> currentProviderIdMutableLiveData.value =
+                            PhoneAuthProvider.PROVIDER_ID
+                        PlayGamesAuthProvider.PROVIDER_ID -> currentProviderIdMutableLiveData.value =
+                            PlayGamesAuthProvider.PROVIDER_ID
+                        TwitterAuthProvider.PROVIDER_ID -> currentProviderIdMutableLiveData.value =
+                            TwitterAuthProvider.PROVIDER_ID
+                    }
+                }
+            }
         }
         return currentProviderIdMutableLiveData
     }
