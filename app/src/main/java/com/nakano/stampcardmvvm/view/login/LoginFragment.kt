@@ -29,6 +29,7 @@ import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 
 // TODO: 各login処理ごとに分割すること
+// TODO: 複数のサービスでログインする場合、アカウントが上書きされているケースがあるので、修正する必要あり
 class LoginFragment : Fragment(), KodeinAware {
 
     override val kodein by kodein()
