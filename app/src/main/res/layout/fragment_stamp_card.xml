@@ -9,7 +9,7 @@
             type="com.nakano.stampcardmvvm.viewModel.UserViewModel" />
     </data>
 
-    <LinearLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -218,18 +218,20 @@
                         android:layout_marginEnd="20dp"
                         android:layout_marginBottom="10dp"
                         android:text="@string/benefits_text" />
-
-                    <Button
-                        android:id="@+id/button_stamp"
-                        style="@style/TextAppearance.MdcTypographyStyles.Button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/benefits_text"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="20dp"
-                        android:text="@string/button_stamp" />
                 </RelativeLayout>
             </ScrollView>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-    </LinearLayout>
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/button_stamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|bottom"
+            android:layout_margin="24dp"
+            android:fontFamily="@font/noto_sans"
+            android:text="@string/button_stamp"
+            android:textSize="14sp"
+            app:backgroundTint="@color/colorAccent"
+            app:icon="@drawable/icon_stamp2" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
