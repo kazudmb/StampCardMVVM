@@ -71,6 +71,7 @@
         <item name="fontFamily">@font/noto_sans</item>
         <item name="android:fontFamily">@font/noto_sans</item>
         <item name="android:textSize">14sp</item>
+        <item name="android:background">@color/colorAccent</item>
     </style>
 
     <style name="TextAppearance.MdcTypographyStyles.Caption" parent="TextAppearance.MaterialComponents.Caption">
