@@ -36,10 +36,12 @@
                     android:layout_height="30dp"
                     android:layout_marginStart="30dp"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/icon_google" />
+                    android:src="@drawable/icon_google"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/login_google"
+                    style="@style/TextAppearance.MdcTypographyStyles.Body2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="20dp"
@@ -62,10 +64,12 @@
                     android:layout_height="30dp"
                     android:layout_marginStart="30dp"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/icon_twitter" />
+                    android:src="@drawable/icon_twitter"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/login_twitter"
+                    style="@style/TextAppearance.MdcTypographyStyles.Body2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/flame_style_twitter_login"
@@ -90,10 +94,12 @@
                     android:layout_height="30dp"
                     android:layout_marginStart="30dp"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/icon_facebook" />
+                    android:src="@drawable/icon_facebook"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/login_facebook"
+                    style="@style/TextAppearance.MdcTypographyStyles.Body2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/flame_style_facebook_login"
@@ -118,10 +124,12 @@
                     android:layout_height="30dp"
                     android:layout_marginStart="30dp"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/icon_mail" />
+                    android:src="@drawable/icon_mail"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/login_email"
+                    style="@style/TextAppearance.MdcTypographyStyles.Body2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/flame_style_other_login"
@@ -146,10 +154,12 @@
                     android:layout_height="30dp"
                     android:layout_marginStart="30dp"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/icon_phone" />
+                    android:src="@drawable/icon_phone"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/login_phone"
+                    style="@style/TextAppearance.MdcTypographyStyles.Body2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/flame_style_other_login"
@@ -174,10 +184,12 @@
                     android:layout_height="30dp"
                     android:layout_marginStart="30dp"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/icon_anonymous" />
+                    android:src="@drawable/icon_anonymous"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/login_anonymous"
+                    style="@style/TextAppearance.MdcTypographyStyles.Body2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/flame_style_other_login"

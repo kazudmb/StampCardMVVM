@@ -1,5 +1,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -33,7 +34,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
-                        android:src="@drawable/top" />
+                        android:src="@drawable/top"
+                        tools:ignore="ContentDescription" />
 
                     <LinearLayout
                         android:id="@+id/text_view"
@@ -44,6 +46,7 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            style="@style/TextAppearance.MdcTypographyStyles.Body1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="20dp"
@@ -53,6 +56,7 @@
 
                         <TextView
                             android:id="@+id/number"
+                            style="@style/TextAppearance.MdcTypographyStyles.Body1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
@@ -60,6 +64,7 @@
                             android:text="@{Long.toString(userViewModel.user.numberOfVisits)}" />
 
                         <TextView
+                            style="@style/TextAppearance.MdcTypographyStyles.Body1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
@@ -68,6 +73,7 @@
 
                         <TextView
                             android:id="@+id/rank"
+                            style="@style/TextAppearance.MdcTypographyStyles.Body1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
@@ -100,7 +106,8 @@
                                 android:layout_weight="1"
                                 android:adjustViewBounds="true"
                                 android:background="@drawable/stroke_line"
-                                android:src="@{userViewModel.stamp[0]}" />
+                                android:src="@{userViewModel.stamp[0]}"
+                                tools:ignore="ContentDescription" />
 
                             <ImageView
                                 android:id="@+id/stamp_area2"
@@ -109,7 +116,8 @@
                                 android:layout_weight="1"
                                 android:adjustViewBounds="true"
                                 android:background="@drawable/stroke_line"
-                                android:src="@{userViewModel.stamp[1]}" />
+                                android:src="@{userViewModel.stamp[1]}"
+                                tools:ignore="ContentDescription" />
 
                             <ImageView
                                 android:id="@+id/stamp_area3"
@@ -118,7 +126,8 @@
                                 android:layout_weight="1"
                                 android:adjustViewBounds="true"
                                 android:background="@drawable/stroke_line"
-                                android:src="@{userViewModel.stamp[2]}" />
+                                android:src="@{userViewModel.stamp[2]}"
+                                tools:ignore="ContentDescription" />
 
                             <ImageView
                                 android:id="@+id/stamp_area4"
@@ -127,7 +136,8 @@
                                 android:layout_weight="1"
                                 android:adjustViewBounds="true"
                                 android:background="@drawable/stroke_line"
-                                android:src="@{userViewModel.stamp[3]}" />
+                                android:src="@{userViewModel.stamp[3]}"
+                                tools:ignore="ContentDescription" />
 
                             <ImageView
                                 android:id="@+id/stamp_area5"
@@ -136,7 +146,8 @@
                                 android:layout_weight="1"
                                 android:adjustViewBounds="true"
                                 android:background="@drawable/stroke_line"
-                                android:src="@{userViewModel.stamp[4]}" />
+                                android:src="@{userViewModel.stamp[4]}"
+                                tools:ignore="ContentDescription" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -151,7 +162,8 @@
                                 android:layout_weight="1"
                                 android:adjustViewBounds="true"
                                 android:background="@drawable/stroke_line"
-                                android:src="@{userViewModel.stamp[5]}" />
+                                android:src="@{userViewModel.stamp[5]}"
+                                tools:ignore="ContentDescription" />
 
                             <ImageView
                                 android:id="@+id/stamp_area7"
@@ -160,7 +172,8 @@
                                 android:layout_weight="1"
                                 android:adjustViewBounds="true"
                                 android:background="@drawable/stroke_line"
-                                android:src="@{userViewModel.stamp[6]}" />
+                                android:src="@{userViewModel.stamp[6]}"
+                                tools:ignore="ContentDescription" />
 
                             <ImageView
                                 android:id="@+id/stamp_area8"
@@ -169,7 +182,8 @@
                                 android:layout_weight="1"
                                 android:adjustViewBounds="true"
                                 android:background="@drawable/stroke_line"
-                                android:src="@{userViewModel.stamp[7]}" />
+                                android:src="@{userViewModel.stamp[7]}"
+                                tools:ignore="ContentDescription" />
 
                             <ImageView
                                 android:id="@+id/stamp_area9"
@@ -178,7 +192,8 @@
                                 android:layout_weight="1"
                                 android:adjustViewBounds="true"
                                 android:background="@drawable/stroke_line"
-                                android:src="@{userViewModel.stamp[8]}" />
+                                android:src="@{userViewModel.stamp[8]}"
+                                tools:ignore="ContentDescription" />
 
                             <ImageView
                                 android:id="@+id/stamp_area10"
@@ -187,12 +202,14 @@
                                 android:layout_weight="1"
                                 android:adjustViewBounds="true"
                                 android:background="@drawable/stroke_line"
-                                android:src="@{userViewModel.stamp[9]}" />
+                                android:src="@{userViewModel.stamp[9]}"
+                                tools:ignore="ContentDescription" />
                         </LinearLayout>
                     </LinearLayout>
 
                     <TextView
                         android:id="@+id/benefits_text"
+                        style="@style/TextAppearance.MdcTypographyStyles.Body1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/stamp_area"
@@ -204,6 +221,7 @@
 
                     <Button
                         android:id="@+id/button_stamp"
+                        style="@style/TextAppearance.MdcTypographyStyles.Button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/benefits_text"
