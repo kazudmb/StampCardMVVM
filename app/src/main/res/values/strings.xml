@@ -1,26 +1,6 @@
 <resources>
+    <!-- for UI -->
     <string name="app_name">Stamp Card</string>
-
-    <!-- for sample -->
-    <string name="loading_projects">Loading projects …</string>
-    <string name="project_name">タイトル</string>
-    <string name="github_projects">Your GitHub Projects!!</string>
-    <string name="project_list">Project List</string>
-    <string name="languages">プログラミング言語: %s</string>
-    <string name="watchers">Watchers: %s</string>
-    <string name="openIssues">Open Issues: %s</string>
-    <string name="created_at">作った時間: %s</string>
-    <string name="updated_at">最後にアップデートされた時間: %s</string>
-    <string name="clone_url">CloneするURL: %s</string>
-    <string name="project_language">Project Language</string>
-    <string name="project_watchers">Project Watchers</string>
-    <string name="project_description">Project Description</string>
-    <string name="open_issues">開かれているIssues</string>
-    <string name="loading_project">Loading Project …</string>
-    <string name="github_user_name">Tsutou</string>
-    <!-- end -->
-
-    <!-- for stamp card -->
     <string name="qr_code">QRコード</string>
     <string name="mail_address">メールアドレス</string>
     <string name="mail_address_current">メールアドレス(現在)</string>
@@ -49,7 +29,15 @@
     <string name="please_login">ログインしてください</string>
     <string name="success_logout">ログアウトに成功しました</string>
     <string name="input_correct_email">正しいメールアドレスを入力してください</string>
+    <string name="login_google">Google アカウントでログイン</string>
+    <string name="login_twitter">Twitter アカウントでログイン</string>
+    <string name="login_facebook">Facebook アカウントでログイン</string>
+    <string name="login_email">メールアドレス でログイン</string>
+    <string name="login_phone_number">電話番号 でログイン</string>
+    <string name="login_anonymous">テストアカウント でログイン</string>
+    <string name="toast_message_coming_soon">coming soon</string>
 
+    <!-- for log -->
     <string name="create_user_with_email_success">新規登録に成功しました</string>
     <string name="create_user_with_email_success_log">createUserWithEmail:success</string>
     <string name="create_user_with_email_failure">新規登録に失敗しました</string>
@@ -74,7 +62,6 @@
     <string name="user_email_address_updated_success_log">User email address updated:success</string>
     <string name="user_email_address_updated_failure">メールアドレス変更に失敗しました</string>
     <string name="user_email_address_updated_failure_log">User email address updated:failure</string>
-
     <string name="user_re_authenticated_success_log">User re-authenticated:success</string>
     <string name="user_re_authenticated_failure_log">User re-authenticated:failure</string>
     <string name="adding_document_failure_log">adding document:failure</string>
@@ -82,15 +69,4 @@
     <string name="getting_documents_failure_log">getting documents:failure</string>
     <string name="generate_qrcode_success_log">generate QRCode:success</string>
     <string name="generate_qrcode_failure_log">generate QRCode:failure</string>
-
-    <string name="login_google">Google アカウントでログイン</string>
-    <string name="login_twitter">Twitter アカウントでログイン</string>
-    <string name="login_facebook">Facebook アカウントでログイン</string>
-    <string name="login_email">メールアドレス でログイン</string>
-    <string name="login_phone_number">電話番号 でログイン</string>
-    <string name="login_anonymous">テストアカウント でログイン</string>
-    <string name="toast_message_coming_soon">coming soon</string>
-
-    <!-- end -->
-
 </resources>
