@@ -3,6 +3,7 @@ package com.nakano.stampcardmvvm.view
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -90,15 +91,13 @@ class AccountInfoFragment : Fragment(), KodeinAware {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.change_email -> {
-                val action =
-                    AccountInfoFragmentDirections.actionAccountInfoFragmentToChangeEmailFragment()
-                findNavController().navigate(action)
+                val args = bundleOf(getText(R.string.BUNDLE_PAIR_KEY_EMAIL).toString() to null) as Bundle?
+                findNavController().navigate(R.id.action_accountInfoFragment_to_changeEmailFragment, args)
                 return true
             }
             R.id.change_password -> {
-                val action =
-                    AccountInfoFragmentDirections.actionAccountInfoFragmentToChangePasswordFragment()
-                findNavController().navigate(action)
+                val args = bundleOf(getText(R.string.BUNDLE_PAIR_KEY_EMAIL).toString() to null) as Bundle?
+                findNavController().navigate(R.id.action_accountInfoFragment_to_changePasswordFragment, args)
                 return true
             }
             R.id.logout -> {

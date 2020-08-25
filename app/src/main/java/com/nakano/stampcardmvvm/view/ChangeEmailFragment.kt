@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.nakano.stampcardmvvm.R
 import com.nakano.stampcardmvvm.databinding.FragmentEmailBaseBinding
+import com.nakano.stampcardmvvm.util.Constant
 import com.nakano.stampcardmvvm.util.Utility
 import com.nakano.stampcardmvvm.viewModel.AuthViewModel
 import com.nakano.stampcardmvvm.viewModel.AuthViewModelFactory
@@ -73,6 +74,9 @@ class ChangeEmailFragment : Fragment(), KodeinAware {
                 }
             }
         }
+
+        val email = arguments?.getString(getText(R.string.BUNDLE_PAIR_KEY_EMAIL).toString())
+        if (email != null) field_email.setText(email)
 
         mail_address.text = getString(R.string.mail_address_after_change)
         current_mail_address1.visibility = View.VISIBLE

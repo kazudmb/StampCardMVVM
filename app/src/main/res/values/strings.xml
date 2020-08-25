@@ -69,4 +69,7 @@
     <string name="getting_documents_failure_log">getting documents:failure</string>
     <string name="generate_qrcode_success_log">generate QRCode:success</string>
     <string name="generate_qrcode_failure_log">generate QRCode:failure</string>
+
+    <!-- for navigation -->
+    <string name="BUNDLE_PAIR_KEY_EMAIL">email</string>
 </resources>

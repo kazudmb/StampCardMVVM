@@ -41,6 +41,9 @@ class ChangePasswordFragment : Fragment(), KodeinAware {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        val email = arguments?.getString(getText(R.string.BUNDLE_PAIR_KEY_EMAIL).toString())
+        if (email != null) field_email.setText(email)
+
         val firebaseAuth = FirebaseAuth.getInstance()
         val currentEmail = firebaseAuth.currentUser?.email
         if (currentEmail != null) {

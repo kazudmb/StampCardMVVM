@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -12,6 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.nakano.stampcardmvvm.R
 import com.nakano.stampcardmvvm.databinding.FragmentEmailBaseBinding
+import com.nakano.stampcardmvvm.util.Constant
 import com.nakano.stampcardmvvm.util.Utility
 import com.nakano.stampcardmvvm.viewModel.AuthViewModel
 import com.nakano.stampcardmvvm.viewModel.AuthViewModelFactory
@@ -60,15 +62,15 @@ class EmailLoginFragment : Fragment(), KodeinAware {
         }
 
         forgot_password.setOnClickListener {
-            val action =
-                EmailLoginFragmentDirections.actionLoginFragmentToChangePasswordFragment()
-            findNavController().navigate(action)
+            val email = field_email.text.toString()
+            val args = bundleOf(getText(R.string.BUNDLE_PAIR_KEY_EMAIL).toString() to email) as Bundle?
+            findNavController().navigate(R.id.action_loginFragment_to_changePasswordFragment, args)
         }
 
         new_registration.setOnClickListener {
-            val action =
-                EmailLoginFragmentDirections.actionLoginFragmentToCreateAccountFragment()
-            findNavController().navigate(action)
+            val email = field_email.text.toString()
+            val args = bundleOf(getText(R.string.BUNDLE_PAIR_KEY_EMAIL).toString() to email) as Bundle?
+            findNavController().navigate(R.id.action_loginFragment_to_createAccountFragment, args)
         }
     }
 }

@@ -19,7 +19,6 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 
-// TODO: High EmailLoginからの遷移の時に、入力しているパスワードは引き継ぐこと、また新規登録からログインへも引き継ぐこと
 class CreateAccountFragment : Fragment(), KodeinAware {
 
     override val kodein by kodein()
@@ -66,6 +65,9 @@ class CreateAccountFragment : Fragment(), KodeinAware {
                 }
             })
         }
+
+        val email = arguments?.getString(getText(R.string.BUNDLE_PAIR_KEY_EMAIL).toString())
+        if (email != null) field_email.setText(email)
 
         forgot_password.visibility = View.GONE
         new_registration.visibility = View.GONE

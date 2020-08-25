@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -20,6 +21,7 @@ import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.GoogleAuthProvider
 import com.nakano.stampcardmvvm.R
 import com.nakano.stampcardmvvm.databinding.FragmentLoginBinding
+import com.nakano.stampcardmvvm.util.Constant
 import com.nakano.stampcardmvvm.util.HelperClass
 import com.nakano.stampcardmvvm.viewModel.AuthViewModel
 import com.nakano.stampcardmvvm.viewModel.AuthViewModelFactory
@@ -79,9 +81,8 @@ class LoginFragment : Fragment(), KodeinAware {
         }
 
         login_email.setOnClickListener {
-            val action =
-                LoginFragmentDirections.actionLoginFragmentToLoginFragment()
-            findNavController().navigate(action)
+            val args = bundleOf(getText(R.string.BUNDLE_PAIR_KEY_EMAIL).toString() to null) as Bundle?
+            findNavController().navigate(R.id.action_loginFragment_to_loginFragment, args)
         }
 
         login_phone.setOnClickListener {
