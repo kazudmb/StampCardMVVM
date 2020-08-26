@@ -18,6 +18,7 @@ import androidx.navigation.ui.NavigationUI
 import com.google.firebase.auth.FirebaseAuth
 import com.nakano.stampcardmvvm.R
 import com.nakano.stampcardmvvm.databinding.FragmentEmailBaseBinding
+import com.nakano.stampcardmvvm.util.Utility
 import com.nakano.stampcardmvvm.viewModel.UserViewModel
 import com.nakano.stampcardmvvm.viewModel.UserViewModelFactory
 import kotlinx.android.synthetic.main.fragment_email_base.*
@@ -64,28 +65,30 @@ class ChangePasswordFragment : Fragment(), KodeinAware {
 
         login_button.text = getString(R.string.send)
         login_button.setOnClickListener {
-            progress_bar.visibility = View.VISIBLE
-            viewModel.sendPasswordResetEmail(field_email.text.toString())
-            viewModel.isSuccess.observe(viewLifecycleOwner,
-                Observer {
-                    progress_bar.visibility = View.INVISIBLE
-                    if (it) {
-                        val action =
-                            ChangePasswordFragmentDirections.actionChangePasswordFragmentPopUpToAccountInfo()
-                        findNavController().navigate(action)
-                        Toast.makeText(
-                            context,
-                            getString(R.string.email_sent_success),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    } else {
-                        Toast.makeText(
-                            context,
-                            getString(R.string.email_sent_failure),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                })
+            if (Utility.validateForm(requireContext(), field_email)) {
+                progress_bar.visibility = View.VISIBLE
+                viewModel.sendPasswordResetEmail(field_email.text.toString())
+                viewModel.isSuccess.observe(viewLifecycleOwner,
+                    Observer {
+                        progress_bar.visibility = View.INVISIBLE
+                        if (it) {
+                            val action =
+                                ChangePasswordFragmentDirections.actionChangePasswordFragmentPopUpToAccountInfo()
+                            findNavController().navigate(action)
+                            Toast.makeText(
+                                context,
+                                getString(R.string.email_sent_success),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else {
+                            Toast.makeText(
+                                context,
+                                getString(R.string.email_sent_failure),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    })
+            }
         }
 
         explanation.visibility = View.VISIBLE

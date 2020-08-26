@@ -16,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.nakano.stampcardmvvm.R
 import com.nakano.stampcardmvvm.databinding.FragmentEmailBaseBinding
+import com.nakano.stampcardmvvm.util.Utility
 import com.nakano.stampcardmvvm.viewModel.UserViewModel
 import com.nakano.stampcardmvvm.viewModel.UserViewModelFactory
 import kotlinx.android.synthetic.main.fragment_email_base.*
@@ -54,29 +55,32 @@ class CreateAccountFragment : Fragment(), KodeinAware {
 
         login_button.text = getString(R.string.new_registration)
         login_button.setOnClickListener {
-            viewModel.createInWithEmailAndPassword(
-                field_email.text.toString(),
-                field_password.text.toString()
-            )
-            viewModel.isSuccess.observe(viewLifecycleOwner, Observer {
-                progress_bar.visibility = View.INVISIBLE
-                if (it) {
-                    val action =
-                        CreateAccountFragmentDirections.actionCreateAccountFragmentPopUpToStampCardFragment()
-                    findNavController().navigate(action)
-                    Toast.makeText(
-                        context,
-                        R.string.create_user_with_email_success,
-                        Toast.LENGTH_LONG
-                    ).show()
-                } else {
-                    Toast.makeText(
-                        context,
-                        R.string.create_user_with_email_failure,
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
-            })
+            if (Utility.validateForm(requireContext(), field_email, field_password)) {
+                progress_bar.visibility = View.VISIBLE
+                viewModel.createInWithEmailAndPassword(
+                    field_email.text.toString(),
+                    field_password.text.toString()
+                )
+                viewModel.isSuccess.observe(viewLifecycleOwner, Observer {
+                    progress_bar.visibility = View.INVISIBLE
+                    if (it) {
+                        val action =
+                            CreateAccountFragmentDirections.actionCreateAccountFragmentPopUpToStampCardFragment()
+                        findNavController().navigate(action)
+                        Toast.makeText(
+                            context,
+                            R.string.create_user_with_email_success,
+                            Toast.LENGTH_LONG
+                        ).show()
+                    } else {
+                        Toast.makeText(
+                            context,
+                            R.string.create_user_with_email_failure,
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                })
+            }
         }
 
         forgot_password.visibility = View.GONE

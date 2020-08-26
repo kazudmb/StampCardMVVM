@@ -39,7 +39,11 @@ object Utility {
         return context.getString(R.string.rank_member)
     }
 
-    fun validateForm(context: Context, fieldEmail: EditText, fieldPassword: EditText): Boolean {
+    fun validateForm(
+        context: Context,
+        fieldEmail: EditText,
+        fieldPassword: EditText = EditText(context)
+    ): Boolean {
         var valid = true
 
         val email = fieldEmail.text.toString()
