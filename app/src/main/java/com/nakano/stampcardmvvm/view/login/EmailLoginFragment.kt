@@ -2,6 +2,7 @@ package com.nakano.stampcardmvvm.view.login
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -10,7 +11,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.nakano.stampcardmvvm.R
 import com.nakano.stampcardmvvm.databinding.FragmentEmailBaseBinding
 import com.nakano.stampcardmvvm.util.Utility
@@ -41,6 +44,8 @@ class EmailLoginFragment : Fragment(), KodeinAware {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        setHasOptionsMenu(true)
+
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             viewModel.saveTmpEmail("") // reset
             findNavController().popBackStack()
@@ -49,20 +54,36 @@ class EmailLoginFragment : Fragment(), KodeinAware {
         viewModel.getTmpEmail()
 
         login_button.setOnClickListener {
-            if (Utility.validateForm(requireContext().applicationContext, field_email, field_password)) {
+            if (Utility.validateForm(
+                    requireContext().applicationContext,
+                    field_email,
+                    field_password
+                )
+            ) {
                 progress_bar.visibility = View.VISIBLE
-                viewModel.signInWithEmailAndPassword(field_email.text.toString(), field_password.text.toString())
+                viewModel.signInWithEmailAndPassword(
+                    field_email.text.toString(),
+                    field_password.text.toString()
+                )
                 viewModel.isSuccess.observe(viewLifecycleOwner, Observer {
-                        progress_bar.visibility = View.INVISIBLE
-                        if (it) {
-                            val action =
-                                EmailLoginFragmentDirections.actionEmailLoginFragmentPopUpToStampCardFragment()
-                            findNavController().navigate(action)
-                            Toast.makeText(context, R.string.sign_in_with_email_success, Toast.LENGTH_LONG).show()
-                        } else {
-                            Toast.makeText(context, R.string.sign_in_with_email_failure, Toast.LENGTH_LONG).show()
-                        }
-                    })
+                    progress_bar.visibility = View.INVISIBLE
+                    if (it) {
+                        val action =
+                            EmailLoginFragmentDirections.actionEmailLoginFragmentPopUpToStampCardFragment()
+                        findNavController().navigate(action)
+                        Toast.makeText(
+                            context,
+                            R.string.sign_in_with_email_success,
+                            Toast.LENGTH_LONG
+                        ).show()
+                    } else {
+                        Toast.makeText(
+                            context,
+                            R.string.sign_in_with_email_failure,
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                })
             }
         }
 
@@ -75,5 +96,13 @@ class EmailLoginFragment : Fragment(), KodeinAware {
             viewModel.saveTmpEmail(field_email.text.toString())
             findNavController().navigate(R.id.action_loginFragment_to_createAccountFragment)
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        viewModel.saveTmpEmail("") // reset
+        return NavigationUI.onNavDestinationSelected(
+            item,
+            requireView().findNavController()
+        ) || super.onOptionsItemSelected(item)
     }
 }
