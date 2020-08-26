@@ -53,11 +53,9 @@ class ChangePasswordFragment : Fragment(), KodeinAware {
         }
 
         viewModel.getTmpEmail()
-
         val firebaseAuth = FirebaseAuth.getInstance()
         val currentEmail = firebaseAuth.currentUser?.email
         if (currentEmail != null) {
-            field_email.setText(currentEmail.toString())
             field_email.setOnKeyListener(null)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 field_email.focusable = View.NOT_FOCUSABLE

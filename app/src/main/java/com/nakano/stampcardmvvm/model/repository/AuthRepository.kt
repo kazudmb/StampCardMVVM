@@ -367,6 +367,12 @@ class AuthRepository(
     }
 
     fun getTmpEmail(): LiveData<String> {
-        return tmpEmail
+        val currentEmail = firebaseAuth.currentUser?.email
+        return if (currentEmail != null) {
+            tmpEmail.value = currentEmail
+            tmpEmail
+        } else {
+            tmpEmail
+        }
     }
 }
