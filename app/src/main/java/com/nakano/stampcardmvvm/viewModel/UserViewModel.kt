@@ -65,6 +65,7 @@ class UserViewModel(
 
     fun logoutFromGoogle() {
         FirebaseAuth.getInstance().signOut()
+        saveTmpEmail("") // reset
     }
 
     fun signInWithGoogle(googleAuthCredential: AuthCredential?) {
