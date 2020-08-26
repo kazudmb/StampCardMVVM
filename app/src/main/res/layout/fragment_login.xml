@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="authViewModel"
-            type="com.nakano.stampcardmvvm.viewModel.AuthViewModel" />
+            name="userViewModel"
+            type="com.nakano.stampcardmvvm.viewModel.UserViewModel" />
     </data>
 
     <RelativeLayout

@@ -3,7 +3,6 @@ package com.nakano.stampcardmvvm
 import android.app.Application
 import com.nakano.stampcardmvvm.model.repository.AuthRepository
 import com.nakano.stampcardmvvm.model.repository.UserRepository
-import com.nakano.stampcardmvvm.viewModel.AuthViewModelFactory
 import com.nakano.stampcardmvvm.viewModel.UserViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -19,8 +18,7 @@ class MVVMApplication : Application(), KodeinAware {
 
         bind() from singleton { UserRepository(instance()) }
         bind() from singleton { AuthRepository(instance()) }
-        bind() from provider { UserViewModelFactory(instance()) }
-        bind() from provider { AuthViewModelFactory(instance()) }
+        bind() from provider { UserViewModelFactory(instance(), instance()) }
     }
 
 }

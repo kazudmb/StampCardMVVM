@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -21,10 +20,9 @@ import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.GoogleAuthProvider
 import com.nakano.stampcardmvvm.R
 import com.nakano.stampcardmvvm.databinding.FragmentLoginBinding
-import com.nakano.stampcardmvvm.util.Constant
 import com.nakano.stampcardmvvm.util.HelperClass
-import com.nakano.stampcardmvvm.viewModel.AuthViewModel
-import com.nakano.stampcardmvvm.viewModel.AuthViewModelFactory
+import com.nakano.stampcardmvvm.viewModel.UserViewModel
+import com.nakano.stampcardmvvm.viewModel.UserViewModelFactory
 import kotlinx.android.synthetic.main.fragment_login.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
@@ -35,8 +33,8 @@ import org.kodein.di.generic.instance
 class LoginFragment : Fragment(), KodeinAware {
 
     override val kodein by kodein()
-    private val factory: AuthViewModelFactory by instance()
-    private val viewModel: AuthViewModel by viewModels { factory }
+    private val factory: UserViewModelFactory by instance()
+    private val viewModel: UserViewModel by viewModels { factory }
     private lateinit var googleSignInClient: GoogleSignInClient
 
     override fun onCreateView(
@@ -45,7 +43,7 @@ class LoginFragment : Fragment(), KodeinAware {
     ): View? {
         val binding: FragmentLoginBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
-        binding.authViewModel = viewModel
+        binding.userViewModel = viewModel
         binding.lifecycleOwner = this
         return binding.root
     }

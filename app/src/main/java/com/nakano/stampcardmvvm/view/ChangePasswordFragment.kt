@@ -15,8 +15,8 @@ import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.nakano.stampcardmvvm.R
 import com.nakano.stampcardmvvm.databinding.FragmentEmailBaseBinding
-import com.nakano.stampcardmvvm.viewModel.AuthViewModel
-import com.nakano.stampcardmvvm.viewModel.AuthViewModelFactory
+import com.nakano.stampcardmvvm.viewModel.UserViewModel
+import com.nakano.stampcardmvvm.viewModel.UserViewModelFactory
 import kotlinx.android.synthetic.main.fragment_email_base.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
@@ -25,8 +25,8 @@ import org.kodein.di.generic.instance
 class ChangePasswordFragment : Fragment(), KodeinAware {
 
     override val kodein by kodein()
-    private val factory: AuthViewModelFactory by instance()
-    private val viewModel: AuthViewModel by viewModels { factory }
+    private val factory: UserViewModelFactory by instance()
+    private val viewModel: UserViewModel by viewModels { factory }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,7 +34,7 @@ class ChangePasswordFragment : Fragment(), KodeinAware {
     ): View? {
         val binding: FragmentEmailBaseBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_email_base, container, false)
-        binding.authViewModel = viewModel
+        binding.userViewModel = viewModel
         binding.lifecycleOwner = this
         return binding.root
     }

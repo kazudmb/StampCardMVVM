@@ -5,8 +5,8 @@
     <data>
 
         <variable
-            name="authViewModel"
-            type="com.nakano.stampcardmvvm.viewModel.AuthViewModel" />
+            name="userViewModel"
+            type="com.nakano.stampcardmvvm.viewModel.UserViewModel" />
     </data>
 
     <RelativeLayout
@@ -68,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:importantForAutofill="no"
                 android:inputType="textEmailAddress"
-                android:text="@{authViewModel.email}"/>
+                android:text="@{userViewModel.email}"/>
 
             <TextView
                 android:id="@+id/password"
