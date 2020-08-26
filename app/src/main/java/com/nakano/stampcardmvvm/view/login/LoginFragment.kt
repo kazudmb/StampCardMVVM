@@ -81,8 +81,7 @@ class LoginFragment : Fragment(), KodeinAware {
         }
 
         login_email.setOnClickListener {
-            val args = bundleOf(getText(R.string.BUNDLE_PAIR_KEY_EMAIL).toString() to null) as Bundle?
-            findNavController().navigate(R.id.action_loginFragment_to_loginFragment, args)
+            findNavController().navigate(R.id.action_loginFragment_to_loginFragment)
         }
 
         login_phone.setOnClickListener {

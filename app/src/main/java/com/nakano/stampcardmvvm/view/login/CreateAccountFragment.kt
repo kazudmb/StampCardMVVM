@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -39,6 +40,13 @@ class CreateAccountFragment : Fragment(), KodeinAware {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            viewModel.saveTmpEmail(field_email.text.toString())
+            findNavController().popBackStack()
+        }
+
+        viewModel.getTmpEmail()
+
         login_button.text = getString(R.string.new_registration)
         login_button.setOnClickListener {
             viewModel.createInWithEmailAndPassword(
@@ -65,9 +73,6 @@ class CreateAccountFragment : Fragment(), KodeinAware {
                 }
             })
         }
-
-        val email = arguments?.getString(getText(R.string.BUNDLE_PAIR_KEY_EMAIL).toString())
-        if (email != null) field_email.setText(email)
 
         forgot_password.visibility = View.GONE
         new_registration.visibility = View.GONE

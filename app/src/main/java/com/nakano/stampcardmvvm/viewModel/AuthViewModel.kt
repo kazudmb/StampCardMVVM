@@ -13,6 +13,8 @@ class AuthViewModel(
 ) : ViewModel() {
     private val _isSuccess = MutableLiveData<Boolean>()
     val isSuccess: LiveData<Boolean> = _isSuccess
+    private val _email = MutableLiveData<String>()
+    var email: LiveData<String> = _email
 
     fun signInWithGoogle(googleAuthCredential: AuthCredential?) {
         viewModelScope.launch {
@@ -61,5 +63,15 @@ class AuthViewModel(
             val result = repository.sendPasswordResetEmail(email)
             _isSuccess.postValue(result.value)
         }
+    }
+
+    fun saveTmpEmail(email: String) {
+        val result = repository.saveTmpEmail(email)
+        _email.postValue(result.value)
+    }
+
+    fun getTmpEmail() {
+        val result = repository.getTmpEmail()
+        _email.postValue(result.value)
     }
 }

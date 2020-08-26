@@ -71,5 +71,5 @@
     <string name="generate_qrcode_failure_log">generate QRCode:failure</string>
 
     <!-- for navigation -->
-    <string name="BUNDLE_PAIR_KEY_EMAIL">email</string>
+    <string name="BUNDLE_PAIR_KEY_IS_CHANGE_EMAIL">isChangeEmail</string>
 </resources>

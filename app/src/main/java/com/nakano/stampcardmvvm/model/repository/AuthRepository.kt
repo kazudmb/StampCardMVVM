@@ -24,6 +24,9 @@ class AuthRepository(
     private val rootRef = FirebaseFirestore.getInstance()
     private val usersRef = rootRef.collection("users")
 
+    private val tmpEmail = MutableLiveData<String>()
+
+
     suspend fun signInWithGoogle(googleAuthCredential: AuthCredential?): LiveData<Boolean> {
 
         val isSuccess = MutableLiveData<Boolean>()
@@ -356,5 +359,14 @@ class AuthRepository(
             isSuccess.value = false
         }
         return isSuccess
+    }
+
+    fun saveTmpEmail(email: String): LiveData<String> {
+        tmpEmail.value = email
+        return tmpEmail
+    }
+
+    fun getTmpEmail(): LiveData<String> {
+        return tmpEmail
     }
 }

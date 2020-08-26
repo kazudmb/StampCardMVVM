@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -13,7 +14,6 @@ import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.nakano.stampcardmvvm.R
 import com.nakano.stampcardmvvm.databinding.FragmentEmailBaseBinding
-import com.nakano.stampcardmvvm.util.Constant
 import com.nakano.stampcardmvvm.util.Utility
 import com.nakano.stampcardmvvm.viewModel.AuthViewModel
 import com.nakano.stampcardmvvm.viewModel.AuthViewModelFactory
@@ -54,9 +54,8 @@ class ChangeEmailFragment : Fragment(), KodeinAware {
                         Observer {
                             if (it) {
                                 // TODO: navigationする時に、新しくなったメールアドレスも渡すこと
-                                val action =
-                                    ChangeEmailFragmentDirections.actionChangeEmailFragmentPopUpToAccountInfo()
-                                findNavController().navigate(action)
+                                val args = bundleOf(getString(R.string.BUNDLE_PAIR_KEY_IS_CHANGE_EMAIL) to true)
+                                findNavController().navigate(R.id.action_changeEmailFragment_popUpTo_accountInfo, args)
                                 // TODO: 表示するtoast内容は、repositoryで返す内容に含んでそれを使用したい
                                 Toast.makeText(
                                     context,
@@ -74,9 +73,6 @@ class ChangeEmailFragment : Fragment(), KodeinAware {
                 }
             }
         }
-
-        val email = arguments?.getString(getText(R.string.BUNDLE_PAIR_KEY_EMAIL).toString())
-        if (email != null) field_email.setText(email)
 
         mail_address.text = getString(R.string.mail_address_after_change)
         current_mail_address1.visibility = View.VISIBLE

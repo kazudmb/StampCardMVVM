@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.constraintlayout.widget.Constraints.TAG
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -112,9 +113,8 @@ class StampCardFragment : Fragment(), KodeinAware {
                 return true
             }
             R.id.accountInfo -> {
-                val action =
-                    StampCardFragmentDirections.actionStampCardFragmentToAccountInfoFragment()
-                findNavController().navigate(action)
+                val args = bundleOf(getString(R.string.BUNDLE_PAIR_KEY_IS_CHANGE_EMAIL) to false) as Bundle?
+                findNavController().navigate(R.id.action_stampCardFragment_to_accountInfoFragment, args)
                 return true
             }
             else -> super.onOptionsItemSelected(item)

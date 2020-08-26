@@ -13,7 +13,6 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.nakano.stampcardmvvm.R
 import com.nakano.stampcardmvvm.databinding.FragmentEmailBaseBinding
-import com.nakano.stampcardmvvm.util.Constant
 import com.nakano.stampcardmvvm.util.Utility
 import com.nakano.stampcardmvvm.viewModel.AuthViewModel
 import com.nakano.stampcardmvvm.viewModel.AuthViewModelFactory
@@ -22,7 +21,6 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 
-// TODO: middle メールログイン画面のデザインの修正
 class EmailLoginFragment : Fragment(), KodeinAware {
 
     override val kodein by kodein()
@@ -62,15 +60,13 @@ class EmailLoginFragment : Fragment(), KodeinAware {
         }
 
         forgot_password.setOnClickListener {
-            val email = field_email.text.toString()
-            val args = bundleOf(getText(R.string.BUNDLE_PAIR_KEY_EMAIL).toString() to email) as Bundle?
-            findNavController().navigate(R.id.action_loginFragment_to_changePasswordFragment, args)
+            viewModel.saveTmpEmail(field_email.text.toString())
+            findNavController().navigate(R.id.action_loginFragment_to_changePasswordFragment)
         }
 
         new_registration.setOnClickListener {
-            val email = field_email.text.toString()
-            val args = bundleOf(getText(R.string.BUNDLE_PAIR_KEY_EMAIL).toString() to email) as Bundle?
-            findNavController().navigate(R.id.action_loginFragment_to_createAccountFragment, args)
+            viewModel.saveTmpEmail(field_email.text.toString())
+            findNavController().navigate(R.id.action_loginFragment_to_createAccountFragment)
         }
     }
 }
