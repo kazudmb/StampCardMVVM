@@ -64,9 +64,11 @@ class ChangePasswordFragment : Fragment(), KodeinAware {
 
         login_button.text = getString(R.string.send)
         login_button.setOnClickListener {
+            progress_bar.visibility = View.VISIBLE
             viewModel.sendPasswordResetEmail(field_email.text.toString())
             viewModel.isSuccess.observe(viewLifecycleOwner,
                 Observer {
+                    progress_bar.visibility = View.INVISIBLE
                     if (it) {
                         val action =
                             ChangePasswordFragmentDirections.actionChangePasswordFragmentPopUpToAccountInfo()

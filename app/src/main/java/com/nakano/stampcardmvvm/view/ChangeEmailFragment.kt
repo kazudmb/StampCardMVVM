@@ -49,9 +49,11 @@ class ChangeEmailFragment : Fragment(), KodeinAware {
         login_button.setOnClickListener {
             if (currentUserEmail != null) {
                 if (Utility.validateForm(requireContext(), field_email, field_password)) {
+                    progress_bar.visibility = View.VISIBLE
                     viewModel.updateEmail(currentUserEmail, field_email.text.toString(), field_password.text.toString())
                     viewModel.isSuccess.observe(viewLifecycleOwner,
                         Observer {
+                            progress_bar.visibility = View.INVISIBLE
                             if (it) {
                                 // TODO: navigationする時に、新しくなったメールアドレスも渡すこと
                                 val args = bundleOf(getString(R.string.BUNDLE_PAIR_KEY_IS_CHANGE_EMAIL) to true)
