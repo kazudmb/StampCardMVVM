@@ -50,8 +50,6 @@ class AccountInfoFragment : Fragment(), KodeinAware {
         } else {
             viewModel.getUser()
         }
-
-//        viewModel.getTmpEmail()
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
